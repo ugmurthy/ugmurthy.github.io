@@ -23,9 +23,10 @@ function onButtonClick() {
     }
 
     let options = {};
+    options.services = UARTService;
     if (document.querySelector('#allDevices').checked) {
         options.acceptAllDevices = true;
-        options.optionalServices = UARTService;
+        //options.optionalServices = UARTService;
     } else {
         options.filters = filters;
     }
@@ -44,7 +45,6 @@ function onButtonClick() {
         }).then(function (server) {
             console.log("Connected ?  " + server.connected);
             return server.getPrimaryService(UARTService);
-
         }).then(function (result) {
             console.log("DEvice information ", result);
         }).catch(error => {
