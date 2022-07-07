@@ -26,7 +26,7 @@ function onButtonClick() {
     options.services = UARTService;
     if (document.querySelector('#allDevices').checked) {
         options.acceptAllDevices = true;
-        //options.optionalServices = UARTService;
+        options.optionalServices = UARTService;
     } else {
         options.filters = filters;
     }
