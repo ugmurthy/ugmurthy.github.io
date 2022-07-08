@@ -62,7 +62,9 @@ function onButtonClick() {
             return server.getPrimaryService(HRService);
 
         }).then(function (result) {
-            console.log("Device information ", result);
+            console.log("Service uuid : ", result.uuid);
+            console.log("is Primary   : ", result.isPrimary);
+            console.log(" Device name : ", result.device.name);
 
         }).catch(error => {
             console.log('Argh! ' + error);
