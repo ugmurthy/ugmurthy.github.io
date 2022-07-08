@@ -77,6 +77,8 @@ function onButtonClick() {
             return service.getCharacteristic(HRLevel);
         }).then(function (characterisitic) {
             console.log("characteristic", characterisitic);
+            listDict(characterisitic);
+
         }).catch(error => {
 
             console.log('Argh! ' + error);
@@ -88,5 +90,12 @@ function onDisconnected(event) {
     console.log(`Device ${device.name} is disconnected.`);
     console.log("Event :", event);
 
+}
 
+function listDict(dict) {
+    for key in dict {
+        if dict.hasOwnProperty(key) {
+            console.log(key, " : ", dict[key]);
+        }
+    }
 }
