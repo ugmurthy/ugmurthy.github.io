@@ -72,7 +72,7 @@ function onButtonClick() {
             console.log("is Primary   : ", result.isPrimary);
             console.log(" Device name : ", result.device.name);
             return result;
-        }).then(function () {
+        }).then(function (service) {
             console.log("Gettting characterisitics...");
             return service.getCharacteristic(HRLevel);
         }).then(function (characterisitic) {
