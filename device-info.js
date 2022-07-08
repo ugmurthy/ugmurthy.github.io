@@ -30,13 +30,15 @@ function onButtonClick() {
     let ConFigGapDurationMinutes = "98ec1403-00e3-b74f-b2a8-d4e4a0c22036"
     let ConFigSampling = "98ec1407-00e3-b74f-b2a8-d4e4a0c22036"
 
+    let HRService = 'heart_rate'
     let options = {};
 
     //options.services = [UARTService];
 
     if (document.querySelector('#allDevices').checked) {
         options.acceptAllDevices = true;
-        options.optionalServices = [UARTService, ConFigService, 0x180a, 0x1800, 0x1801, 0x180f, 0xfe59];
+        //options.optionalServices = [UARTService, ConFigService, 0x180a, 0x1800, 0x1801, 0x180f, 0xfe59];
+        options.optionalServices = [HRService]
     } else {
         options.filters = filters;
     }
@@ -57,7 +59,7 @@ function onButtonClick() {
 
         }).then(function (server) {
             console.log("Connected ?  " + server.connected);
-            return server.getPrimaryService(UARTService);
+            return server.getPrimaryService(HRService);
 
         }).then(function (result) {
             console.log("Device information ", result);
