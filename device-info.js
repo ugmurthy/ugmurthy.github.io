@@ -30,7 +30,9 @@ function onButtonClick() {
     let ConFigGapDurationMinutes = "98ec1403-00e3-b74f-b2a8-d4e4a0c22036"
     let ConFigSampling = "98ec1407-00e3-b74f-b2a8-d4e4a0c22036"
 
-    let HRService = 'heart_rate'
+    let HRService = 'heart_rate';
+    let HRLevel = 0x2a37; // Heart rate measurement level
+
     let options = {};
 
     //options.services = [UARTService];
@@ -55,18 +57,28 @@ function onButtonClick() {
         }).then(device => {
             // Set up event listener for when device gets disconnected.
             device.addEventListener('gattserverdisconnected', onDisconnected);
+            console.log("GATT Server Disconnect handler installed");
+            console.log("Connecting to GATT Server...");
             return device.gatt.connect();
 
         }).then(function (server) {
+
             console.log("Connected ?  " + server.connected);
+            console.log("Getting Service...");
             return server.getPrimaryService(HRService);
 
         }).then(function (result) {
             console.log("Service uuid : ", result.uuid);
             console.log("is Primary   : ", result.isPrimary);
             console.log(" Device name : ", result.device.name);
-
+            return result;
+        }).then(function () {
+            console.log("Gettting characterisitics...");
+            return service.getCharacteristic(HRLevel);
+        }).then(function (characterisitic) {
+            console.log("characteristic", characterisitic);
         }).catch(error => {
+
             console.log('Argh! ' + error);
         });
 }
