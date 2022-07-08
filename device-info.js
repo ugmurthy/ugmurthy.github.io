@@ -23,13 +23,20 @@ function onButtonClick() {
     let UARTService = "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
     let UARTCharRX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e"
     let UARTCharTX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"
+
+    let ConFigService = "98ec1400-00e3-b74f-b2a8-d4e4a0c22036"
+    let ConfigODR = "98ec1401-00e3-b74f-b2a8-d4e4a0c22036"
+    let ConfigSampleDurationSecs = "98ec1402-00e3-b74f-b2a8-d4e4a0c22036"
+    let ConfigGapDurationMinutes = "98ec1403-00e3-b74f-b2a8-d4e4a0c22036"
+    let ConfigSampling = "98ec1407-00e3-b74f-b2a8-d4e4a0c22036"
+
     let options = {};
 
-    //options.services = UARTService;
+    options.services = [UARTService];
 
     if (document.querySelector('#allDevices').checked) {
         options.acceptAllDevices = true;
-        options.optionalServices = [UARTService];
+        options.optionalServices = [UARTService, ConfigService, 0x180a, 0x1800, 0x1801, 0x180f, 0xfe59];
     } else {
         options.filters = filters;
     }
@@ -63,4 +70,5 @@ function onButtonClick() {
 function onDisconnected(event) {
     const device = event.target;
     console.log(`Device ${device.name} is disconnected.`);
+
 }
