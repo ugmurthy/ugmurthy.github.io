@@ -32,7 +32,7 @@ function onButtonClick() {
 
     let options = {};
 
-    options.services = [UARTService];
+    //options.services = [UARTService];
 
     if (document.querySelector('#allDevices').checked) {
         options.acceptAllDevices = true;
@@ -70,5 +70,7 @@ function onButtonClick() {
 function onDisconnected(event) {
     const device = event.target;
     console.log(`Device ${device.name} is disconnected.`);
+    console.log("Event :", event);
+
 
 }
