@@ -304,44 +304,76 @@
 
     let bluetoothDevice = null;
     let nusTxCharacteristic = null;
+    let lastValues = {
+      acc: { x: null, y: null, z: null },
+      gyro: { x: null, y: null, z: null },
+      mag: { x: null, y: null, z: null },
+      temp: null,
+      humidity: null,
+      pressure: null,
+      proximity: null,
+      color: { r: null, g: null, b: null }
+    };
 
     function updateSensorDisplay(data) {
       if (data.acc) {
-        document.getElementById('accX').textContent = data.acc.x?.toFixed(2) ?? '--';
-        document.getElementById('accY').textContent = data.acc.y?.toFixed(2) ?? '--';
-        document.getElementById('accZ').textContent = data.acc.z?.toFixed(2) ?? '--';
+        lastValues.acc = { ...lastValues.acc, ...data.acc };
       }
       if (data.gyro) {
-        document.getElementById('gyroX').textContent = data.gyro.x?.toFixed(2) ?? '--';
-        document.getElementById('gyroY').textContent = data.gyro.y?.toFixed(2) ?? '--';
-        document.getElementById('gyroZ').textContent = data.gyro.z?.toFixed(2) ?? '--';
+        lastValues.gyro = { ...lastValues.gyro, ...data.gyro };
       }
       if (data.mag) {
-        document.getElementById('magX').textContent = data.mag.x?.toFixed(2) ?? '--';
-        document.getElementById('magY').textContent = data.mag.y?.toFixed(2) ?? '--';
-        document.getElementById('magZ').textContent = data.mag.z?.toFixed(2) ?? '--';
+        lastValues.mag = { ...lastValues.mag, ...data.mag };
       }
       if (data.temp !== undefined) {
-        document.getElementById('temp').textContent = data.temp?.toFixed(2) ?? '--';
+        lastValues.temp = data.temp;
       }
       if (data.humidity !== undefined) {
-        document.getElementById('humidity').textContent = data.humidity?.toFixed(2) ?? '--';
+        lastValues.humidity = data.humidity;
       }
       if (data.pressure !== undefined) {
-        document.getElementById('pressure').textContent = data.pressure?.toFixed(2) ?? '--';
+        lastValues.pressure = data.pressure;
       }
       if (data.proximity !== undefined) {
-        document.getElementById('proximity').textContent = data.proximity ?? '--';
+        lastValues.proximity = data.proximity;
       }
       if (data.color) {
-        document.getElementById('colorR').textContent = data.color.r ?? '--';
-        document.getElementById('colorG').textContent = data.color.g ?? '--';
-        document.getElementById('colorB').textContent = data.color.b ?? '--';
+        lastValues.color = { ...lastValues.color, ...data.color };
+      }
+
+      if (lastValues.acc.x !== null) {
+        document.getElementById('accX').textContent = lastValues.acc.x.toFixed(2);
+        document.getElementById('accY').textContent = lastValues.acc.y.toFixed(2);
+        document.getElementById('accZ').textContent = lastValues.acc.z.toFixed(2);
+      }
+      if (lastValues.gyro.x !== null) {
+        document.getElementById('gyroX').textContent = lastValues.gyro.x.toFixed(2);
+        document.getElementById('gyroY').textContent = lastValues.gyro.y.toFixed(2);
+        document.getElementById('gyroZ').textContent = lastValues.gyro.z.toFixed(2);
+      }
+      if (lastValues.mag.x !== null) {
+        document.getElementById('magX').textContent = lastValues.mag.x.toFixed(2);
+        document.getElementById('magY').textContent = lastValues.mag.y.toFixed(2);
+        document.getElementById('magZ').textContent = lastValues.mag.z.toFixed(2);
+      }
+      if (lastValues.temp !== null) {
+        document.getElementById('temp').textContent = lastValues.temp.toFixed(2);
+      }
+      if (lastValues.humidity !== null) {
+        document.getElementById('humidity').textContent = lastValues.humidity.toFixed(2);
+      }
+      if (lastValues.pressure !== null) {
+        document.getElementById('pressure').textContent = lastValues.pressure.toFixed(2);
+      }
+      if (lastValues.proximity !== null) {
+        document.getElementById('proximity').textContent = lastValues.proximity;
+      }
+      if (lastValues.color.r !== null) {
+        document.getElementById('colorR').textContent = lastValues.color.r;
+        document.getElementById('colorG').textContent = lastValues.color.g;
+        document.getElementById('colorB').textContent = lastValues.color.b;
         
-        const r = data.color.r ?? 0;
-        const g = data.color.g ?? 0;
-        const b = data.color.b ?? 0;
-        document.getElementById('colorPreview').style.background = `rgb(${r},${g},${b})`;
+        document.getElementById('colorPreview').style.background = `rgb(${lastValues.color.r},${lastValues.color.g},${lastValues.color.b})`;
       }
     }
 
