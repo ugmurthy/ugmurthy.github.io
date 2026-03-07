@@ -1,81 +1,416 @@
-
-<p>This sample illustrates the use of the Web Bluetooth API to retrieve basic
-  device information from a nearby Bluetooth Low Energy Device. You may want to
-  check out the <a href="device-info-async-await.html">Device Info (Async
-    Await)</a> sample.</p>
-
-<form>
-  <label for="allDevices">All Devices</label>
-  <input id="allDevices" type="checkbox">
-  <input id="service" type="text" size=17 list="services" placeholder="Bluetooth Service">
-  <input id="name" type="text" size=17 placeholder="Device Name">
-  <input id="namePrefix" type="text" size=17 placeholder="Device Name Prefix">
-  <button>Get Bluetooth Device Info</button>
-</form>
-
-<datalist id="services">
-  <option value="alert_notification">alert_notification</option>
-  <option value="automation_io">automation_io</option>
-  <option value="battery_service">battery_service</option>
-  <option value="blood_pressure">blood_pressure</option>
-  <option value="body_composition">body_composition</option>
-  <option value="bond_management">bond_management</option>
-  <option value="continuous_glucose_monitoring">continuous_glucose_monitoring</option>
-  <option value="current_time">current_time</option>
-  <option value="cycling_power">cycling_power</option>
-  <option value="cycling_speed_and_cadence">cycling_speed_and_cadence</option>
-  <option value="device_information">device_information</option>
-  <option value="environmental_sensing">environmental_sensing</option>
-  <option value="generic_access">generic_access</option>
-  <option value="generic_attribute">generic_attribute</option>
-  <option value="glucose">glucose</option>
-  <option value="health_thermometer">health_thermometer</option>
-  <option value="heart_rate">heart_rate</option>
-  <option value="human_interface_device">human_interface_device (blocklisted)</option>
-  <option value="immediate_alert">immediate_alert</option>
-  <option value="indoor_positioning">indoor_positioning</option>
-  <option value="internet_protocol_support">internet_protocol_support</option>
-  <option value="link_loss">link_loss</option>
-  <option value="location_and_navigation">location_and_navigation</option>
-  <option value="next_dst_change">next_dst_change</option>
-  <option value="phone_alert_status">phone_alert_status</option>
-  <option value="pulse_oximeter">pulse_oximeter</option>
-  <option value="reference_time_update">reference_time_update</option>
-  <option value="running_speed_and_cadence">running_speed_and_cadence</option>
-  <option value="scan_parameters">scan_parameters</option>
-  <option value="tx_power">tx_power</option>
-  <option value="user_data">user_data</option>
-  <option value="weight_scale">weight_scale</option>
-</datalist>
-
-
-
-<script src="device-info.js"></script>
-
-
-<script>
-  document.querySelector('form').addEventListener('submit', function (event) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    if (isWebBluetoothEnabled()) {
-      console.log("Browser is WebBluetoothEnabled");
-      onButtonClick();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NanoSattelite - Sensor Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #e0e0e0;
+      padding: 20px;
     }
-  });
-</script>
-
-<script>
-  ChromeSamples = {};
-  log = ChromeSamples.log;
-
-  function isWebBluetoothEnabled() {
-    if (navigator.bluetooth) {
-      return true;
-    } else {
-      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
-        'Please make sure the "Experimental Web Platform features" flag is enabled.');
-      return false;
+    
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
     }
-  }
-</script>
+    
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+    
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      animation: pulse 2s infinite;
+    }
+    
+    .status-dot.connected { background: #51cf66; }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .connect-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white linear-gradient(90;
+      background:deg, #00d4ff, #7b2cbf);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .connect-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,212,255,0.4);
+    }
+    
+    .connect-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      opacity: 0.3;
+      transition: opacity 0.5s;
+    }
+    
+    .dashboard.active { opacity: 1; }
+    
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .card-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card-title::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    
+    .card.imu .card-title::before { background: #ff6b6b; }
+    .card.gyro .card-title::before { background: #ffd43b; }
+    .card.mag .card-title::before { background: #74c0fc; }
+    .card.env .card-title::before { background: #51cf66; }
+    .card.prox .card-title::before { background: #cc5de8; }
+    .card.color .card-title::before { background: #ffffff; }
+    
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    
+    .sensor-item {
+      text-align: center;
+      padding: 10px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+    }
+    
+    .sensor-label {
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    
+    .sensor-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .single-value {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .color-preview {
+      width: 100%;
+      height: 80px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    .json-viewer {
+      margin-top: 30px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      max-height: 200px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NanoSattelite</h1>
+      <div class="status">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">Disconnected</span>
+      </div>
+    </header>
+    
+    <button class="connect-btn" id="connectBtn">Connect to NanoSattelite</button>
+    
+    <div class="dashboard" id="dashboard">
+      <div class="card imu">
+        <div class="card-title">Accelerometer (g)</div>
+        <div class="sensor-grid">
+          <div class="sensor-item">
+            <div class="sensor-label">X</div>
+            <div class="sensor-value" id="accX">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Y</div>
+            <div class="sensor-value" id="accY">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Z</div>
+            <div class="sensor-value" id="accZ">--</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card gyro">
+        <div class="card-title">Gyroscope (°/s)</div>
+        <div class="sensor-grid">
+          <div class="sensor-item">
+            <div class="sensor-label">X</div>
+            <div class="sensor-value" id="gyroX">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Y</div>
+            <div class="sensor-value" id="gyroY">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Z</div>
+            <div class="sensor-value" id="gyroZ">--</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mag">
+        <div class="card-title">Magnetometer (µT)</div>
+        <div class="sensor-grid">
+          <div class="sensor-item">
+            <div class="sensor-label">X</div>
+            <div class="sensor-value" id="magX">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Y</div>
+            <div class="sensor-value" id="magY">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Z</div>
+            <div class="sensor-value" id="magZ">--</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card env">
+        <div class="card-title">Environmental</div>
+        <div class="sensor-grid">
+          <div class="sensor-item">
+            <div class="sensor-label">Temp (°C)</div>
+            <div class="sensor-value" id="temp">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Humidity (%)</div>
+            <div class="sensor-value" id="humidity">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">Pressure (hPa)</div>
+            <div class="sensor-value" id="pressure">--</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card prox">
+        <div class="card-title">Proximity</div>
+        <div class="single-value" id="proximity">--</div>
+      </div>
+      
+      <div class="card color">
+        <div class="card-title">Color (RGB)</div>
+        <div class="sensor-grid">
+          <div class="sensor-item">
+            <div class="sensor-label">R</div>
+            <div class="sensor-value" id="colorR">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">G</div>
+            <div class="sensor-value" id="colorG">--</div>
+          </div>
+          <div class="sensor-item">
+            <div class="sensor-label">B</div>
+            <div class="sensor-value" id="colorB">--</div>
+          </div>
+        </div>
+        <div class="color-preview" id="colorPreview"></div>
+      </div>
+    </div>
+    
+    <div class="json-viewer" id="jsonViewer"></div>
+  </div>
+
+  <script>
+    const NUS_SERVICE_UUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+    const NUS_TX_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+    const NUS_RX_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const connectBtn = document.getElementById('connectBtn');
+    const dashboard = document.getElementById('dashboard');
+    const jsonViewer = document.getElementById('jsonViewer');
+
+    let bluetoothDevice = null;
+    let nusTxCharacteristic = null;
+
+    function updateSensorDisplay(data) {
+      if (data.acc) {
+        document.getElementById('accX').textContent = data.acc.x?.toFixed(2) ?? '--';
+        document.getElementById('accY').textContent = data.acc.y?.toFixed(2) ?? '--';
+        document.getElementById('accZ').textContent = data.acc.z?.toFixed(2) ?? '--';
+      }
+      if (data.gyro) {
+        document.getElementById('gyroX').textContent = data.gyro.x?.toFixed(2) ?? '--';
+        document.getElementById('gyroY').textContent = data.gyro.y?.toFixed(2) ?? '--';
+        document.getElementById('gyroZ').textContent = data.gyro.z?.toFixed(2) ?? '--';
+      }
+      if (data.mag) {
+        document.getElementById('magX').textContent = data.mag.x?.toFixed(2) ?? '--';
+        document.getElementById('magY').textContent = data.mag.y?.toFixed(2) ?? '--';
+        document.getElementById('magZ').textContent = data.mag.z?.toFixed(2) ?? '--';
+      }
+      if (data.temp !== undefined) {
+        document.getElementById('temp').textContent = data.temp?.toFixed(2) ?? '--';
+      }
+      if (data.humidity !== undefined) {
+        document.getElementById('humidity').textContent = data.humidity?.toFixed(2) ?? '--';
+      }
+      if (data.pressure !== undefined) {
+        document.getElementById('pressure').textContent = data.pressure?.toFixed(2) ?? '--';
+      }
+      if (data.proximity !== undefined) {
+        document.getElementById('proximity').textContent = data.proximity ?? '--';
+      }
+      if (data.color) {
+        document.getElementById('colorR').textContent = data.color.r ?? '--';
+        document.getElementById('colorG').textContent = data.color.g ?? '--';
+        document.getElementById('colorB').textContent = data.color.b ?? '--';
+        
+        const r = data.color.r ?? 0;
+        const g = data.color.g ?? 0;
+        const b = data.color.b ?? 0;
+        document.getElementById('colorPreview').style.background = `rgb(${r},${g},${b})`;
+      }
+    }
+
+    function handleDataReceived(event) {
+      const decoder = new TextDecoder();
+      const value = decoder.decode(event.target.value);
+      const lines = value.split('\n').filter(line => line.trim());
+      
+      lines.forEach(line => {
+        try {
+          const data = JSON.parse(line);
+          updateSensorDisplay(data);
+          jsonViewer.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          console.log('Invalid JSON:', line);
+        }
+      });
+    }
+
+    async function connect() {
+      try {
+        connectBtn.disabled = true;
+        connectBtn.textContent = 'Scanning...';
+        
+        bluetoothDevice = await navigator.bluetooth.requestDevice({
+          filters: [{ name: 'NanoSattelite' }],
+          optionalServices: [NUS_SERVICE_UUID]
+        });
+        
+        statusDot.classList.add('connected');
+        statusText.textContent = 'Connected';
+        connectBtn.textContent = 'Connected!';
+        
+        const server = await bluetoothDevice.gatt.connect();
+        const service = await server.getPrimaryService(NUS_SERVICE_UUID);
+        
+        nusTxCharacteristic = await service.getCharacteristic(NUS_TX_UUID);
+        await nusTxCharacteristic.startNotifications();
+        nusTxCharacteristic.addEventListener('characteristicvaluechanged', handleDataReceived);
+        
+        dashboard.classList.add('active');
+        
+        bluetoothDevice.addEventListener('gattserverdisconnected', disconnect);
+        
+      } catch (error) {
+        console.error('Connection error:', error);
+        alert('Failed to connect: ' + error.message);
+        disconnect();
+      }
+    }
+    
+    function disconnect() {
+      statusDot.classList.remove('connected');
+      statusText.textContent = 'Disconnected';
+      connectBtn.disabled = false;
+      connectBtn.textContent = 'Connect to NanoSattelite';
+      dashboard.classList.remove('active');
+      
+      if (nusTxCharacteristic) {
+        nusTxCharacteristic.removeEventListener('characteristicvaluechanged', handleDataReceived);
+        nusTxCharacteristic = null;
+      }
+      if (bluetoothDevice) {
+        bluetoothDevice.removeEventListener('gattserverdisconnected', disconnect);
+        bluetoothDevice = null;
+      }
+    }
+    
+    connectBtn.addEventListener('click', connect);
+  </script>
+</body>
+</html>
