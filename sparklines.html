@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NanoSattelite - Sensor Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #e0e0e0;
+      padding: 16px;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      font-size: 0.85rem;
+    }
+    
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      animation: pulse 2s infinite;
+    }
+    
+    .status-dot.connected { background: #51cf66; }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .connect-btn {
+      display: block;
+      margin: 16px auto;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .connect-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,212,255,0.4);
+    }
+    
+    .connect-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      opacity: 0.3;
+      transition: opacity 0.5s;
+    }
+    
+    .dashboard.active { opacity: 1; }
+    
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .card-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .card-title::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+    
+    .card.imu .card-title::before { background: #ff6b6b; }
+    .card.gyro .card-title::before { background: #ffd43b; }
+    .card.mag .card-title::before { background: #74c0fc; }
+    .card.env .card-title::before { background: #51cf66; }
+    .card.prox .card-title::before { background: #cc5de8; }
+    .card.color .card-title::before { background: #ffffff; }
+    
+    .sensor-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .sensor-row:last-child { margin-bottom: 0; }
+    
+    .sensor-label {
+      width: 28px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #888;
+    }
+    
+    .sensor-value {
+      width: 60px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      text-align: right;
+    }
+    
+    .sparkline {
+      flex: 1;
+      height: 32px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sparkline svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .sparkline path {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    .sparkline.acc path { stroke: #ff6b6b; }
+    .sparkline.gyro path { stroke: #ffd43b; }
+    .sparkline.mag path { stroke: #74c0fc; }
+    .sparkline.env path { stroke: #51cf66; }
+    .sparkline.prox path { stroke: #cc5de8; }
+    
+    .sparkline-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.15;
+    }
+    
+    .env-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    
+    .env-item {
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .env-item .sensor-label {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    
+    .env-item .sensor-value {
+      width: 100%;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    
+    .env-item .sparkline {
+      height: 24px;
+    }
+    
+    .prox-display {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+      padding: 10px 0;
+    }
+    
+    .prox-bar {
+      flex: 1;
+      max-width: 200px;
+      height: 16px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .prox-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #cc5de8, #ff6b6b);
+      border-radius: 8px;
+      transition: width 0.3s ease;
+    }
+    
+    .prox-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      min-width: 50px;
+      text-align: right;
+    }
+    
+    .color-preview {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      margin-top: 12px;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    .json-viewer {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      max-height: 150px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    
+    @media (min-width: 600px) {
+      .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .card { padding: 20px; }
+      .sparkline { height: 40px; }
+      .env-item .sparkline { height: 32px; }
+    }
+    
+    @media (min-width: 900px) {
+      .dashboard {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>NanoSattelite</h1>
+      <div class="status">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText">Disconnected</span>
+      </div>
+    </header>
+    
+    <button class="connect-btn" id="connectBtn">Connect to NanoSattelite</button>
+    
+    <div class="dashboard" id="dashboard">
+      <div class="card imu">
+        <div class="card-title">Accelerometer (g)</div>
+        <div class="sensor-row">
+          <div class="sensor-label">X</div>
+          <div class="sensor-value" id="accX">--</div>
+          <div class="sparkline acc" id="accXSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">Y</div>
+          <div class="sensor-value" id="accY">--</div>
+          <div class="sparkline acc" id="accYSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">Z</div>
+          <div class="sensor-value" id="accZ">--</div>
+          <div class="sparkline acc" id="accZSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card gyro">
+        <div class="card-title">Gyroscope (°/s)</div>
+        <div class="sensor-row">
+          <div class="sensor-label">X</div>
+          <div class="sensor-value" id="gyroX">--</div>
+          <div class="sparkline gyro" id="gyroXSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">Y</div>
+          <div class="sensor-value" id="gyroY">--</div>
+          <div class="sparkline gyro" id="gyroYSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">Z</div>
+          <div class="sensor-value" id="gyroZ">--</div>
+          <div class="sparkline gyro" id="gyroZSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mag">
+        <div class="card-title">Magnetometer (µT)</div>
+        <div class="sensor-row">
+          <div class="sensor-label">X</div>
+          <div class="sensor-value" id="magX">--</div>
+          <div class="sparkline mag" id="magXSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">Y</div>
+          <div class="sensor-value" id="magY">--</div>
+          <div class="sparkline mag" id="magYSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">Z</div>
+          <div class="sensor-value" id="magZ">--</div>
+          <div class="sparkline mag" id="magZSpark">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card env">
+        <div class="card-title">Environmental</div>
+        <div class="env-grid">
+          <div class="env-item">
+            <div class="sensor-label">Temp (°C)</div>
+            <div class="sensor-value" id="temp">--</div>
+            <div class="sparkline env" id="tempSpark">
+              <svg viewBox="0 0 100 32" preserveAspectRatio="none"></svg>
+            </div>
+          </div>
+          <div class="env-item">
+            <div class="sensor-label">Humidity (%)</div>
+            <div class="sensor-value" id="humidity">--</div>
+            <div class="sparkline env" id="humiditySpark">
+              <svg viewBox="0 0 100 32" preserveAspectRatio="none"></svg>
+            </div>
+          </div>
+          <div class="env-item">
+            <div class="sensor-label">Pressure (hPa)</div>
+            <div class="sensor-value" id="pressure">--</div>
+            <div class="sparkline env" id="pressureSpark">
+              <svg viewBox="0 0 100 32" preserveAspectRatio="none"></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card prox">
+        <div class="card-title">Proximity</div>
+        <div class="prox-display">
+          <div class="prox-bar">
+            <div class="prox-fill" id="proxFill" style="width: 0%"></div>
+          </div>
+          <div class="prox-value" id="proximity">--</div>
+        </div>
+      </div>
+      
+      <div class="card color">
+        <div class="card-title">Color (RGB)</div>
+        <div class="sensor-row">
+          <div class="sensor-label">R</div>
+          <div class="sensor-value" id="colorR">--</div>
+          <div class="sparkline" id="colorRSpark" style="--color: #ff6b6b">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">G</div>
+          <div class="sensor-value" id="colorG">--</div>
+          <div class="sparkline" id="colorGSpark" style="--color: #51cf66">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="sensor-row">
+          <div class="sensor-label">B</div>
+          <div class="sensor-value" id="colorB">--</div>
+          <div class="sparkline" id="colorBSpark" style="--color: #74c0fc">
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+        <div class="color-preview" id="colorPreview"></div>
+      </div>
+    </div>
+    
+    <div class="json-viewer" id="jsonViewer"></div>
+  </div>
+
+  <script>
+    const NUS_SERVICE_UUID = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+    const NUS_TX_UUID = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+    const NUS_RX_UUID = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const connectBtn = document.getElementById('connectBtn');
+    const dashboard = document.getElementById('dashboard');
+    const jsonViewer = document.getElementById('jsonViewer');
+
+    let bluetoothDevice = null;
+    let nusTxCharacteristic = null;
+
+    const HISTORY_SIZE = 30;
+    const history = {
+      accX: [], accY: [], accZ: [],
+      gyroX: [], gyroY: [], gyroZ: [],
+      magX: [], magY: [], magZ: [],
+      temp: [], humidity: [], pressure: [],
+      colorR: [], colorG: [], colorB: []
+    };
+
+    const ranges = {
+      accX: { min: -2, max: 2 },
+      accY: { min: -2, max: 2 },
+      accZ: { min: -2, max: 2 },
+      gyroX: { min: -500, max: 500 },
+      gyroY: { min: -500, max: 500 },
+      gyroZ: { min: -500, max: 500 },
+      magX: { min: -100, max: 100 },
+      magY: { min: -100, max: 100 },
+      magZ: { min: -100, max: 100 },
+      temp: { min: 0, max: 50 },
+      humidity: { min: 0, max: 100 },
+      pressure: { min: 900, max: 1100 },
+      colorR: { min: 0, max: 255 },
+      colorG: { min: 0, max: 255 },
+      colorB: { min: 0, max: 255 }
+    };
+
+    function addToHistory(key, value) {
+      if (history[key].length >= HISTORY_SIZE) {
+        history[key].shift();
+      }
+      history[key].push(value);
+    }
+
+    function normalizeValue(value, key) {
+      const range = ranges[key];
+      const normalized = (value - range.min) / (range.max - range.min);
+      return Math.max(0, Math.min(1, normalized));
+    }
+
+    function updateSparkline(key) {
+      const data = history[key];
+      if (data.length < 2) return;
+
+      const svg = document.querySelector(`#${key}Spark svg`);
+      if (!svg) return;
+
+      const width = 100;
+      const height = key.includes('temp') || key.includes('humidity') || key.includes('pressure') ? 32 : 40;
+      
+      const points = data.map((val, i) => {
+        const x = (i / (HISTORY_SIZE - 1)) * width;
+        const y = height - (normalizeValue(val, key) * height);
+        return `${x},${y}`;
+      });
+
+      const pathD = 'M' + points.join(' L');
+      svg.innerHTML = `<path d="${pathD}" />`;
+      
+      if (key.includes('color')) {
+        const color = key.replace('color', '').toLowerCase();
+        const path = svg.querySelector('path');
+        if (color === 'r') path.style.stroke = '#ff6b6b';
+        else if (color === 'g') path.style.stroke = '#51cf66';
+        else if (color === 'b') path.style.stroke = '#74c0fc';
+      }
+    }
+
+    function updateSensorDisplay(data) {
+      if (data.acc) {
+        if (data.acc.x !== undefined) {
+          document.getElementById('accX').textContent = data.acc.x.toFixed(2);
+          addToHistory('accX', data.acc.x);
+          updateSparkline('accX');
+        }
+        if (data.acc.y !== undefined) {
+          document.getElementById('accY').textContent = data.acc.y.toFixed(2);
+          addToHistory('accY', data.acc.y);
+          updateSparkline('accY');
+        }
+        if (data.acc.z !== undefined) {
+          document.getElementById('accZ').textContent = data.acc.z.toFixed(2);
+          addToHistory('accZ', data.acc.z);
+          updateSparkline('accZ');
+        }
+      }
+      if (data.gyro) {
+        if (data.gyro.x !== undefined) {
+          document.getElementById('gyroX').textContent = data.gyro.x.toFixed(0);
+          addToHistory('gyroX', data.gyro.x);
+          updateSparkline('gyroX');
+        }
+        if (data.gyro.y !== undefined) {
+          document.getElementById('gyroY').textContent = data.gyro.y.toFixed(0);
+          addToHistory('gyroY', data.gyro.y);
+          updateSparkline('gyroY');
+        }
+        if (data.gyro.z !== undefined) {
+          document.getElementById('gyroZ').textContent = data.gyro.z.toFixed(0);
+          addToHistory('gyroZ', data.gyro.z);
+          updateSparkline('gyroZ');
+        }
+      }
+      if (data.mag) {
+        if (data.mag.x !== undefined) {
+          document.getElementById('magX').textContent = data.mag.x.toFixed(1);
+          addToHistory('magX', data.mag.x);
+          updateSparkline('magX');
+        }
+        if (data.mag.y !== undefined) {
+          document.getElementById('magY').textContent = data.mag.y.toFixed(1);
+          addToHistory('magY', data.mag.y);
+          updateSparkline('magY');
+        }
+        if (data.mag.z !== undefined) {
+          document.getElementById('magZ').textContent = data.mag.z.toFixed(1);
+          addToHistory('magZ', data.mag.z);
+          updateSparkline('magZ');
+        }
+      }
+      if (data.temp !== undefined) {
+        document.getElementById('temp').textContent = data.temp.toFixed(1);
+        addToHistory('temp', data.temp);
+        updateSparkline('temp');
+      }
+      if (data.humidity !== undefined) {
+        document.getElementById('humidity').textContent = data.humidity.toFixed(0);
+        addToHistory('humidity', data.humidity);
+        updateSparkline('humidity');
+      }
+      if (data.pressure !== undefined) {
+        document.getElementById('pressure').textContent = data.pressure.toFixed(0);
+        addToHistory('pressure', data.pressure);
+        updateSparkline('pressure');
+      }
+      if (data.proximity !== undefined) {
+        document.getElementById('proximity').textContent = data.proximity;
+        const pct = Math.min(100, (data.proximity / 255) * 100);
+        document.getElementById('proxFill').style.width = pct + '%';
+      }
+      if (data.color) {
+        if (data.color.r !== undefined) {
+          document.getElementById('colorR').textContent = data.color.r;
+          addToHistory('colorR', data.color.r);
+          updateSparkline('colorR');
+        }
+        if (data.color.g !== undefined) {
+          document.getElementById('colorG').textContent = data.color.g;
+          addToHistory('colorG', data.color.g);
+          updateSparkline('colorG');
+        }
+        if (data.color.b !== undefined) {
+          document.getElementById('colorB').textContent = data.color.b;
+          addToHistory('colorB', data.color.b);
+          updateSparkline('colorB');
+        }
+        if (data.color.r !== undefined && data.color.g !== undefined && data.color.b !== undefined) {
+          document.getElementById('colorPreview').style.background = 
+            `rgb(${data.color.r},${data.color.g},${data.color.b})`;
+        }
+      }
+    }
+
+    function handleDataReceived(event) {
+      const decoder = new TextDecoder();
+      const value = decoder.decode(event.target.value);
+      const lines = value.split('\n').filter(line => line.trim());
+      
+      lines.forEach(line => {
+        try {
+          const data = JSON.parse(line);
+          updateSensorDisplay(data);
+          jsonViewer.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          console.log('Invalid JSON:', line);
+        }
+      });
+    }
+
+    async function connect() {
+      try {
+        connectBtn.disabled = true;
+        connectBtn.textContent = 'Scanning...';
+        
+        bluetoothDevice = await navigator.bluetooth.requestDevice({
+          filters: [{ name: 'NanoSattelite' }],
+          optionalServices: [NUS_SERVICE_UUID]
+        });
+        
+        statusDot.classList.add('connected');
+        statusText.textContent = 'Connected';
+        connectBtn.textContent = 'Connected!';
+        
+        const server = await bluetoothDevice.gatt.connect();
+        const service = await server.getPrimaryService(NUS_SERVICE_UUID);
+        
+        nusTxCharacteristic = await service.getCharacteristic(NUS_TX_UUID);
+        await nusTxCharacteristic.startNotifications();
+        nusTxCharacteristic.addEventListener('characteristicvaluechanged', handleDataReceived);
+        
+        dashboard.classList.add('active');
+        
+        bluetoothDevice.addEventListener('gattserverdisconnected', disconnect);
+        
+      } catch (error) {
+        console.error('Connection error:', error);
+        alert('Failed to connect: ' + error.message);
+        disconnect();
+      }
+    }
+    
+    function disconnect() {
+      statusDot.classList.remove('connected');
+      statusText.textContent = 'Disconnected';
+      connectBtn.disabled = false;
+      connectBtn.textContent = 'Connect to NanoSattelite';
+      dashboard.classList.remove('active');
+      
+      if (nusTxCharacteristic) {
+        nusTxCharacteristic.removeEventListener('characteristicvaluechanged', handleDataReceived);
+        nusTxCharacteristic = null;
+      }
+      if (bluetoothDevice) {
+        bluetoothDevice.removeEventListener('gattserverdisconnected', disconnect);
+        bluetoothDevice = null;
+      }
+    }
+    
+    connectBtn.addEventListener('click', connect);
+  </script>
+</body>
+</html>
