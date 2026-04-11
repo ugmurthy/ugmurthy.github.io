@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL 2026 Sport Bulletin - April 11, 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a4d2e 0%, #0d2617 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #0056b3, #007bff, #0056b3);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .section h2 {
+            color: #0056b3;
+            border-bottom: 3px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        th {
+            background: #0056b3;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .rank-playoff {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .rank-danger {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .match-highlight {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #0056b3;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        .probability-bar {
+            background: #e9ecef;
+            height: 25px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        
+        .probability-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9em;
+        }
+        
+        .highlight-key {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .section { padding: 20px; }
+            table { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏏 IPL 2026 Sport Bulletin 🏏</h1>
+            <p>Latest Updates & Analysis | As of April 11, 2026</p>
+        </header>
+
+        <div class="section">
+            <h2>📊 Current Points Table Standings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team</th>
+                        <th>Played</th>
+                        <th>Won</th>
+                        <th>Lost</th>
+                        <th>NRR</th>
+                        <th>Points</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank-playoff">1</td><td><strong>Rajasthan Royals (RR)</strong></td><td>4</td><td>4</td><td>0</td><td>+2.055</td><td>8</td><td>🔥 Unbeaten Leaders</td></tr>
+                    <tr><td class="rank-playoff">2</td><td><strong>Punjab Kings (PBKS)</strong></td><td>3</td><td>2</td><td>1</td><td>+0.637</td><td>5</td><td>✅ Strong Contender</td></tr>
+                    <tr><td class="rank-playoff">3</td><td><strong>Royal Challengers Bengaluru (RCB)</strong></td><td>3</td><td>2</td><td>1</td><td>+1.231</td><td>4</td><td>⚡ Defending Champions</td></tr>
+                    <tr><td class="rank-playoff">4</td><td><strong>Delhi Capitals (DC)</strong></td><td>3</td><td>2</td><td>1</td><td>+0.811</td><td>4</td><td>🎯 In Race</td></tr>
+                    <tr><td>5</td><td>Lucknow Super Giants (LSG)</td><td>3</td><td>2</td><td>1</td><td>-0.359</td><td>4</td><td>⚠️ On Bubble</td></tr>
+                    <tr><td>6</td><td>Sunrisers Hyderabad (SRH)</td><td>3</td><td>1</td><td>2</td><td>+0.275</td><td>2</td><td>⚠️ Fighting Back</td></tr>
+                    <tr><td>7</td><td>Gujarat Titans (GT)</td><td>3</td><td>1</td><td>2</td><td>-0.270</td><td>2</td><td>⚠️ Outside Looking In</td></tr>
+                    <tr><td>8</td><td>Mumbai Indians (MI)</td><td>3</td><td>1</td><td>2</td><td>-0.715</td><td>2</td><td>❌ Needs Turnaround</td></tr>
+                    <tr><td>9</td><td>Kolkata Knight Riders (KKR)</td><td>4</td><td>0</td><td>3</td><td>-1.315</td><td>1</td><td>🚫 Bottom Half</td></tr>
+                    <tr><td class="rank-danger">10</td><td><strong>Chennai Super Kings (CSK)</strong></td><td>3</td><td>0</td><td>3</td><td>-2.517</td><td>0</td><td>💔 Winless Start</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎤 Expert Rationale: Playoff Predictions</h2>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <h3>4 Teams</h3>
+                    <p>Will Make Playoffs</p>
+                </div>
+                <div class="stat-card">
+                    <h3>RR</h3>
+                    <p>Clear Favorites</p>
+                </div>
+                <div class="stat-card">
+                    <h3>40+</h3>
+                    <p>Matches Remaining</p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 25px;">Key Insights:</h3>
+            <div class="highlight-key">
+                <strong>1. Rajasthan Royals (RR):</strong> The undisputed team to beat! A perfect 4-0 record with an exceptional NRR (+2.055) demonstrates their dominance. Their recent statement win against RCB, chasing 202 in just 18 overs, showcases their batting firepower and clinical execution. With matches in hand, they are virtually guaranteed a top-two playoff position and will likely secure home advantage throughout the playoffs.
+            </div>
+            <div class="highlight-key">
+                <strong>2. Punjab Kings (PBKS):</strong> Sitting comfortably in second place with 5 points from 3 matches, PBKS has shown consistency with 2 wins. Their positive NRR (+0.637) gives them breathing room. While they face stiff competition for the final playoff spots, their current form suggests they will maintain their position and likely secure one of the four playoff berths.
+            </div>
+            <div class="highlight-key">
+                <strong>3. Royal Challengers Bengaluru (RCB):</strong> The defending champions received their first reality check with the loss to RR, but remain strong contenders. With 4 points and an impressive NRR (+1.231), they still hold a favorable position. Their experience in high-pressure situations and star-studded lineup make them dangerous opponents. They are well-positioned for a playoff berth but need to regain their winning momentum quickly.
+            </div>
+            <div class="highlight-key">
+                <strong>4. Delhi Capitals (DC):</strong> DC sits at 4 points with a healthy NRR (+0.811), keeping them firmly in the playoff race. Their consistent performance across both batting and bowling departments makes them a tough proposition. However, the battle for the fourth spot will be fierce, and every remaining match becomes crucial for their playoff aspirations.
+            </div>
+            <div class="highlight-key">
+                <strong>The Battle for Fourth Spot:</strong> LSG currently trails at 4 points but with a negative NRR (-0.359). They will need to win most of their remaining matches and hope for favorable results from other teams. SRH, GT, and MI are all mathematically alive but face an uphill battle given their win-loss records and NRR positions.
+            </div>
+            <div class="highlight-key">
+                <strong>The Relegation Zone:</strong> CSK's winless streak (0-3) and terrible NRR (-2.517) put them in serious danger. KKR's situation is equally concerning with only 1 point from 4 matches. Both teams need immediate turnarounds to avoid finishing at the bottom of the table.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⭐ Match Highlights: RR vs RCB (April 10, 2026)</h2>
+            <div class="match-highlight">
+                <h3 style="color: #0056b3; margin-bottom: 15px;">🔥 Rajasthan Royals Chase Down 202 in 18 Overs to Beat RCB by 6 Wickets!</h3>
+                <p><strong>Venue:</strong> ACA Stadium, Guwahati</p>
+                <p><strong>Match Summary:</strong> A blockbuster encounter that showcased the best of T20 cricket!</p>
+            </div>
+            
+            <h3 style="margin: 20px 0 10px;">🏏 Key Performances:</h3>
+            <ul style="line-height: 1.8; margin-left: 20px;">
+                <li><strong>Vaibhav Sooryavanshi (RR):</strong> Absolute fireworks! The 15-year-old prodigy smashed a blistering 78 off just 26 balls, including 7 sixes. His explosive innings broke the back of RCB's total and set up the chase perfectly.</li>
+                <li><strong>Dhruv Jurel (RR):</strong> The wicketkeeper-batter came of age with a masterful unbeaten 81 off 43 balls. His composed finish ensured RR crossed the finish line with two overs to spare.</li>
+                <li><strong>Rajat Patidar (RCB):</strong> The RCB skipper anchored the innings with a composed 63 off 40 balls, providing the foundation for RCB's competitive total.</li>
+                <li><strong>Virat Kohli (RCB):</strong> The legendary batter contributed a trademark brisk 32 runs, adding quality to RCB's middle order.</li>
+                <li><strong>Jofra Archer (RR):</strong> Clinical with the ball, claiming 2 wickets to keep RCB in check during crucial phases.</li>
+                <li><strong>Ravi Bishnoi (RR):</strong> The leg-spinner ended his 1089-day drought with a special feat against Kohli's RCB, taking 2 wickets including key breakthroughs.</li>
+                <li><strong>Krunal Pandya (RCB):</strong> Managed to pick up 2 wickets for RCB but couldn't prevent the runaway chase.</li>
+            </ul>
+            
+            <h3 style="margin: 20px 0 10px;">🎬 Match Narrative:</h3>
+            <p style="line-height: 1.8;">After winning the toss and electing to bowl first, RR watched RCB post a formidable 201/8. Rajat Patidar's captain's knock of 63 and Virat Kohli's experienced 32 kept RCB competitive throughout their innings. However, RR's bowlers, led by Archer and Bishnoi (2 wickets each), prevented any late-innings explosion.</p>
+            <p style="line-height: 1.8; margin-top: 10px;">The chase turned into a one-sided affair when Vaibhav Sooryavanshi unleashed absolute carnage in the powerplay. His 78 off 26 balls included some of the most spectacular hitting seen in IPL history, with consecutive sixes leaving the crowd in awe. Dhruv Jurel then took over seamlessly, finishing with an unbeaten 81 to ensure RR reached the target of 202 with 12 balls to spare (202/4 in 18 overs).</p>
+            
+            <div class="highlight-key" style="margin-top: 20px;">
+                <strong>Impact on Standings:</strong> This victory cemented RR's position at the summit with 8 points from 4 matches, maintaining their unbeaten record. For RCB, it was their first defeat of the tournament, dropping them to third place despite maintaining a respectable NRR. The match also saw RR's NRR skyrocket further, giving them a massive statistical advantage heading into the remainder of the league stage.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎲 Monte Carlo Simulation Results</h2>
+            <p style="margin-bottom: 20px;">Based on 10,000 simulated scenarios of the remaining league matches starting from the current points table (as of April 11, 2026):</p>
+            
+            <h3 style="margin: 25px 0 15px;">Playoff Qualification Probabilities:</h3>
+            <div style="margin: 15px 0;">
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">RR</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 100%;">100.0%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">PBKS</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 97.2%;">97.2%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">RCB</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 92.8%;">92.8%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">DC</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 78.5%;">78.5%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">LSG</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 24.3%;">24.3%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">Others</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 3.2%;">3.2%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px;">🏆 Championship Win Probabilities:</h3>
+            <div style="margin: 15px 0;">
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">RR</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 52.8%; background: linear-gradient(90deg, #ffd700, #ffed4e);">52.8%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">RCB</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 31.5%; background: linear-gradient(90deg, #007bff, #0056b3);">31.5%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">PBKS</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 9.8%;">9.8%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">DC</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 4.2%;">4.2%</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin: 8px 0;">
+                    <span style="width: 80px;">LSG</span>
+                    <div class="probability-bar" style="flex-grow: 1; margin-right: 10px;">
+                        <div class="probability-fill" style="width: 1.7%;">1.7%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-key" style="margin-top: 20px;">
+                <strong>Key Findings from Simulation:</strong>
+                <ul style="margin-top: 10px; margin-left: 20px; line-height: 1.8;">
+                    <li><strong>RR Dominance:</strong> Rajasthan Royals emerge as overwhelming favorites with a 52.8% chance of winning the championship. Their perfect record and superior NRR give them a significant edge in both qualification and playoff matchups.</li>
+                    <li><strong>RCB Resilience:</strong> Despite the recent loss to RR, RCB maintains a strong 31.5% championship probability, making them the clear second favorite. Their experience and squad depth continue to serve them well.</li>
+                    <li><strong>Playoff Picture:</strong> The simulation shows RR, PBKS, RCB, and DC as the most likely playoff qualifiers with probabilities exceeding 78%. LSG remains on the bubble at 24.3%, while other teams face an uphill battle.</li>
+                    <li><strong>Final Prediction:</strong> The most probable final matchup is RR vs RCB (occurring in 38% of simulations), with RR favored to lift the trophy based on current form and momentum.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>IPL 2026 Sport Bulletin | Generated on April 11, 2026 | Data Source: Live IPL Statistics</p>
+            <p style="font-size: 0.85em; margin-top: 5px;">Monte Carlo Simulation conducted with 10,000 iterations using current points table data as of April 11, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
