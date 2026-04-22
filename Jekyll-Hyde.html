@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Character Arc of Dr. Jekyll - A Literary Analysis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lora', serif;
+            line-height: 1.8;
+            color: #2c2c2c;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #f8f5f0;
+            padding: 60px 80px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid #8b4513;
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8em;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.2em;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: #8b4513;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8b4513;
+        }
+        
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            color: #2c2c2c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.1em;
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 4px solid #8b4513;
+            padding: 20px 30px;
+            margin: 30px 0;
+            background: #fff8f0;
+            font-size: 1.15em;
+            color: #4a4a4a;
+        }
+        
+        .arc-stage {
+            background: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #8b4513;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .arc-stage h3 {
+            margin-top: 0;
+            color: #8b4513;
+        }
+        
+        .highlight {
+            background: #fff8dc;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .author-note {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #8b4513;
+            font-style: italic;
+            color: #666;
+        }
+        
+        ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+        
+        .dual-nature {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .nature-column {
+            flex: 1;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .jekyll-col {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+        
+        .hyde-col {
+            background: #ffebee;
+            border: 2px solid #f44336;
+        }
+        
+        .nature-column h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        
+        .jekyll-col h4 {
+            color: #2e7d32;
+        }
+        
+        .hyde-col h4 {
+            color: #c62828;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .dual-nature {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>The Strange Case of Dr. Jekyll and Mr. Hyde</h1>
+            <p class="subtitle">A Character Arc Analysis of Dr. Henry Jekyll</p>
+            
+            <p><strong>By Robert Louis Stevenson</strong></p>
+            <p><strong>Analyzed by AdaptiveAgent</strong></p>
+            
+            <div class="quote">
+                "Man is not truly one, but truly two." — Dr. Henry Jekyll
+            </div>
+            
+            <h2>Introduction</h2>
+            <p>Dr. Henry Jekyll's character arc in Robert Louis Stevenson's classic novella represents one of literature's most profound explorations of duality, morality, and the human psyche. His journey from a respected physician to a tragic figure consumed by his own creation offers a cautionary tale about the dangers of repressing one's darker impulses and the consequences of playing god with science.</p>
+            
+            <h2>The Dual Nature</h2>
+            <div class="dual-nature">
+                <div class="nature-column jekyll-col">
+                    <h4>Dr. Henry Jekyll</h4>
+                    <ul>
+                        <li>Respected physician and scientist</li>
+                        <li>Well-educated, wealthy gentleman</li>
+                        <li>Publicly moral and upright</li>
+                        <li>Represents society's expectations</li>
+                        <li>Struggles with hidden desires</li>
+                        <li>Initially in control</li>
+                    </ul>
+                </div>
+                <div class="nature-column hyde-col">
+                    <h4>Mr. Edward Hyde</h4>
+                    <ul>
+                        <li>Physical manifestation of evil</li>
+                        <li>Small, deformed appearance</li>
+                        <li>Uninhibited and violent</li>
+                        <li>Represents primal instincts</li>
+                        <li>Embodies repressed desires</li>
+                        <li>Becomes increasingly dominant</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>The Character Arc: Four Stages</h2>
+            
+            <div class="arc-stage">
+                <h3>Stage I: The Curious Scientist</h3>
+                <p>At the beginning of the narrative, Dr. Jekyll appears as a successful, well-respected London physician. He is described as "a large, well-made, smooth-faced man of fifty, with something of a slyish cast perhaps, but every mark of capacity and kindness." However, beneath this respectable exterior lies a man troubled by the duality of human nature.</p>
+                <p>Jekyll's scientific curiosity leads him to develop a potion that can separate the good and evil aspects of his personality. His motivation is not purely malicious—he genuinely believes he can help humanity by understanding this duality. Yet there is also a personal element: he wishes to indulge his darker impulses without compromising his reputation.</p>
+                <div class="quote">
+                    "If each," cried he, "could be housed in separate identities, life would be relieved of all that was unbearable; the unjust might go his way, delivered from the aspirations and remorse of his more upright twin; and the just could walk steadfastly and securely on his upward path, doing the good things in which he found his pleasure, and no longer exposed to disgrace and penitence by the hands of this extraneous evil."
+                </div>
+            </div>
+            
+            <div class="arc-stage">
+                <h3>Stage II: The Experiment Goes Wrong</h3>
+                <p>As Jekyll begins using his potion, he discovers both the liberating power and the terrible danger of his creation. Initially, he enjoys the freedom of being Hyde—the ability to act without consequence or moral restraint. However, he quickly realizes that Hyde is not merely a release valve for his darker side but an independent entity with its own will and appetites.</p>
+                <p>This stage marks Jekyll's first loss of control. Hyde begins committing crimes, including the brutal murder of Sir Danvers Carew, which shocks even Jekyll's conscience. Despite swearing to abandon Hyde forever, Jekyll finds himself unable to resist the temptation of transformation. His addiction to the dual life becomes apparent, and he struggles to maintain his public persona while secretly indulging his darker nature.</p>
+                <p>Key turning points in this stage include:</p>
+                <ul>
+                    <li>The trampling of the young girl (Hyde's first known crime)</li>
+                    <li>The murder of Sir Danvers Carew</li>
+                    <li>Jekyll's promise to Utterson to abandon Hyde</li>
+                    <li>The growing frequency of involuntary transformations</li>
+                </ul>
+            </div>
+            
+            <div class="arc-stage">
+                <h3>Stage III: The Loss of Control</h3>
+                <p>The third stage represents Jekyll's descent into desperation. The transformations begin occurring spontaneously, without the use of the potion. Hyde is becoming the dominant personality, and Jekyll finds himself trapped in his own body, emerging only when Hyde chooses to transform back—or when the potion wears off.</p>
+                <p>Jekyll's isolation increases as he locks himself away from friends and society. His trusted butler, Poole, grows suspicious of the strange behavior emanating from the laboratory. Jekyll writes letters assuring his friends of his safety while simultaneously recognizing his inevitable doom. The psychological toll becomes evident in his deteriorating mental state and physical appearance.</p>
+                <div class="quote">
+                    "I was slowly losing hold of my original and better self, and becoming slowly incorporated with my second and worse."
+                </div>
+                <p>This stage reveals the true horror of Jekyll's experiment: he cannot destroy Hyde without destroying himself, and Hyde refuses to die. The balance of power has shifted irreversibly.</p>
+            </div>
+            
+            <div class="arc-stage">
+                <h3>Stage IV: The Tragic End</h3>
+                <p>In the final stage, Jekyll faces his ultimate defeat. With his supply of the crucial salt ingredient running low (and later discovering it is contaminated), he finds himself permanently trapped as Hyde. In his final statement, Jekyll recounts his last hours as himself, knowing that once he sleeps or loses consciousness, he will wake up as Hyde forever.</p>
+                <p>The tragedy culminates in Jekyll's suicide—committed while still in his Jekyll form—to prevent Hyde from escaping and continuing his reign of terror. This final act is both a confession and an attempt at redemption, though too late to save his soul or reputation.</p>
+                <div class="quote">
+                    "Of my own face there was nothing left, but what was changed into something foul and fiendish. I had already been dead many days; and now, as I looked down upon my own body, I saw that it was indeed the body of Edward Hyde."
+                </div>
+                <p>Jekyll's death marks the complete victory of evil over good within him—a stark warning about the consequences of attempting to divide the indivisible nature of humanity.</p>
+            </div>
+            
+            <h2>Psychological Themes</h2>
+            <p>Jekyll's character arc explores several profound psychological themes:</p>
+            <ul>
+                <li><strong>Duality of Human Nature:</strong> The story suggests that every person contains both good and evil, and attempting to separate them leads to destruction.</li>
+                <li><strong>Addiction:</strong> Jekyll's relationship with the potion mirrors substance abuse—initial control giving way to dependency and eventual loss of agency.</li>
+                <li><strong>Repression:</strong> Victorian society's strict moral codes forced individuals to suppress their natural desires, creating psychological tension that Jekyll's experiment attempts to resolve.</li>
+                <li><strong>Identity Crisis:</strong> As Jekyll loses control of his transformations, he questions which identity is the "real" one, ultimately discovering they are inseparable.</li>
+            </ul>
+            
+            <h2>Conclusion</h2>
+            <p>Dr. Henry Jekyll's character arc is a tragic descent from respected scientist to doomed victim of his own hubris. His journey demonstrates that the attempt to separate good from evil within oneself is not only impossible but destructive. The story serves as both a Gothic thriller and a profound meditation on the complexity of human nature.</p>
+            <p>Jekyll's fate warns us that we cannot escape our shadows—they are part of who we are. To deny or attempt to excise them is to invite catastrophe. His final realization—that man is not truly one but truly two—comes too late to save him, but stands as an enduring truth for readers across generations.</p>
+            
+            <div class="author-note">
+                <p>This analysis is based on the complete text of "The Strange Case of Dr. Jekyll and Mr. Hyde" by Robert Louis Stevenson, published in 1886.</p>
+                <p style="margin-top: 15px; font-size: 0.9em;">Generated by AdaptiveAgent | Source: Project Gutenberg eBook #43</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
