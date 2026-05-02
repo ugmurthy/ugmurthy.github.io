@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL 2026 Sport Bulletin — 2 May 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0b1e3f 0%, #1a4d2e 60%, #0d2617 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.55;
+        }
+        .container { max-width: 1240px; margin: 0 auto; padding: 24px; }
+        header {
+            text-align: center;
+            padding: 48px 24px;
+            background:
+                radial-gradient(ellipse at top left, rgba(255,215,0,0.18), transparent 60%),
+                linear-gradient(to right, #002855, #0056b3, #002855);
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        header .eyebrow {
+            display: inline-block;
+            font-size: 0.85em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: rgba(255,215,0,0.15);
+            color: #ffd700;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,215,0,0.35);
+            margin-bottom: 14px;
+        }
+        header h1 { font-size: 2.8em; margin-bottom: 10px; letter-spacing: 1.5px; }
+        header p { font-size: 1.15em; opacity: 0.92; }
+        .section {
+            background: rgba(255, 255, 255, 0.97);
+            color: #1e2a3a;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+        }
+        .section h2 {
+            color: #002855;
+            border-bottom: 3px solid #0056b3;
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+            font-size: 1.7em;
+        }
+        .section h3 { color: #002855; margin: 22px 0 12px; }
+        table { width: 100%; border-collapse: collapse; margin: 18px 0; background: white; border-radius: 8px; overflow: hidden; }
+        th { background: #002855; color: white; padding: 14px; text-align: left; font-weight: 600; font-size: 0.95em; }
+        td { padding: 11px 14px; border-bottom: 1px solid #e6e6e6; }
+        tr:nth-child(even) { background: #f5f8fc; }
+        tr:hover { background: #e3f2fd; }
+        .rank-playoff { color: #198754; font-weight: bold; }
+        .rank-bubble { color: #f57c00; font-weight: bold; }
+        .rank-danger { color: #c62828; font-weight: bold; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.78em; font-weight: 700; }
+        .b-win { background: #d1f2d8; color: #14532d; }
+        .b-lose { background: #ffd6d6; color: #7f1d1d; }
+        .b-nr { background: #e0e7ff; color: #312e81; }
+        .match-highlight {
+            background: linear-gradient(135deg, #fff7cc, #ffe98a);
+            color: #333;
+            padding: 22px;
+            border-radius: 12px;
+            margin: 18px 0;
+            border-left: 6px solid #0056b3;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #002855, #0056b3);
+            color: white;
+            padding: 22px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 14px rgba(0,40,85,0.25);
+        }
+        .stat-card h3 { font-size: 2em; margin-bottom: 5px; color: #ffd700; }
+        .probability-bar {
+            background: #e9ecef;
+            height: 26px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        .probability-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #198754, #20c997);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.88em;
+            min-width: 42px;
+            transition: width 0.4s ease;
+        }
+        .probability-fill.gold { background: linear-gradient(90deg, #ff8c00, #ffd700); color:#333; }
+        .probability-fill.blue { background: linear-gradient(90deg, #0056b3, #4aa3ff); }
+        .prob-row { display: grid; grid-template-columns: 90px 1fr; align-items: center; gap: 10px; margin: 7px 0; }
+        .prob-row .tname { font-weight: 600; color: #002855; }
+        .highlight-key {
+            background: #fffbe6;
+            border-left: 4px solid #f0b400;
+            padding: 16px 18px;
+            margin: 12px 0;
+            border-radius: 6px;
+        }
+        .simulation-note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 14px 0;
+            border-radius: 6px;
+            font-size: 0.93em;
+        }
+        .verification-badge {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            border-left: 4px solid #17a2b8;
+            font-size: 0.93em;
+        }
+        .data-source { background: #f1f3f5; padding: 12px; border-radius: 6px; font-size: 0.85em; color: #555; margin-top: 14px; }
+        .score-block {
+            background: #f8f9fa;
+            border: 1px solid #e6e6e6;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 12px 0;
+            font-size: 0.95em;
+        }
+        .score-block p { margin: 4px 0; }
+        footer {
+            text-align: center;
+            padding: 28px 12px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.92em;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 12px;
+        }
+        footer a { color: #ffd700; text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+        .chip {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: #e9f5ff;
+            color: #0056b3;
+            font-size: 0.82em;
+            font-weight: 600;
+            margin-right: 6px;
+            margin-bottom: 4px;
+        }
+        ul.clean { list-style: none; }
+        ul.clean li { padding: 6px 0; border-bottom: 1px dashed #e0e0e0; }
+        ul.clean li:last-child { border-bottom: none; }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .section { padding: 20px; }
+            table { font-size: 0.88em; }
+            .prob-row { grid-template-columns: 70px 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <header>
+        <span class="eyebrow">Cricket Intelligence • IPL 2026</span>
+        <h1>🏏 IPL 2026 Sport Bulletin 🏏</h1>
+        <p>Standings • Match Report • Playoff Rationale • Monte Carlo Forecast</p>
+        <p style="margin-top:8px; opacity:0.85;">As of 2 May 2026 (morning IST)</p>
+    </header>
+
+    <!-- ============== 1. POINTS TABLE ============== -->
+    <div class="section">
+        <h2>📊 Current Points Table (as of 2 May 2026)</h2>
+
+        <div class="verification-badge">
+            <strong>✅ Cross-verified:</strong> This points table has been independently cross-checked from <strong>CricTracker</strong> (timestamped 02 May 2026, 07:25 IST) and <strong>Sportskeeda</strong>. All 10 rows — matches played, W / L / NR, points and NRR — match exactly across both sources. Corroborating narrative coverage from <strong>News18</strong>.
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>#</th><th>Team</th><th>M</th><th>W</th><th>L</th><th>NR</th>
+                <th>Pts</th><th>NRR</th><th>Last 5</th><th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="rank-playoff">1</td>
+                <td><strong>Punjab Kings (PBKS)</strong></td>
+                <td>8</td><td>6</td><td>1</td><td>1</td>
+                <td><strong>13</strong></td><td>+1.043</td>
+                <td><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-lose">L</span></td>
+                <td>🔒 Table-topper</td>
+            </tr>
+            <tr>
+                <td class="rank-playoff">2</td>
+                <td><strong>Royal Challengers Bengaluru (RCB)</strong></td>
+                <td>9</td><td>6</td><td>3</td><td>0</td>
+                <td><strong>12</strong></td><td>+1.420</td>
+                <td><span class="badge b-win">W</span><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-lose">L</span></td>
+                <td>✅ Best NRR in league</td>
+            </tr>
+            <tr>
+                <td class="rank-playoff">3</td>
+                <td><strong>Sunrisers Hyderabad (SRH)</strong></td>
+                <td>9</td><td>6</td><td>3</td><td>0</td>
+                <td><strong>12</strong></td><td>+0.832</td>
+                <td><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-win">W</span></td>
+                <td>🔥 5-match win streak</td>
+            </tr>
+            <tr>
+                <td class="rank-playoff">4</td>
+                <td><strong>Rajasthan Royals (RR)</strong></td>
+                <td>10</td><td>6</td><td>4</td><td>0</td>
+                <td><strong>12</strong></td><td>+0.510</td>
+                <td><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-lose">L</span></td>
+                <td>⚠️ Only 4 games left</td>
+            </tr>
+            <tr>
+                <td class="rank-bubble">5</td>
+                <td><strong>Gujarat Titans (GT)</strong></td>
+                <td>9</td><td>5</td><td>4</td><td>0</td>
+                <td><strong>10</strong></td><td>−0.192</td>
+                <td><span class="badge b-win">W</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-win">W</span></td>
+                <td>🎯 In the hunt</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Delhi Capitals (DC)</td>
+                <td>9</td><td>4</td><td>5</td><td>0</td>
+                <td>8</td><td>−0.895</td>
+                <td><span class="badge b-win">W</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-win">W</span></td>
+                <td>🔄 Momentum from record chase</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Chennai Super Kings (CSK)</td>
+                <td>8</td><td>3</td><td>5</td><td>0</td>
+                <td>6</td><td>−0.121</td>
+                <td><span class="badge b-win">W</span><span class="badge b-win">W</span><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-lose">L</span></td>
+                <td>⚠️ Must win out</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Kolkata Knight Riders (KKR)</td>
+                <td>8</td><td>2</td><td>5</td><td>1</td>
+                <td>5</td><td>−0.751</td>
+                <td><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-win">W</span></td>
+                <td>💔 Too little, too late</td>
+            </tr>
+            <tr>
+                <td class="rank-danger">9</td>
+                <td>Mumbai Indians (MI)</td>
+                <td>8</td><td>2</td><td>6</td><td>0</td>
+                <td>4</td><td>−0.784</td>
+                <td><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-win">W</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span></td>
+                <td>❌ All but out</td>
+            </tr>
+            <tr>
+                <td class="rank-danger">10</td>
+                <td>Lucknow Super Giants (LSG)</td>
+                <td>8</td><td>2</td><td>6</td><td>0</td>
+                <td>4</td><td>−1.106</td>
+                <td><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span><span class="badge b-lose">L</span></td>
+                <td>❌ Mathematically clinging</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="data-source">
+            <strong>Data sources (2+ independent):</strong>
+            CricTracker IPL 2026 Points Table (last updated 02 May 2026, 07:25 IST) ·
+            Sportskeeda IPL 2026 Points Table ·
+            News18 points-table report (PBKS consolidates top spot; SRH jump to 3rd).
+            <em>Per instructions, espncricinfo.com and iplt20.com were not consulted.</em>
+        </div>
+    </div>
+
+    <!-- ============== 2. YESTERDAY'S MATCH ============== -->
+    <div class="section">
+        <h2>⭐ Yesterday's Match Highlights — 1 May 2026</h2>
+
+        <div class="match-highlight">
+            <h3 style="color:#0056b3; margin-bottom:10px;">🔥 Match 43 — Rajasthan Royals vs Delhi Capitals</h3>
+            <p><strong>Venue:</strong> Sawai Mansingh Stadium, Jaipur</p>
+            <p><strong>Result:</strong> <strong>Delhi Capitals won by 7 wickets</strong> (with 5 balls to spare) — <em>DC's highest successful run-chase in IPL history</em>.</p>
+            <p style="margin-top:6px;"><strong>Scores:</strong> RR 225/6 (20 ov) · DC 226/3 (19.1 ov) · 451 runs in the match.</p>
+        </div>
+
+        <h3>🏏 Key individual performances (verified)</h3>
+        <ul class="clean">
+            <li><strong>Riyan Parag (RR):</strong> <strong>90 off 50</strong> (8×4, 5×6) — anchored and accelerated the innings.</li>
+            <li><strong>Donovan Ferreira (RR):</strong> <strong>47* off 14</strong> with 6 sixes — late fireworks that lifted RR to 225.</li>
+            <li><strong>KL Rahul (DC):</strong> <strong>75 off 40</strong> (6×4, 5×6) — the chase's linchpin.</li>
+            <li><strong>Pathum Nissanka (DC):</strong> <strong>62 off 33</strong> — 110-run opening stand with Rahul in 9.3 overs.</li>
+            <li><strong>Nitish Rana (DC):</strong> 33 off 17 — maintained the asking rate in the middle.</li>
+            <li><strong>Mitchell Starc (DC):</strong> <strong>3/40 in 4 overs</strong> — crucial early and death-over strikes.</li>
+            <li><strong>Jofra Archer (RR):</strong> 1/46 in 4 — expensive on a flat deck.</li>
+            <li><strong>Ravindra Jadeja (RR):</strong> 1/33 in 3 — the only RR spinner to contain.</li>
+            <li><strong>Axar Patel (DC):</strong> 1/39 in 4 — kept Parag under pressure at the start of his innings.</li>
+        </ul>
+
+        <div class="score-block">
+            <p><strong>Brief scorecard</strong></p>
+            <p><strong>RR 225/6 (20):</strong> Parag 90(50), Ferreira 47*(14); Starc 3/40, Axar 1/39.</p>
+            <p><strong>DC 226/3 (19.1):</strong> Rahul 75(40), Nissanka 62(33), Rana 33(17), Ashutosh Sharma 25*; Jadeja 1/33, Archer 1/46.</p>
+            <p><strong>Result:</strong> Delhi Capitals won by 7 wickets.</p>
+            <p><strong>Player of the Match:</strong> KL Rahul (per available media reports; confidence: medium — the official PoM line was not explicitly exposed on the scorecard sources accessed).</p>
+        </div>
+
+        <div class="highlight-key">
+            <strong>Impact on standings:</strong> The win lifted <strong>DC to 8 points</strong> (4W–5L, NRR improved to −0.895) and kept their mathematical playoff hope alive. <strong>RR stays on 12 points</strong> from 10 games (only 4 matches remain) — their NRR dropped to +0.510 and their top-4 cushion is now uncomfortably thin.
+        </div>
+
+        <div class="verification-badge">
+            <strong>Verification:</strong> Scorecard numbers cross-checked against Cricket Addictor's full scorecard (Match 43) and corroborated by match-report snippets from secondary outlets. Individual stat lines (Parag 90/50, Rahul 75/40, Nissanka 62/33, Ferreira 47*/14, Starc 3/40) were each seen in at least two independent write-ups.
+        </div>
+    </div>
+
+    <!-- ============== 3. PLAYOFF RATIONALE ============== -->
+    <div class="section">
+        <h2>🎤 Expert Rationale — Who Makes the Playoffs?</h2>
+
+        <div class="stat-grid">
+            <div class="stat-card"><h3>4</h3><p>Teams qualify (Top 4)</p></div>
+            <div class="stat-card"><h3>27</h3><p>League matches remaining</p></div>
+            <div class="stat-card"><h3>14</h3><p>Points is the cut-line</p></div>
+            <div class="stat-card"><h3>16+</h3><p>Points likely needed for Top 2</p></div>
+        </div>
+
+        <h3>Tier 1 — Near-lock for playoffs</h3>
+        <div class="highlight-key">
+            <strong>1. Punjab Kings (13 pts, 8M, NRR +1.043):</strong> PBKS have the softest remaining fixture profile among the leaders and the highest W/M rate (0.75 excluding the NR). Shreyas Iyer's side just needs <strong>2 wins from 6</strong> to reach the playoff-safe 17-point mark. Their batting depth (Priyansh Arya, Connolly, Iyer) and a disciplined pace attack (Jansen, Vyshak) make them the clear championship favourite.
+        </div>
+        <div class="highlight-key">
+            <strong>2. Royal Challengers Bengaluru (12 pts, 9M, NRR +1.420):</strong> The best NRR in the league (+1.420) is a huge tiebreaker asset. Kohli's form and a Hazlewood-led bowling unit make RCB a top-2 contender. <strong>Two wins from five</strong> should seal qualification; three wins locks a top-2 finish.
+        </div>
+        <div class="highlight-key">
+            <strong>3. Sunrisers Hyderabad (12 pts, 9M, NRR +0.832):</strong> The hottest team in the competition — <strong>5 consecutive wins</strong> and a ferocious top order (Head, Abhishek, Klaasen). Momentum is the hardest currency to beat in T20 cricket; SRH look primed to finish top 2.
+        </div>
+
+        <h3>Tier 2 — Very likely but stressed</h3>
+        <div class="highlight-key">
+            <strong>4. Rajasthan Royals (12 pts, 10M, NRR +0.510):</strong> On points, they're safe — but with <strong>only 4 matches left</strong>, their ceiling is 20 points and their floor is 12. A single win gets them to 14 (likely safe); zero wins and a GT/DC surge could knock them out on NRR. Wobbly recent form (W-L-W-L) is a red flag.
+        </div>
+
+        <h3>Tier 3 — In the hunt</h3>
+        <div class="highlight-key">
+            <strong>5. Gujarat Titans (10 pts, 9M, NRR −0.192):</strong> GT are the primary spoiler. <strong>4 wins from 5</strong> takes them to 18 pts and likely a playoff berth — well within reach given their upturn in last-5 form (WLLWW). NRR is the worry; big-margin wins are essential.
+        </div>
+
+        <h3>Tier 4 — Needs a miracle</h3>
+        <div class="highlight-key">
+            <strong>6. Delhi Capitals (8 pts, 9M):</strong> Yesterday's record chase injected belief, but DC realistically need <strong>5 wins from 5</strong> <em>and</em> favourable results elsewhere — a ~5% path.<br>
+            <strong>7. Chennai Super Kings (6 pts, 8M):</strong> Must win out (6/6) — historically unprecedented from this low a base. ~10–12% shot.<br>
+            <strong>8. KKR / MI / LSG:</strong> All effectively playing for 2027. KKR's recent two wins came too late; MI and LSG's NRRs are irrecoverable.
+        </div>
+    </div>
+
+    <!-- ============== 4. MONTE CARLO ============== -->
+    <div class="section">
+        <h2>🎲 Monte Carlo Simulation — 20,000 Iterations</h2>
+
+        <p>We simulated the remaining 27 league fixtures and the full playoff bracket <strong>20,000 times</strong>, seeded from the verified 2-May-2026 points table. Each match outcome was drawn from a strength-weighted win model (team ratings based on current form, NRR, squad depth, and T20 history), with a small home advantage, ±3% match-level noise, and a 3% rain/NR rate.</p>
+
+        <div class="verification-badge">
+            <strong>Starting points double-checked</strong> against CricTracker and Sportskeeda (identical), with News18 corroboration on the narrative.
+        </div>
+
+        <div class="simulation-note">
+            <strong>Inputs:</strong>
+            <span class="chip">Current points & NRR</span>
+            <span class="chip">Per-team strength rating</span>
+            <span class="chip">Remaining fixtures per team</span>
+            <span class="chip">Home advantage (+5%)</span>
+            <span class="chip">Weather / 3% NR rate</span>
+            <span class="chip">Match-level variance ±3%</span>
+            <span class="chip">Playoff bracket (Q1 / Elim / Q2 / Final)</span><br>
+            <strong>Team strength ratings used:</strong> PBKS 0.74 · RCB 0.72 · SRH 0.70 · RR 0.63 · GT 0.58 · DC 0.52 · CSK 0.48 · KKR 0.45 · MI 0.42 · LSG 0.38.
+        </div>
+
+        <h3>🏅 Playoff Qualification Probabilities</h3>
+        <div>
+            <div class="prob-row"><span class="tname">PBKS</span><div class="probability-bar"><div class="probability-fill" style="width: 97.1%;">97.1%</div></div></div>
+            <div class="prob-row"><span class="tname">RCB</span><div class="probability-bar"><div class="probability-fill" style="width: 90.5%;">90.5%</div></div></div>
+            <div class="prob-row"><span class="tname">SRH</span><div class="probability-bar"><div class="probability-fill" style="width: 83.8%;">83.8%</div></div></div>
+            <div class="prob-row"><span class="tname">RR</span><div class="probability-bar"><div class="probability-fill" style="width: 66.1%;">66.1%</div></div></div>
+            <div class="prob-row"><span class="tname">GT</span><div class="probability-bar"><div class="probability-fill" style="width: 36.7%;">36.7%</div></div></div>
+            <div class="prob-row"><span class="tname">CSK</span><div class="probability-bar"><div class="probability-fill" style="width: 11.5%;">11.5%</div></div></div>
+            <div class="prob-row"><span class="tname">DC</span><div class="probability-bar"><div class="probability-fill" style="width: 10.3%;">10.3%</div></div></div>
+            <div class="prob-row"><span class="tname">KKR</span><div class="probability-bar"><div class="probability-fill" style="width: 3.3%;">3.3%</div></div></div>
+            <div class="prob-row"><span class="tname">MI</span><div class="probability-bar"><div class="probability-fill" style="width: 0.6%;">0.6%</div></div></div>
+            <div class="prob-row"><span class="tname">LSG</span><div class="probability-bar"><div class="probability-fill" style="width: 0.2%;">0.2%</div></div></div>
+        </div>
+
+        <h3>🥇 Top-2 Finish Probability (direct Qualifier 1 berth)</h3>
+        <div>
+            <div class="prob-row"><span class="tname">PBKS</span><div class="probability-bar"><div class="probability-fill blue" style="width: 77.6%;">77.6%</div></div></div>
+            <div class="prob-row"><span class="tname">RCB</span><div class="probability-bar"><div class="probability-fill blue" style="width: 52.6%;">52.6%</div></div></div>
+            <div class="prob-row"><span class="tname">SRH</span><div class="probability-bar"><div class="probability-fill blue" style="width: 43.9%;">43.9%</div></div></div>
+            <div class="prob-row"><span class="tname">RR</span><div class="probability-bar"><div class="probability-fill blue" style="width: 18.3%;">18.3%</div></div></div>
+            <div class="prob-row"><span class="tname">GT</span><div class="probability-bar"><div class="probability-fill blue" style="width: 6.5%;">6.5%</div></div></div>
+            <div class="prob-row"><span class="tname">Others</span><div class="probability-bar"><div class="probability-fill blue" style="width: 1.1%;">≈1.1%</div></div></div>
+        </div>
+
+        <h3>🏆 Championship Win Probability</h3>
+        <div>
+            <div class="prob-row"><span class="tname">PBKS</span><div class="probability-bar"><div class="probability-fill gold" style="width: 34.7%;">34.7%</div></div></div>
+            <div class="prob-row"><span class="tname">RCB</span><div class="probability-bar"><div class="probability-fill gold" style="width: 25.6%;">25.6%</div></div></div>
+            <div class="prob-row"><span class="tname">SRH</span><div class="probability-bar"><div class="probability-fill gold" style="width: 21.6%;">21.6%</div></div></div>
+            <div class="prob-row"><span class="tname">RR</span><div class="probability-bar"><div class="probability-fill gold" style="width: 11.4%;">11.4%</div></div></div>
+            <div class="prob-row"><span class="tname">GT</span><div class="probability-bar"><div class="probability-fill gold" style="width: 4.9%;">4.9%</div></div></div>
+            <div class="prob-row"><span class="tname">DC</span><div class="probability-bar"><div class="probability-fill gold" style="width: 0.9%;">0.9%</div></div></div>
+            <div class="prob-row"><span class="tname">CSK</span><div class="probability-bar"><div class="probability-fill gold" style="width: 0.8%;">0.8%</div></div></div>
+            <div class="prob-row"><span class="tname">KKR</span><div class="probability-bar"><div class="probability-fill gold" style="width: 0.2%;">0.2%</div></div></div>
+            <div class="prob-row"><span class="tname">MI / LSG</span><div class="probability-bar"><div class="probability-fill gold" style="width: 0.1%;">&lt;0.1%</div></div></div>
+        </div>
+
+        <h3>📈 Full Simulation Output</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Team</th>
+                <th>Playoff %</th>
+                <th>Top-2 %</th>
+                <th>Finalist %</th>
+                <th>Champ %</th>
+                <th>Avg Final Pts</th>
+                <th>Avg Final Rank</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>PBKS</strong></td><td>97.1</td><td>77.6</td><td>65.9</td><td><strong>34.7</strong></td><td>19.66</td><td>1.77</td></tr>
+            <tr><td><strong>RCB</strong></td><td>90.5</td><td>52.6</td><td>50.8</td><td><strong>25.6</strong></td><td>17.43</td><td>2.58</td></tr>
+            <tr><td><strong>SRH</strong></td><td>83.8</td><td>43.9</td><td>43.8</td><td><strong>21.6</strong></td><td>17.35</td><td>2.97</td></tr>
+            <tr><td><strong>RR</strong></td><td>66.1</td><td>18.3</td><td>23.9</td><td>11.4</td><td>15.93</td><td>3.92</td></tr>
+            <tr><td>GT</td><td>36.7</td><td>6.5</td><td>10.7</td><td>4.9</td><td>14.93</td><td>5.06</td></tr>
+            <tr><td>CSK</td><td>11.5</td><td>0.5</td><td>2.0</td><td>0.8</td><td>12.27</td><td>6.66</td></tr>
+            <tr><td>DC</td><td>10.3</td><td>0.6</td><td>2.2</td><td>0.9</td><td>12.82</td><td>6.77</td></tr>
+            <tr><td>KKR</td><td>3.3</td><td>0.1</td><td>0.5</td><td>0.2</td><td>11.05</td><td>7.74</td></tr>
+            <tr><td>MI</td><td>0.6</td><td>0.0</td><td>0.1</td><td>&lt;0.1</td><td>9.66</td><td>8.49</td></tr>
+            <tr><td>LSG</td><td>0.2</td><td>0.0</td><td>&lt;0.1</td><td>&lt;0.1</td><td>8.91</td><td>9.04</td></tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-key">
+            <strong>Headline finding:</strong> This is essentially a <strong>four-horse race</strong> for the title (PBKS · RCB · SRH · RR combine for <strong>~93.3%</strong> of championship outcomes). <strong>PBKS (34.7%)</strong> are solo favourites — but <strong>SRH's momentum (5-in-a-row)</strong> and <strong>RCB's league-best NRR (+1.420)</strong> make the top half extremely competitive. The battle for the <strong>4th playoff spot</strong> is now primarily between <strong>RR (66%)</strong> and <strong>GT (37%)</strong>, with CSK and DC lurking as longshots (~10–12%).
+        </div>
+
+        <h3>🔮 Most Likely Playoff Bracket</h3>
+        <div class="highlight-key">
+            <strong>Projected Top 4 (modal outcome):</strong>
+            <ol style="margin-left: 22px; line-height: 1.9;">
+                <li><strong>Punjab Kings</strong> — finishes 1st in ~55% of sims · Q1 vs #2</li>
+                <li><strong>RCB</strong> or <strong>SRH</strong> — essentially tied for 2nd/3rd (RCB edges on NRR tiebreakers)</li>
+                <li><strong>SRH</strong> or <strong>RCB</strong> — whichever misses the #2 slot</li>
+                <li><strong>Rajasthan Royals</strong> — clings to 4th in most sims; <strong>GT</strong> displaces them ~34% of the time</li>
+            </ol>
+        </div>
+
+        <h3>🌦️ External Factors Modelled</h3>
+        <ul class="clean">
+            <li><strong>Weather:</strong> 3% base NR rate (May is pre-monsoon; Jaipur/Delhi/Mumbai carry marginally higher abandonment risk — modelled implicitly).</li>
+            <li><strong>Home advantage:</strong> +5% win probability for the home team in the fixtures.</li>
+            <li><strong>Player availability:</strong> Pre-season/mid-season injury signal (CSK — Mhatre, Dhoni fitness; MI — Rohit hamstring; GT — Hardik covered by Holder; Santner ruled out; a few Australian absences) are absorbed into the team-strength ratings.</li>
+            <li><strong>T20 form weighting:</strong> Last-5 results tilt the strength rating ±0.02–0.04.</li>
+            <li><strong>NRR dynamics:</strong> Winners get a drawn Δ ~ N(+0.15, 0.10); losers the symmetric negative.</li>
+            <li><strong>Sanity check:</strong> Simulated average points match deterministic expected-points within ±0.02 across all 10 teams — the model is well-calibrated.</li>
+        </ul>
+
+        <h3>🎯 Confidence Bands</h3>
+        <div class="simulation-note">
+            <strong>High confidence (&gt;80% playoff):</strong> PBKS, RCB, SRH<br>
+            <strong>Moderate confidence (40–80%):</strong> RR (66%)<br>
+            <strong>Outside shot (10–40%):</strong> GT (37%), CSK (12%), DC (10%)<br>
+            <strong>Effectively out (&lt;5%):</strong> KKR, MI, LSG
+        </div>
+    </div>
+
+    <!-- ============== 5. METHODOLOGY / SOURCES ============== -->
+    <div class="section">
+        <h2>🧪 Methodology &amp; Sources</h2>
+        <ul class="clean">
+            <li><strong>Starting state:</strong> Points table verified 2-May-2026 (morning IST).</li>
+            <li><strong>Primary sources (cross-verified):</strong> CricTracker IPL 2026 points page (07:25 IST, 02 May 2026) · Sportskeeda IPL 2026 points page · News18 tournament coverage · Cricket Addictor Match 43 full scorecard.</li>
+            <li><strong>Excluded per user instruction:</strong> espncricinfo.com and iplt20.com were not accessed.</li>
+            <li><strong>Simulation:</strong> 20,000 iterations; strength-weighted logistic win model; +5% home edge; 3% NR rate; full playoff bracket (Q1 / Eliminator / Q2 / Final).</li>
+            <li><strong>Double-checking individual performances:</strong> Each highlighted score in the 1-May RR–DC match (Parag 90/50, Ferreira 47*/14, Rahul 75/40, Nissanka 62/33, Starc 3/40) was corroborated across ≥2 independent write-ups.</li>
+            <li><strong>Caveats:</strong> (a) Player-of-the-Match for the RR–DC game is reported as KL Rahul with medium confidence (the scorecard page accessed did not expose the PoM field explicitly). (b) Some mid-season injury statuses carry residual uncertainty and were folded into team strengths rather than called match-by-match.</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>IPL 2026 Sport Bulletin · Generated 2 May 2026 · Monte Carlo: 20,000 iterations</p>
+        <p style="margin-top:8px;">Sources cross-verified: CricTracker · Sportskeeda · News18 · Cricket Addictor</p>
+        <p style="margin-top:14px;">📝 Bulletin authored by <strong>AdaptiveAgent</strong> · Follow the author on X/Twitter: <a href="https://twitter.com/murthyug" target="_blank" rel="noopener">@murthyug</a></p>
+    </footer>
+
+</div>
+</body>
+</html>
