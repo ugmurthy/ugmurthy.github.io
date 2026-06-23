@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubik's Cube Scrambler & Solver</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        /* Cube Container */
+        .cube-container {
+            perspective: 1000px;
+            width: 280px;
+            height: 280px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-25deg) rotateY(45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .face {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+            padding: 5px;
+            background: #333;
+            border: 3px solid #333;
+            border-radius: 5px;
+        }
+
+        .sticker {
+            border-radius: 3px;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Face positions */
+        .face.front  { transform: rotateY(0deg) translateZ(90px); }
+        .face.back   { transform: rotateY(180deg) translateZ(90px); }
+        .face.right  { transform: rotateY(90deg) translateZ(90px); }
+        .face.left   { transform: rotateY(-90deg) translateZ(90px); }
+        .face.top    { transform: rotateX(90deg) translateZ(90px); }
+        .face.bottom { transform: rotateX(-90deg) translateZ(90px); }
+
+        /* Face colors when solved */
+        .face.front .sticker:nth-child(1) { background: #ffff00; }
+        .face.front .sticker:nth-child(2) { background: #ffff00; }
+        .face.front .sticker:nth-child(3) { background: #ffff00; }
+        .face.front .sticker:nth-child(4) { background: #ffff00; }
+        .face.front .sticker:nth-child(5) { background: #ffff00; }
+        .face.front .sticker:nth-child(6) { background: #ffff00; }
+        .face.front .sticker:nth-child(7) { background: #ffff00; }
+        .face.front .sticker:nth-child(8) { background: #ffff00; }
+        .face.front .sticker:nth-child(9) { background: #ffff00; }
+
+        .face.back .sticker:nth-child(n) { background: #00ff00; }
+        .face.right .sticker:nth-child(n) { background: #ffffff; }
+        .face.left .sticker:nth-child(n) { background: #ff0000; }
+        .face.top .sticker:nth-child(n) { background: #0000ff; }
+        .face.bottom .sticker:nth-child(n) { background: #ff0000; }
+
+        /* Control Panel */
+        .controls {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 300px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ccc;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-scramble {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+        }
+
+        .btn-solve {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Stats Display */
+        .stats {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #4fc3f7;
+        }
+
+        /* Solution Display */
+        .solution-container {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .solution-moves {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .move-badge {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .move-badge.animating {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        /* Status Messages */
+        .status {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .status.info { background: rgba(52, 152, 219, 0.2); color: #5dade2; }
+        .status.success { background: rgba(39, 174, 96, 0.2); color: #58d68d; }
+        .status.error { background: rgba(231, 76, 60, 0.2); color: #ec7063; }
+        .status.warning { background: rgba(243, 156, 18, 0.2); color: #f5b041; }
+
+        /* History Table */
+        .history {
+            margin-top: 20px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .history table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .history th, .history td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .history th {
+            color: #4fc3f7;
+            font-weight: 600;
+        }
+
+        /* Rotation Controls */
+        .rotation-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .rotate-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .rotate-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cube-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .face {
+                width: 70px;
+                height: 70px;
+            }
+
+            .face.front  { transform: rotateY(0deg) translateZ(70px); }
+            .face.back   { transform: rotateY(180deg) translateZ(70px); }
+            .face.right  { transform: rotateY(90deg) translateZ(70px); }
+            .face.left   { transform: rotateY(-90deg) translateZ(70px); }
+            .face.top    { transform: rotateX(90deg) translateZ(70px); }
+            .face.bottom { transform: rotateX(-90deg) translateZ(70px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎲 Rubik's Cube Scrambler & Solver</h1>
+    <p class="subtitle">Using Kociemba's Two-Phase Algorithm for optimal solutions</p>
+
+    <div class="container">
+        <!-- 3D Cube Display -->
+        <div class="cube-container">
+            <div class="cube" id="cube">
+                <div class="face front" id="face-F"></div>
+                <div class="face back" id="face-B"></div>
+                <div class="face right" id="face-R"></div>
+                <div class="face left" id="face-L"></div>
+                <div class="face top" id="face-U"></div>
+                <div class="face bottom" id="face-D"></div>
+            </div>
+        </div>
+
+        <!-- Controls & Stats -->
+        <div class="controls">
+            <div class="control-group">
+                <span class="control-label">Actions</span>
+                <button class="btn btn-scramble" id="btnScramble" onclick="scrambleCube()">🔀 Scramble</button>
+                <button class="btn btn-solve" id="btnSolve" onclick="solveCube()" disabled>✓ Solve</button>
+                <button class="btn btn-reset" id="btnReset" onclick="resetCube()">↺ Reset</button>
+            </div>
+
+            <div class="rotation-controls">
+                <button class="rotate-btn" onclick="rotateCube(-5, 0)">←</button>
+                <button class="rotate-btn" onclick="rotateCube(0, -5)">↑</button>
+                <button class="rotate-btn" onclick="rotateCube(5, 0)">→</button>
+                <button class="rotate-btn" onclick="rotateCube(0, 5)">↓</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <span>Total Moves:</span>
+                    <span class="stat-value" id="totalMoves">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Solve Time:</span>
+                    <span class="stat-value" id="solveTime">--</span>
+                </div>
+                <div class="stat-item">
+                    <span>Avg Moves/Solve:</span>
+                    <span class="stat-value" id="avgMoves">--</span>
+                </div>
+                <div class="stat-item">
+                    <span>Solves Completed:</span>
+                    <span class="stat-value" id="solvesCompleted">0</span>
+                </div>
+            </div>
+
+            <div class="status info" id="statusMessage">Click "Scramble" to start!</div>
+
+            <div class="solution-container" id="solutionContainer" style="display: none;">
+                <span class="control-label">Solution</span>
+                <div class="solution-moves" id="solutionMoves"></div>
+            </div>
+
+            <div class="history">
+                <span class="control-label">Solve History</span>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Moves</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load cube-solver library -->
+    <script src="https://unpkg.com/cube-solver@2.4.1/dist/cube-solver.min.js"></script>
+
+    <script>
+        // Color definitions for each face (solved state)
+        const COLORS = {
+            U: '#0000ff', // Up - Blue
+            D: '#ff0000', // Down - Red
+            L: '#ffffff', // Left - White
+            R: '#00ff00', // Right - Green
+            F: '#ffff00', // Front - Yellow
+            B: '#ffaa00'  // Back - Orange
+        };
+
+        // State tracking
+        let scrambledState = null;
+        let solveHistory = [];
+        let totalMovesAllTime = 0;
+        let solvesCount = 0;
+        let rotationX = -25;
+        let rotationY = 45;
+        let isAnimating = false;
+
+        // Initialize the cube faces
+        function initFaces() {
+            const faces = ['F', 'B', 'R', 'L', 'U', 'D'];
+            faces.forEach(face => {
+                const faceDiv = document.getElementById('face-' + face);
+                faceDiv.innerHTML = '';
+                for (let i = 0; i < 9; i++) {
+                    const sticker = document.createElement('div');
+                    sticker.className = 'sticker';
+                    sticker.id = `${face}-${i}`;
+                    sticker.style.backgroundColor = COLORS[face];
+                    faceDiv.appendChild(sticker);
+                }
+            });
+        }
+
+        // Update cube visualization from state string
+        function updateCubeVisualization(state) {
+            // State format: UBDRFL (each face is 9 characters)
+            const faceOrder = ['U', 'B', 'D', 'R', 'F', 'L'];
+            
+            faceOrder.forEach((face, index) => {
+                const faceStickers = state.substring(index * 9, (index + 1) * 9);
+                for (let i = 0; i < 9; i++) {
+                    const stickerId = `${face}-${i}`;
+                    const sticker = document.getElementById(stickerId);
+                    if (sticker) {
+                        sticker.style.backgroundColor = getFaceColor(faceStickers[i]);
+                    }
+                }
+            });
+        }
+
+        // Convert character to color
+        function getFaceColor(char) {
+            switch(char.toUpperCase()) {
+                case 'U': return COLORS.U;
+                case 'D': return COLORS.D;
+                case 'L': return COLORS.L;
+                case 'R': return COLORS.R;
+                case 'F': return COLORS.F;
+                case 'B': return COLORS.B;
+                default: return '#333';
+            }
+        }
+
+        // Rotate the 3D view
+        function rotateCube(dx, dy) {
+            rotationY += dx;
+            rotationX -= dy;
+            document.getElementById('cube').style.transform = 
+                `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+        }
+
+        // Show status message
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+
+        // Generate scramble using cube-solver
+        async function scrambleCube() {
+            try {
+                disableButtons();
+                showStatus('Generating scramble...', 'info');
+
+                // Initialize solver first time
+                if (typeof window.cubeSolver === 'undefined' || typeof window.cubeSolver.initialize !== 'function') {
+                    showStatus('Initializing solver (this may take a moment)...', 'warning');
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    try {
+                        window.cubeSolver.initialize('kociemba');
+                    } catch(e) {
+                        console.log('Solver will initialize on first solve');
+                    }
+                }
+
+                // Generate random scramble
+                if (typeof window.cubeSolver !== 'undefined' && typeof window.cubeSolver.randomState === 'function') {
+                    scrambledState = window.cubeSolver.randomState();
+                } else {
+                    throw new Error('Cube solver not properly initialized');
+                }
+
+                // Get solution to know how many moves it takes
+                if (typeof window.cubeSolver !== 'undefined' && typeof window.cubeSolver.solve === 'function') {
+                    const solution = window.cubeSolver.solve(scrambledState, 'kociemba');
+                    const scrambleMoves = solution.split(' ').filter(m => m.length > 0);
+
+                    showStatus(`Scrambled! (${scrambleMoves.length} moves to solve)`, 'success');
+                    document.getElementById('btnSolve').disabled = false;
+
+                    // Update visualization
+                    updateCubeVisualization(scrambledState);
+                } else {
+                    throw new Error('Cube solver not properly initialized');
+                }
+
+            } catch (error) {
+                console.error('Scramble error:', error);
+                showStatus('Error generating scramble: ' + error.message, 'error');
+            }
+        }
+
+        // Solve the cube
+        async function solveCube() {
+            if (!scrambledState) {
+                showStatus('Please scramble the cube first!', 'warning');
+                return;
+            }
+
+            try {
+                disableButtons();
+                showStatus('Finding optimal solution...', 'info');
+
+                const startTime = Date.now();
+                
+                // Get solution using Kociemba algorithm
+                if (typeof window.cubeSolver !== 'undefined' && typeof window.cubeSolver.solve === 'function') {
+                    const solution = window.cubeSolver.solve(scrambledState, 'kociemba');
+                    const moves = solution.split(' ').filter(m => m.length > 0);
+
+                    const endTime = Date.now();
+                    const solveDuration = ((endTime - startTime) / 1000).toFixed(2);
+
+                    showStatus(`Found solution in ${moves.length} moves!`, 'success');
+
+                    // Display solution moves
+                    displaySolution(moves);
+
+                    // Animate solving (visually reset the cube)
+                    await animateSolution(moves);
+
+                    // Update statistics
+                    updateStatistics(moves.length, solveDuration);
+
+                    // Record history
+                    addToHistory(moves.length, solveDuration);
+
+                    // Reset to solved state visually
+                    initFaces();
+                    scrambledState = null;
+                    document.getElementById('btnSolve').disabled = true;
+                    showStatus('Solved! Click Scramble to play again.', 'success');
+
+                    enableButtons();
+                } else {
+                    throw new Error('Cube solver not properly initialized');
+                }
+
+            } catch (error) {
+                console.error('Solve error:', error);
+                showStatus('Error solving: ' + error.message, 'error');
+                enableButtons();
+            }
+        }
+
+        // Display solution moves
+        function displaySolution(moves) {
+            const container = document.getElementById('solutionContainer');
+            const movesDiv = document.getElementById('solutionMoves');
+            
+            container.style.display = 'block';
+            movesDiv.innerHTML = '';
+            
+            moves.forEach(move => {
+                const badge = document.createElement('span');
+                badge.className = 'move-badge';
+                badge.textContent = move;
+                movesDiv.appendChild(badge);
+            });
+        }
+
+        // Animate the solution (visual effect only)
+        async function animateSolution(moves) {
+            const badges = document.querySelectorAll('.move-badge');
+            for (let i = 0; i < badges.length; i++) {
+                badges[i].classList.add('animating');
+                await new Promise(resolve => setTimeout(resolve, 150));
+                badges[i].classList.remove('animating');
+                
+                // Gradually restore cube to solved state
+                if (i % 2 === 0 || i === badges.length - 1) {
+                    initFaces();
+                }
+            }
+        }
+
+        // Update statistics
+        function updateStatistics(moves, timeStr) {
+            totalMovesAllTime += moves;
+            solvesCount++;
+            
+            document.getElementById('totalMoves').textContent = totalMovesAllTime;
+            document.getElementById('solveTime').textContent = timeStr + 's';
+            document.getElementById('avgMoves').textContent = 
+                (totalMovesAllTime / solvesCount).toFixed(1);
+            document.getElementById('solvesCompleted').textContent = solvesCount;
+        }
+
+        // Add to history table
+        function addToHistory(moves, timeStr) {
+            const tbody = document.getElementById('historyTable');
+            const row = document.createElement('tr');
+            const solveNum = solveHistory.length + 1;
+            
+            row.innerHTML = `
+                <td>${solveNum}</td>
+                <td><strong>${moves}</strong></td>
+                <td>${timeStr}s</td>
+            `;
+            
+            // Insert at top
+            if (tbody.firstChild) {
+                tbody.insertBefore(row, tbody.firstChild);
+            } else {
+                tbody.appendChild(row);
+            }
+            
+            // Keep last 10 entries
+            while (tbody.children.length > 10) {
+                tbody.removeChild(tbody.lastChild);
+            }
+            
+            solveHistory.push({ moves, time: timeStr });
+        }
+
+        // Reset the cube
+        function resetCube() {
+            initFaces();
+            scrambledState = null;
+            document.getElementById('btnSolve').disabled = true;
+            document.getElementById('solutionContainer').style.display = 'none';
+            showStatus('Cube reset to solved state.', 'info');
+        }
+
+        // Button states
+        function disableButtons() {
+            document.getElementById('btnScramble').disabled = true;
+            document.getElementById('btnSolve').disabled = true;
+            document.getElementById('btnReset').disabled = true;
+        }
+
+        function enableButtons() {
+            document.getElementById('btnScramble').disabled = false;
+            document.getElementById('btnReset').disabled = false;
+        }
+
+        // Initialize on load
+        window.onload = async function() {
+            initFaces();
+            
+            // Check if cube-solver loaded correctly
+            if (!window.cubeSolver) {
+                showStatus('Loading cube-solver library...', 'warning');
+                const maxAttempts = 10;
+                let attempts = 0;
+                
+                const checkLibrary = async () => {
+                    if (window.cubeSolver) {
+                        showStatus('Cube-solver library loaded successfully.', 'success');
+                        return;
+                    }
+                    
+                    attempts++;
+                    if (attempts >= maxAttempts) {
+                        showStatus('Failed to load solver library. Please refresh.', 'error');
+                        return;
+                    }
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    await checkLibrary();
+                };
+                
+                await checkLibrary();
+            }
+        };
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ') {
+                e.preventDefault();
+                if (!scrambledState && document.getElementById('btnScramble').textContent.includes('Scramble')) {
+                    scrambleCube();
+                } else if (scrambledState && !document.getElementById('btnSolve').disabled) {
+                    solveCube();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
