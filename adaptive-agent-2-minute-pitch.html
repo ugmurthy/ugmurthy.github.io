@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A two-minute introduction to AdaptiveAgent, the operating layer for reliable AI agents.">
+  <title>AdaptiveAgent — 2 Minute Pitch</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f3f0e8;
+      --muted: #aaa9a3;
+      --night: #090b0a;
+      --panel: #111512;
+      --line: rgba(243, 240, 232, 0.14);
+      --acid: #c8ff3d;
+      --acid-soft: rgba(200, 255, 61, 0.13);
+      --orange: #ff7548;
+      --cyan: #76e8dc;
+      --display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --body: "Avenir Next", Avenir, "Century Gothic", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--night);
+      color: var(--ink);
+      font-family: var(--body);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.2;
+      z-index: 30;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    button { font: inherit; }
+
+    .deck {
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: clamp(28px, 4vw, 64px) clamp(28px, 6vw, 104px) clamp(84px, 8vw, 112px);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(4%);
+      transition: opacity 420ms ease, transform 520ms cubic-bezier(.2, .8, .2, 1), visibility 420ms;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .slide.was-active { transform: translateX(-4%); }
+
+    .slide::after {
+      content: attr(data-index);
+      position: absolute;
+      right: -0.04em;
+      bottom: -0.24em;
+      color: rgba(243, 240, 232, 0.025);
+      font: 34vw/1 var(--display);
+      letter-spacing: -0.07em;
+      z-index: -1;
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: clamp(0.72rem, 1vw, 0.9rem);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(255, 244, 220, 0.36);
+      border-radius: 8px;
+      background: rgba(255, 244, 220, 0.1);
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 220, 0.08);
+    }
+
+    .brand-mark svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .section-label {
+      color: var(--acid);
+      font: 700 clamp(0.64rem, 0.9vw, 0.8rem)/1 var(--mono);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .content {
+      align-self: center;
+      width: 100%;
+      min-width: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .kicker {
+      margin: 0 0 16px;
+      color: var(--acid);
+      font: 700 clamp(0.72rem, 1vw, 0.92rem)/1.3 var(--mono);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1,
+    h2 {
+      margin-bottom: 22px;
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 0.91;
+      text-transform: uppercase;
+    }
+
+    h1 { font-size: clamp(4.3rem, 11vw, 10.5rem); }
+    h2 { max-width: 1050px; font-size: clamp(3.4rem, 8vw, 8rem); }
+
+    .accent { color: var(--acid); }
+    .accent-orange { color: var(--orange); }
+
+    .lede {
+      max-width: 810px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.65rem);
+      line-height: 1.38;
+    }
+
+    .lede strong { color: var(--ink); }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      color: #747872;
+      font: 700 0.68rem/1.3 var(--mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Opening slide */
+    .hero { background: radial-gradient(circle at 78% 32%, rgba(200,255,61,.12), transparent 30%), var(--night); }
+
+    .hero .content { padding-top: 2vh; }
+
+    .hero h1 span { display: block; }
+
+    .hero .agent-word {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+    }
+
+    .hero-orbit {
+      position: absolute;
+      width: min(45vw, 640px);
+      aspect-ratio: 1;
+      right: -10vw;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid rgba(200, 255, 61, 0.23);
+      border-radius: 50%;
+      animation: orbit 18s linear infinite;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      inset: 16%;
+    }
+
+    .hero-orbit::after {
+      inset: 38%;
+      background: var(--acid);
+      border: 0;
+      box-shadow: 0 0 80px rgba(200, 255, 61, 0.35);
+    }
+
+    .orbit-node {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--orange);
+      top: 10%;
+      left: 29%;
+      box-shadow: 0 0 20px var(--orange);
+    }
+
+    @keyframes orbit { to { rotate: 360deg; } }
+
+    /* Problem / definition */
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(290px, .82fr);
+      gap: clamp(30px, 7vw, 110px);
+      align-items: center;
+    }
+
+    .statement {
+      margin: 0;
+      font: 700 clamp(1.5rem, 3.3vw, 3.2rem)/1.12 var(--body);
+      letter-spacing: -0.04em;
+    }
+
+    .before-after {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status-card {
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+    }
+
+    .status-card span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font: 700 .68rem/1 var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .status-card b { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+    .status-card.good { border-color: rgba(200, 255, 61, .52); background: var(--acid-soft); }
+    .status-card.good b { color: var(--acid); }
+
+    /* Audience */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: clamp(22px, 4vh, 42px);
+    }
+
+    .audience-card {
+      min-width: 0;
+      min-height: 190px;
+      padding: clamp(20px, 2.3vw, 34px);
+      border-top: 2px solid var(--acid);
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+    }
+
+    .audience-card .num {
+      display: block;
+      margin-bottom: 30px;
+      color: var(--acid);
+      font: 700 .75rem/1 var(--mono);
+    }
+
+    .audience-card h3 {
+      margin-bottom: 10px;
+      font-size: clamp(1.15rem, 2vw, 1.75rem);
+      line-height: 1.1;
+    }
+
+    .audience-card p { margin: 0; color: var(--muted); line-height: 1.45; }
+
+    /* Capabilities */
+    .capability-layout {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: clamp(36px, 7vw, 100px);
+      align-items: end;
+    }
+
+    .cap-list { border-top: 1px solid var(--line); }
+
+    .cap-row {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: clamp(14px, 2vh, 22px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cap-row .icon { color: var(--acid); font: 1.2rem/1 var(--mono); }
+    .cap-row b { font-size: clamp(1rem, 1.6vw, 1.35rem); }
+    .cap-row small { color: var(--muted); font-size: .82rem; text-align: right; }
+
+    /* Difference */
+    .difference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      max-width: 1080px;
+      margin-top: 34px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .difference {
+      position: relative;
+      min-height: 145px;
+      padding: clamp(22px, 2.5vw, 34px);
+      background: var(--night);
+    }
+
+    .difference h3 {
+      margin-bottom: 8px;
+      font-size: clamp(1.15rem, 2vw, 1.7rem);
+    }
+
+    .difference p { max-width: 420px; margin: 0; color: var(--muted); line-height: 1.4; }
+    .difference .tick { position: absolute; right: 24px; top: 24px; color: var(--acid); font: 1rem/1 var(--mono); }
+
+    /* Flow */
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1.15fr auto 1fr;
+      align-items: center;
+      gap: clamp(10px, 2vw, 26px);
+      margin-top: clamp(28px, 5vh, 56px);
+    }
+
+    .flow-card {
+      min-height: 210px;
+      padding: clamp(20px, 2.5vw, 34px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+    }
+
+    .flow-card.core {
+      border-color: var(--acid);
+      background: var(--acid-soft);
+      transform: translateY(-10px);
+      box-shadow: 0 22px 70px rgba(0,0,0,.36);
+    }
+
+    .flow-card small { color: var(--muted); font: 700 .67rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .flow-card b { font-size: clamp(1.25rem, 2.2vw, 2rem); line-height: 1.12; }
+    .flow-card p { margin: 8px 0 0; color: var(--muted); font-size: .92rem; }
+    .flow-arrow { color: var(--acid); font: 1.7rem/1 var(--mono); }
+
+    /* Close */
+    .closing {
+      background:
+        linear-gradient(115deg, transparent 52%, rgba(200,255,61,.08) 52%),
+        var(--night);
+    }
+
+    .closing h2 { max-width: 1150px; }
+
+    .closing-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+      padding: 13px 18px;
+      border: 1px solid var(--acid);
+      color: var(--acid);
+      font: 700 clamp(.75rem, 1.2vw, .95rem)/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .closing-line::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 16px var(--acid); }
+
+    /* Navigation */
+    .controls {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateX(-50%);
+      padding: 7px;
+      border: 1px solid var(--line);
+      background: rgba(9, 11, 10, 0.82);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-button {
+      width: 38px;
+      height: 34px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      transition: color 160ms, background 160ms;
+    }
+
+    .nav-button:hover,
+    .nav-button:focus-visible { color: var(--acid); background: var(--acid-soft); outline: none; }
+
+    .counter {
+      min-width: 64px;
+      color: var(--muted);
+      text-align: center;
+      font: 700 .72rem/1 var(--mono);
+    }
+
+    .counter strong { color: var(--ink); }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 25;
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .progress-bar {
+      display: block;
+      height: 100%;
+      width: 14.285%;
+      background: var(--acid);
+      transition: width 420ms cubic-bezier(.2, .8, .2, 1);
+      box-shadow: 0 0 12px rgba(200,255,61,.55);
+    }
+
+    .hint {
+      position: fixed;
+      right: 24px;
+      bottom: 30px;
+      z-index: 20;
+      color: #646963;
+      font: 700 .62rem/1 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .active .reveal { animation: reveal 560ms cubic-bezier(.2,.8,.2,1) forwards; }
+    .active .reveal:nth-child(2) { animation-delay: 90ms; }
+    .active .reveal:nth-child(3) { animation-delay: 170ms; }
+    .active .reveal:nth-child(4) { animation-delay: 240ms; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 800px) {
+      .slide { overflow-y: auto; padding-bottom: 96px; }
+      .topline { align-items: flex-start; gap: 12px; }
+      .section-label { max-width: 110px; line-height: 1.35; text-align: right; }
+      h1 { font-size: clamp(3.8rem, 20vw, 6rem); }
+      h2 { max-width: 100%; font-size: clamp(2.65rem, 12vw, 4.4rem); overflow-wrap: break-word; }
+      .split,
+      .capability-layout { grid-template-columns: 1fr; gap: 28px; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .audience-card { width: 100%; min-height: 0; overflow-wrap: anywhere; }
+      .audience-card .num { margin-bottom: 12px; }
+      .difference-grid { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-card { min-height: 140px; }
+      .flow-card.core { transform: none; }
+      .flow-arrow { rotate: 90deg; text-align: center; }
+      .hint { display: none; }
+      .hero-orbit { opacity: .45; }
+    }
+
+    @media (max-height: 680px) and (min-width: 801px) {
+      .slide { padding-top: 24px; padding-bottom: 78px; }
+      h1 { font-size: clamp(4rem, 9vw, 7.5rem); }
+      h2 { font-size: clamp(3rem, 6.5vw, 5.5rem); }
+      .audience-card { min-height: 150px; }
+      .audience-card .num { margin-bottom: 16px; }
+      .flow-card { min-height: 170px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+
+    @media print {
+      html, body { height: auto; overflow: visible; background: #090b0a; }
+      .slide { position: relative; visibility: visible; opacity: 1; transform: none; width: 100vw; height: 56.25vw; min-height: 720px; page-break-after: always; }
+      .controls, .progress, .hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide hero active" data-index="01" aria-label="Slide 1 of 7: AdaptiveAgent">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">2 minute pitch</span>
+      </div>
+      <div class="content">
+        <p class="kicker reveal">AI agents, ready for real work</p>
+        <h1 class="reveal"><span>Adaptive</span><span class="agent-word">Agent</span></h1>
+        <p class="lede reveal">The operating layer for <strong>reliable AI agents.</strong></p>
+      </div>
+      <div class="footer-line"><span>Run · Control · Recover · Improve</span><span>01 / 07</span></div>
+      <div class="hero-orbit" aria-hidden="true"><span class="orbit-node"></span></div>
+    </section>
+
+    <section class="slide" data-index="02" aria-label="Slide 2 of 7: What it is">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">What is it?</span>
+      </div>
+      <div class="content split">
+        <div>
+          <p class="kicker reveal">From demo to dependable</p>
+          <h2 class="reveal">Agents are easy to start.<br><span class="accent-orange">Hard to trust.</span></h2>
+          <p class="lede reveal">AdaptiveAgent sits between your app, AI models, and tools — so every job is <strong>controlled, visible, and recoverable.</strong></p>
+        </div>
+        <div class="before-after reveal">
+          <div class="status-card"><span>Without AdaptiveAgent</span><b>“What did the agent do?”</b></div>
+          <div class="status-card good"><span>With AdaptiveAgent</span><b>See it. Control it. Resume it.</b></div>
+        </div>
+      </div>
+      <div class="footer-line"><span>One layer for agent operations</span><span>02 / 07</span></div>
+    </section>
+
+    <section class="slide" data-index="03" aria-label="Slide 3 of 7: Who it is for">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">Who is it for?</span>
+      </div>
+      <div class="content">
+        <p class="kicker reveal">Built for people shipping agents</p>
+        <h2 class="reveal">For teams moving beyond the <span class="accent">prototype.</span></h2>
+        <div class="audience-grid reveal">
+          <article class="audience-card">
+            <span class="num">01</span>
+            <h3>AI product teams</h3>
+            <p>Ship agent features without building the reliability layer from scratch.</p>
+          </article>
+          <article class="audience-card">
+            <span class="num">02</span>
+            <h3>Platform engineers</h3>
+            <p>Give every agent shared controls, history, policies, and provider access.</p>
+          </article>
+          <article class="audience-card">
+            <span class="num">03</span>
+            <h3>Operations teams</h3>
+            <p>Automate research, support, reporting, and repeatable business workflows.</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer-line"><span>Developers first · Teams next</span><span>03 / 07</span></div>
+    </section>
+
+    <section class="slide" data-index="04" aria-label="Slide 4 of 7: What it can do">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">What can it do?</span>
+      </div>
+      <div class="content capability-layout">
+        <div>
+          <p class="kicker reveal">A complete agent runtime</p>
+          <h2 class="reveal">Give agents real <span class="accent">capability.</span></h2>
+          <p class="lede reveal">Run goals that use tools, work with specialists, and keep going when things go wrong.</p>
+        </div>
+        <div class="cap-list reveal">
+          <div class="cap-row"><span class="icon">↗</span><b>Use real tools</b><small>Web · Files · Shell · Data</small></div>
+          <div class="cap-row"><span class="icon">⌘</span><b>Delegate work</b><small>Specialist child agents</small></div>
+          <div class="cap-row"><span class="icon">Ⅱ</span><b>Pause & approve</b><small>Humans stay in control</small></div>
+          <div class="cap-row"><span class="icon">↻</span><b>Retry & resume</b><small>Work survives failure</small></div>
+          <div class="cap-row"><span class="icon">◎</span><b>Trace & evaluate</b><small>See cost, steps, results</small></div>
+        </div>
+      </div>
+      <div class="footer-line"><span>One runtime · Many workflows</span><span>04 / 07</span></div>
+    </section>
+
+    <section class="slide" data-index="05" aria-label="Slide 5 of 7: What makes it unique">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">Why is it different?</span>
+      </div>
+      <div class="content">
+        <p class="kicker reveal">Production behavior, built in</p>
+        <h2 class="reveal">Not another model wrapper.<br><span class="accent">A trust layer.</span></h2>
+        <div class="difference-grid reveal">
+          <article class="difference"><span class="tick">✓</span><h3>Every step is visible</h3><p>A structured history shows what happened, when, and where.</p></article>
+          <article class="difference"><span class="tick">✓</span><h3>Failure is recoverable</h3><p>Runs can survive interruptions and continue safely.</p></article>
+          <article class="difference"><span class="tick">✓</span><h3>Control is built in</h3><p>Approvals, limits, and policies guard real-world tool use.</p></article>
+          <article class="difference"><span class="tick">✓</span><h3>Models stay replaceable</h3><p>Use local or hosted models without locking your runtime to one vendor.</p></article>
+        </div>
+      </div>
+      <div class="footer-line"><span>Reliable by design</span><span>05 / 07</span></div>
+    </section>
+
+    <section class="slide" data-index="06" aria-label="Slide 6 of 7: How it fits">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">How does it fit?</span>
+      </div>
+      <div class="content">
+        <p class="kicker reveal">The neutral layer in the middle</p>
+        <h2 class="reveal">Keep your stack.<br><span class="accent">Make it dependable.</span></h2>
+        <div class="flow reveal">
+          <div class="flow-card"><small>Your experience</small><div><b>Apps & workflows</b><p>Research, support, coding, operations</p></div></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-card core"><small>The control layer</small><div><b>AdaptiveAgent</b><p>Runs · tools · approvals · memory · traces</p></div></div>
+          <span class="flow-arrow" aria-hidden="true">→</span>
+          <div class="flow-card"><small>Your choice</small><div><b>Models & tools</b><p>Hosted, local, or mixed</p></div></div>
+        </div>
+      </div>
+      <div class="footer-line"><span>Flexible above · Portable below</span><span>06 / 07</span></div>
+    </section>
+
+    <section class="slide closing" data-index="07" aria-label="Slide 7 of 7: Closing">
+      <div class="topline">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#fff4dc" stroke-width="2" stroke-linecap="round"/><path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#d8f1ec" stroke-width="2" stroke-linecap="round"/><path d="M8.5 12h7" stroke="#f9e7c1" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.25" fill="#fff4dc"/></svg></span> AdaptiveAgent</div>
+        <span class="section-label">The takeaway</span>
+      </div>
+      <div class="content">
+        <p class="kicker reveal">Agents will do more real work</p>
+        <h2 class="reveal">AdaptiveAgent makes that work <span class="accent">safe to run.</span></h2>
+        <p class="lede reveal">Build once. Choose your models. See every step. Recover from failure. Improve with evidence.</p>
+        <div class="closing-line reveal">The operating layer for reliable AI agents</div>
+      </div>
+      <div class="footer-line"><span>adaptive-agent</span><span>07 / 07</span></div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Presentation controls">
+    <button class="nav-button" id="previous" type="button" aria-label="Previous slide">←</button>
+    <span class="counter"><strong id="current">01</strong> / 07</span>
+    <button class="nav-button" id="next" type="button" aria-label="Next slide">→</button>
+  </nav>
+  <div class="hint">Use ← → or space</div>
+  <div class="progress" aria-hidden="true"><span class="progress-bar" id="progress"></span></div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const currentLabel = document.getElementById('current');
+    const progress = document.getElementById('progress');
+    let current = 0;
+
+    function showSlide(index) {
+      const next = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, position) => {
+        slide.classList.toggle('active', position === next);
+        slide.classList.toggle('was-active', position < next);
+        slide.setAttribute('aria-hidden', position === next ? 'false' : 'true');
+      });
+      current = next;
+      currentLabel.textContent = String(current + 1).padStart(2, '0');
+      progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+      history.replaceState(null, '', `#${current + 1}`);
+    }
+
+    document.getElementById('previous').addEventListener('click', () => showSlide(current - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(current + 1));
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', 'Enter', ' '].includes(event.key)) {
+        event.preventDefault();
+        showSlide(current + 1);
+      }
+      if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) {
+        event.preventDefault();
+        showSlide(current - 1);
+      }
+      if (event.key === 'Home') showSlide(0);
+      if (event.key === 'End') showSlide(slides.length - 1);
+    });
+
+    let touchStart = 0;
+    document.addEventListener('touchstart', (event) => { touchStart = event.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener('touchend', (event) => {
+      const distance = touchStart - event.changedTouches[0].screenX;
+      if (Math.abs(distance) > 50) showSlide(current + Math.sign(distance));
+    }, { passive: true });
+
+    const requested = Number.parseInt(location.hash.slice(1), 10);
+    showSlide(Number.isFinite(requested) ? requested - 1 : 0);
+  </script>
+</body>
+</html>
