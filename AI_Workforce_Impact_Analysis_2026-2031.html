@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Impact on the Workforce 2026-2031: Strategic Analysis & Guidance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .date-range {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 24px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+        
+        main {
+            padding: 50px 40px;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        section > h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        section > h3 {
+            font-size: 1.4em;
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .subsection {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .highlight-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .key-stat {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .risk-high {
+            background: #fadbd8;
+            border-left-color: #e74c3c;
+        }
+        
+        .opportunity {
+            background: #d5f4e6;
+            border-left-color: #27ae60;
+        }
+        
+        .warning {
+            background: #fdebd0;
+            border-left-color: #f39c12;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        table tr:hover {
+            background: #f0f0f0;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .scenario-card {
+            background: white;
+            border: 1px solid #ecf0f1;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .scenario-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .skill-mapping {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .skill-column {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        
+        .skill-column h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .declining {
+            border-top: 3px solid #e74c3c;
+        }
+        
+        .growing {
+            border-top: 3px solid #27ae60;
+        }
+        
+        .skill-item {
+            background: white;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #95a5a6;
+        }
+        
+        .skill-item.decline {
+            border-left-color: #e74c3c;
+        }
+        
+        .skill-item.growth {
+            border-left-color: #27ae60;
+        }
+        
+        .case-study {
+            background: #ecf0f1;
+            border-left: 5px solid #9b59b6;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        
+        .case-study h4 {
+            color: #8e44ad;
+            margin-bottom: 12px;
+            font-size: 1.15em;
+        }
+        
+        .case-study-item {
+            margin-bottom: 15px;
+        }
+        
+        .case-study-item strong {
+            color: #2c3e50;
+        }
+        
+        .citation {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        
+        .chart-placeholder {
+            background: linear-gradient(135deg, #ecf0f1 0%, #d5d8dc 100%);
+            padding: 40px;
+            text-align: center;
+            border-radius: 6px;
+            margin: 20px 0;
+            color: #7f8c8d;
+        }
+        
+        .employment-scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .employment-scenario-grid > div {
+            background: #f9f9f9;
+            border: 1px solid #ecf0f1;
+            border-radius: 6px;
+            padding: 20px;
+        }
+        
+        .employment-scenario-grid h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .numeric-highlight {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        
+        .sectoral-impacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .sector-card {
+            background: white;
+            border: 1px solid #ecf0f1;
+            border-radius: 6px;
+            padding: 20px;
+            border-top: 4px solid #3498db;
+        }
+        
+        .sector-card h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 40px;
+            font-size: 0.9em;
+        }
+        
+        .sources-list {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 6px;
+            margin-top: 30px;
+        }
+        
+        .source-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
+            border-radius: 4px;
+        }
+        
+        .source-item-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .source-item-meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .skill-mapping {
+                grid-template-columns: 1fr;
+            }
+            
+            .employment-scenario-grid,
+            .sectoral-impacts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            main {
+                padding: 30px 20px;
+            }
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 30px 0;
+        }
+        
+        .toc h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .toc ol {
+            margin-left: 25px;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .confidence-note {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-top: 8px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Impact on the Workforce 2026–2031</h1>
+            <p>Strategic Analysis, Employment Scenarios, and Workforce Preparation</p>
+            <div class="date-range">
+                Analysis Period: July 9, 2026 – July 9, 2031 (5-Year Horizon)
+            </div>
+        </header>
+        
+        <main>
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>📋 Report Contents</h3>
+                <ol>
+                    <li>Executive Summary</li>
+                    <li>Employment Impact Scenarios</li>
+                    <li>Occupations Most at Risk of Automation</li>
+                    <li>Occupations Likely to Grow</li>
+                    <li>Distributional Impacts (Sectoral, Regional, Demographic)</li>
+                    <li>Skills Transformation: Decline & Growth</li>
+                    <li>Case Studies: Displacement and Augmentation</li>
+                    <li>Workforce Preparation Strategies</li>
+                    <li>Sources and Citations</li>
+                </ol>
+            </div>
+            
+            <!-- Executive Summary -->
+            <section>
+                <h2>📊 Executive Summary</h2>
+                
+                <div class="key-stat">
+                    <strong>Overall Trajectory:</strong> AI will reshape rather than outright eliminate the majority of jobs, but transformation will be rapid, uneven, and destabilizing for entry-level workers and lower-income occupations.
+                </div>
+                
+                <p style="margin-top: 20px;"><strong>Key Findings (2026–2031):</strong></p>
+                
+                <ul>
+                    <li><strong>Job Reshaping:</strong> 50–55% of US jobs will be significantly reshaped in task composition within 2–3 years, with augmentation (AI supporting humans) as the dominant mechanism.</li>
+                    <li><strong>Job Elimination:</strong> 10–15% of US jobs (~16.5–24.75 million) could be eliminated by 2031 if adoption accelerates; baseline estimate: 5.1% (~7.9 million) face high displacement risk with limited nontechnical barriers.</li>
+                    <li><strong>Net Employment Growth:</strong> Overall employment levels will likely remain stable or grow slightly, but labor market composition will shift dramatically, creating a "two-track economy" of high-wage AI-enhanced roles and lower-wage service work.</li>
+                    <li><strong>Geographic Variation:</strong> Advanced economies (developed nations) face 60% job impact; low-income countries only 26% due to different employment composition.</li>
+                    <li><strong>Demographic Disparities:</strong> Women, younger workers, and entry-level employees face disproportionate displacement risks; wage gaps likely to widen.</li>
+                    <li><strong>Skill Urgency:</strong> Entry-level roles requiring traditionally senior-level competencies (strategy, leadership, critical thinking) will grow 35% while traditional junior positions decline. Skills will change 2× faster in AI-exposed roles.</li>
+                </ul>
+                
+                <div class="cite">
+                    <p class="citation"><strong>Sources:</strong> Boston Consulting Group (2026), SHRM 2026 Automation/AI Survey, PwC Global AI Jobs Barometer (2026), World Economic Forum Future of Jobs Report 2025</p>
+                </div>
+            </section>
+            
+            <!-- Employment Impact Scenarios -->
+            <section>
+                <h2>📈 Net Employment Scenarios (2026–2031)</h2>
+                
+                <p style="margin-bottom: 20px;">The following scenarios reflect different adoption speeds and nontechnical barriers to automation:</p>
+                
+                <div class="employment-scenario-grid">
+                    <div class="scenario-card">
+                        <h4>Scenario 1: Short-Term Reshaping (Most Likely 2026–2029)</h4>
+                        <p><strong>Job Elimination:</strong> 0–5%</p>
+                        <p><strong>Job Reshaping:</strong> 50–55%</p>
+                        <p style="margin-top: 15px;"><strong>Mechanism:</strong> Augmentation dominates. AI handles routine elements; humans retain oversight and high-judgment work.</p>
+                        <p style="margin-top: 10px;"><strong>Outcome:</strong> Majority of jobs survive but with radically new task profiles. Wage polarization accelerates.</p>
+                    </div>
+                    
+                    <div class="scenario-card">
+                        <h4>Scenario 2: Medium-Term Substitution (5-Year View)</h4>
+                        <p><strong>Job Elimination:</strong> 10–15%</p>
+                        <p class="numeric-highlight">16.5–24.75 million US jobs at risk</p>
+                        <p style="margin-top: 10px;"><strong>Confidence:</strong> <em>Moderate—assumes faster automation than near-term, but still limited by client preferences, regulation, and human interaction needs.</em></p>
+                        <p style="margin-top: 10px;"><strong>Affected Sectors:</strong> Customer service, administrative/office support, financial analysis, some manufacturing roles.</p>
+                    </div>
+                    
+                    <div class="scenario-card">
+                        <h4>Scenario 3: High-Risk Baseline (No Nontechnical Barriers)</h4>
+                        <p><strong>Job Elimination:</strong> 5.1% (high confidence threshold)</p>
+                        <p class="numeric-highlight">~7.9 million jobs</p>
+                        <p style="margin-top: 10px;"><strong>Definition:</strong> Fully automatable with no regulatory, preference, or human-interaction barriers protecting them.</p>
+                        <p style="margin-top: 10px;"><strong>Protection Reality:</strong> 60.4% of US employment has at least one nontechnical barrier (client preference 62.7%, regulatory 15%+, sustained interaction needs).</p>
+                        <p class="citation">Source: SHRM 2026 Automation/AI Survey</p>
+                    </div>
+                    
+                    <div class="scenario-card">
+                        <h4>Scenario 4: Global Perspective (Advanced vs. Developing)</h4>
+                        <p><strong>Advanced Economies:</strong> 60% of jobs could be affected; 14% of employees may change careers by 2030.</p>
+                        <p><strong>Low-Income Countries:</strong> Only 26% of jobs at risk.</p>
+                        <p style="margin-top: 10px;"><strong>Challenge:</strong> Over 600 million jobs must be created by 2030 for young people entering the labor market, particularly in emerging economies.</p>
+                        <p class="citation">Sources: Goldman Sachs, National University, WEF</p>
+                    </div>
+                </div>
+                
+                <div class="key-stat opportunity">
+                    <strong>Confidence Caveat:</strong> These scenarios depend on adoption speed, policy response, and nontechnical barriers. Regulatory intervention, unionization, and client preferences could lower displacement by 30–50%. Conversely, breakthroughs in reasoning AI or automated physical systems could accelerate it.
+                </div>
+            </section>
+            
+            <!-- Occupations at Risk -->
+            <section>
+                <h2>⚠️ Occupations Most at Risk of Automation</h2>
+                
+                <p style="margin-bottom: 20px;">The following occupations face >40% task automation and highest substitution risk by 2031:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Occupation</th>
+                            <th>Automation Probability</th>
+                            <th>Affected Workers</th>
+                            <th>Projected Change (2023–2033)</th>
+                            <th>Primary Mechanism</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Customer Service Representatives</strong></td>
+                            <td>High (>75%)</td>
+                            <td>Large segment</td>
+                            <td>−5.0%</td>
+                            <td>AI chatbots, voicebots handle routine inquiries; agent roles shift to escalation and complex issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Call Center & Telemarketing Agents</strong></td>
+                            <td>High (>75%)</td>
+                            <td>~500K+ directly</td>
+                            <td>Accelerating decline</td>
+                            <td>AI-driven outbound systems replace 40%+ of function</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Medical Transcriptionists</strong></td>
+                            <td>High (>75%)</td>
+                            <td>~25K</td>
+                            <td>−4.7%</td>
+                            <td>Speech-to-text and documentation AI; limited new roles</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Credit Analysts & Financial Analysts (Routine)</strong></td>
+                            <td>High (>75%)</td>
+                            <td>~150K in finance</td>
+                            <td>−3.9%</td>
+                            <td>Predictive models handle preliminary screening; human input shifts to exceptions and judgment calls</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Administrative & Office Support (Routine)</strong></td>
+                            <td>High (>40% automatable)</td>
+                            <td>~3.7 million (43% of all jobs)</td>
+                            <td>Slow decline since 2019</td>
+                            <td>Document automation, workflow processing, scheduling AI</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Entry-Level Roles (Across Sectors)</strong></td>
+                            <td>Very High</td>
+                            <td>~50 million</td>
+                            <td>Restructuring upward</td>
+                            <td>AI absorbs junior execution tasks (data entry, reports, analysis); roles demand senior-level skills or disappear</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Architecture & Engineering (Routine Design)</strong></td>
+                            <td>High (>50%)</td>
+                            <td>~2–3 million</td>
+                            <td>Moderate risk</td>
+                            <td>Generative design, code generation, technical drawing automation</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box risk-high">
+                    <strong>Critical Risk Factor—Entry-Level Acceleration:</strong>
+                    <p style="margin-top: 12px;">Nearly 50 million entry-level US jobs are at risk. The traditional career ladder (junior → mid → senior) is compressing. More than 20% of entry-level workers are expected to change careers, re-enter, or move industries by 2030. Gen X (45–60) comprises ~1 in 5 entry-level workers, complicating reskilling assumptions.</p>
+                    <p class="citation" style="margin-top: 12px;">Source: WEF Artificial Intelligence and the Future of Entry-Level Work (2026)</p>
+                </div>
+            </section>
+            
+            <!-- Growing Occupations -->
+            <section>
+                <h2>✅ Occupations Likely to Grow (2026–2031)</h2>
+                
+                <p style="margin-bottom: 20px;">These occupations are expanding due to sustained human demand, AI augmentation, or complementary service growth:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Occupation/Role Category</th>
+                            <th>Projected Growth (2024–2034 baseline)</th>
+                            <th>Reason for Growth</th>
+                            <th>Expected Job Creation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nurse Practitioners & Nurses</strong></td>
+                            <td>+52% (NPs); +8.4% sector average</td>
+                            <td>AI augments rather than replaces; aging population; sustained care demand</td>
+                            <td>+2.0 million healthcare jobs (2024–2034)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Medical Aides & Home Health Aides</strong></td>
+                            <td>+8.4%</td>
+                            <td>Hands-on, in-person care; physical presence required; demographic aging</td>
+                            <td>Included in +2.0 million healthcare total</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Personal Financial Advisors</strong></td>
+                            <td>+13% (2022–2032)</td>
+                            <td>Clients value human expertise for complex decisions despite AI tools; wealth creation drives demand</td>
+                            <td>~50K–80K new roles</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI-Related & Technical Roles</strong></td>
+                            <td>Growing 2× faster than "democratised" roles</td>
+                            <td>High demand for AI implementation, governance, ethics; nearly 1 in 8 new TMT jobs are AI-related</td>
+                            <td>~400K–600K new AI-adjacent roles by 2031</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Food Preparation & Service Workers</strong></td>
+                            <td>500K+ new positions by 2033</td>
+                            <td>In-person services; limited automation feasibility; consumer demand resilient</td>
+                            <td>+500K</td>
+                        </tr>
+                        <tr>
+                            <td><strong>'Seniorised' Entry-Level Roles</strong></td>
+                            <td>+35% since 2019</td>
+                            <td>Entry-level positions requiring traditionally mid-career competencies (leadership, strategy, client interaction)</td>
+                            <td>Higher wage entry points; smaller cohort size</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skilled Trades (HVAC, Electrical, Plumbing)</strong></td>
+                            <td>Steady growth</td>
+                            <td>Physical presence and hands-on work limit automation; sustained infrastructure demand</td>
+                            <td>~100K–200K annually</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="key-stat opportunity">
+                    <strong>Healthcare as the Bright Spot:</strong>
+                    <p style="margin-top: 12px;">The AI-in-Healthcare market is growing from <strong>$36.67 billion (2026) to $194.79 billion (2031) at a 39.7% compound annual growth rate</strong>. Healthcare employment is expanding at <strong>8.4% through 2034</strong>, adding approximately <strong>2.0 million jobs</strong>. This sector offers the most robust job growth and demonstrates how AI augmentation (rather than replacement) can coexist with workforce expansion.</p>
+                    <p class="citation" style="margin-top: 12px;">Sources: BLS Employment Projections, Healthcare AI market data</p>
+                </div>
+            </section>
+            
+            <!-- Distributional Impacts -->
+            <section>
+                <h2>🌍 Distributional Impacts: Sectoral, Regional & Demographic</h2>
+                
+                <!-- Sectoral Impacts -->
+                <h3>Sectoral Impacts</h3>
+                
+                <div class="sectoral-impacts-grid">
+                    <div class="sector-card">
+                        <h4>💻 Technology, Media & Telecoms (TMT)</h4>
+                        <p><strong>AI Exposure:</strong> Highest adoption rate</p>
+                        <p><strong>Job Impact:</strong> Nearly 1 in 8 new jobs are AI-related; highest hiring intensity</p>
+                        <p><strong>Wage Effect:</strong> Strong AI skill premiums (40%+)</p>
+                        <p><strong>Outcome:</strong> High growth but heavily skewed to high-skill roles</p>
+                    </div>
+                    
+                    <div class="sector-card">
+                        <h4>🏥 Healthcare & Social Assistance</h4>
+                        <p><strong>AI Exposure:</strong> Growing but augmentative</p>
+                        <p><strong>Job Impact:</strong> +2.0 million (8.4% growth 2024–2034); nurse practitioners +52%</p>
+                        <p><strong>Mechanism:</strong> AI diagnostic tools amplify clinician capabilities</p>
+                        <p><strong>Outcome:</strong> Strong net job creation; human touch remains essential</p>
+                    </div>
+                    
+                    <div class="sector-card">
+                        <h4>🏭 Manufacturing</h4>
+                        <p><strong>AI Exposure:</strong> High in routine production</p>
+                        <p><strong>Job Impact:</strong> Routine jobs declining; AI-enabled roles growing</p>
+                        <p><strong>Wage Effect:</strong> Polarization—high-skill AI roles vs. low-skill maintenance</p>
+                        <p><strong>Outcome:</strong> Net job loss in traditional roles; modest growth in technical positions</p>
+                    </div>
+                    
+                    <div class="sector-card">
+                        <h4>💼 Financial Services</h4>
+                        <p><strong>AI Exposure:</strong> Very High</p>
+                        <p><strong>Job Impact:</strong> Credit analysts −3.9%; routine analysis roles declining</p>
+                        <p><strong>Mechanism:</strong> Predictive models handle preliminary screening</p>
+                        <p><strong>Outcome:</strong> Consolidation of routine roles; demand shift to relationship management & complex advisory</p>
+                    </div>
+                    
+                    <div class="sector-card">
+                        <h4>📞 Customer Service & Telecommunications</h4>
+                        <p><strong>AI Exposure:</strong> Very High</p>
+                        <p><strong>Job Impact:</strong> Customer service reps −5.0%; call centers under pressure</p>
+                        <p><strong>Mechanism:</strong> Chatbots & voicebots handle 40%+ of routine inquiries</p>
+                        <p><strong>Outcome:</strong> Shift from transaction processing to complex problem-solving & retention</p>
+                    </div>
+                    
+                    <div class="sector-card">
+                        <h4>🎓 Professional Services (Legal, Consulting)</h4>
+                        <p><strong>AI Exposure:</strong> Rapidly increasing</p>
+                        <p><strong>Job Impact:</strong> AI hiring demand growing; junior roles under pressure</p>
+                        <p><strong>Mechanism:</strong> Document review, research, preliminary analysis automation</p>
+                        <p><strong>Outcome:</strong> Entry-level positions require higher competencies; experienced professionals in demand</p>
+                    </div>
+                </div>
+                
+                <!-- Regional Impacts -->
+                <h3>Regional Impacts</h3>
+                
+                <div class="subsection">
+                    <div class="key-stat">
+                        <strong>United States (High AI Exposure):</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>Jobs at highest displacement risk:</strong> 7.9 million (5.1% of employment)</li>
+                            <li><strong>Jobs requiring 50%+ automation by 2026:</strong> 20% of employment</li>
+                            <li><strong>Entry-level jobs at risk:</strong> Nearly 50 million</li>
+                            <li><strong>Workers needing retraining (next 3 years):</strong> ~20 million</li>
+                            <li><strong>Geographic concentration:</strong> Tech hubs (San Francisco, Seattle, Boston), financial centers (New York, Chicago), and professional services hubs disproportionately affected</li>
+                        </ul>
+                        <p class="citation" style="margin-top: 15px;">Source: SHRM 2026 Automation/AI Survey</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="key-stat opportunity">
+                        <strong>Advanced Economies (Europe, Japan, Australia):</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>Job exposure:</strong> 60% of jobs could be affected by AI</li>
+                            <li><strong>Forced career change by 2030:</strong> 14% of employees</li>
+                            <li><strong>Variation by country:</strong> UAE entry-level roles show 4× skill change rate vs. Italy (lower exposure due to different employment composition)</li>
+                            <li><strong>Reskilling capacity:</strong> Generally higher education levels and social safety nets allow faster adaptation</li>
+                        </ul>
+                        <p class="citation" style="margin-top: 15px;">Source: WEF Future of Jobs Report 2025, PwC Global AI Jobs Barometer</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="highlight-box">
+                        <strong>Low-Income Countries & Emerging Economies:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>Job exposure:</strong> Only 26% of jobs at risk (different employment composition—agriculture, construction dominant)</li>
+                            <li><strong>Challenge:</strong> Over 600 million jobs must be created by 2030 for young people entering the labor market</li>
+                            <li><strong>Opportunity:</strong> Leapfrog potential if AI tools democratized; risk of digital divide widening</li>
+                            <li><strong>Youth labor force (15–24):</strong> Over 500 million young people needing employment pathways</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Demographic Impacts -->
+                <h3>Demographic Impacts</h3>
+                
+                <div class="subsection">
+                    <div class="key-stat risk-high">
+                        <strong>Gender Disparities:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>Women's job risk (high-income nations):</strong> 9.6% of women's jobs at highest risk vs. 3.2% for men</li>
+                            <li><strong>Global female job exposure:</strong> 4.7% of women's jobs face severe disruption vs. 2.4% for men</li>
+                            <li><strong>US data:</strong> 79% of employed women work in jobs at high automation risk vs. 58% of men</li>
+                            <li><strong>Root cause:</strong> Women concentrated in administrative support, customer service, healthcare support—roles with high automation potential</li>
+                            <li><strong>Wage gap risk:</strong> AI creates premium roles disproportionately filled by men; female underrepresentation in AI/STEM limits access to high-paying positions</li>
+                        </ul>
+                        <p class="citation" style="margin-top: 15px;">Source: National University AI Job Statistics 2026</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="key-stat risk-high">
+                        <strong>Age and Generation Disparities:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>Young workers (18–24):</strong> 129% more likely than those 65+ to worry AI will make job obsolete</li>
+                            <li><strong>Gen Z attitude:</strong> 49% of Gen Z job seekers believe AI has reduced the value of a college education</li>
+                            <li><strong>Entry-level risk:</strong> ~50 million entry-level jobs at risk; traditionally filled by 18–30 year-olds but increasingly by Gen X (45–60)</li>
+                            <li><strong>Mid-career vulnerability:</strong> 14% of all workers displaced by AI; higher among younger and mid-career workers in tech/creative sectors</li>
+                            <li><strong>Skill change urgency:</strong> Entry-level roles require learning 2× faster than senior positions; 28% believe half their skills will be obsolete in 3 years</li>
+                        </ul>
+                        <p class="citation" style="margin-top: 15px;">Source: WEF AI and Future of Entry-Level Work 2026</p>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="key-stat warning">
+                        <strong>Education Level Disparities:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>College graduate trend:</strong> Young college graduates more likely to work in AI-exposed occupations than the overall workforce</li>
+                            <li><strong>Implication:</strong> Education becomes the critical differentiator for job security, but exposure is complex</li>
+                            <li><strong>Skill requirement:</strong> Rising demand for AI technical skills widens the gap between educated and non-educated workers</li>
+                            <li><strong>Risk:</strong> Non-college workers in routine occupations face highest displacement without reskilling support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <div class="key-stat risk-high">
+                        <strong>Income & Occupational Status Divergence:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>Two-track labor market:</strong> High-wage AI-enhanced roles vs. lower-wage routine-task automation</li>
+                            <li><strong>Low-paid service work:</strong> Flat/declining employment since 2019, partly attributed to AI adoption</li>
+                            <li><strong>Wage growth gap:</strong> Professionalised (high-skill AI) jobs growing 2× faster than democratised jobs with 42% higher wage growth since 2021</li>
+                            <li><strong>Implication:</strong> Widening income inequality absent policy intervention</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Skills Transformation -->
+            <section>
+                <h2>🎓 Skills Transformation: Decline and Growth (2026–2031)</h2>
+                
+                <p style="margin-bottom: 20px;">The following skill mapping illustrates which competencies will decline in demand and which will surge:</p>
+                
+                <div class="skill-mapping">
+                    <div class="skill-column declining">
+                        <h4>❌ Skills Declining in Demand</h4>
+                        
+                        <div class="skill-item decline">
+                            <strong>Routine Data Entry & Transcription</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Medical transcriptionists declining 4.7%; document automation widespread. Impact: Reduced demand for manual keystroke-based work.</p>
+                        </div>
+                        
+                        <div class="skill-item decline">
+                            <strong>Scripted Customer Interaction</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Customer service reps declining 5.0%; chatbots handle standard inquiries. Impact: Call-reading and static response scripts obsolete.</p>
+                        </div>
+                        
+                        <div class="skill-item decline">
+                            <strong>Manual Report Generation & Analysis</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Entry-level junior positions declining; AI generates preliminary reports and dashboards. Impact: Lower-level analytics and compilation work undervalued.</p>
+                        </div>
+                        
+                        <div class="skill-item decline">
+                            <strong>Rote Data Processing & Verification</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Administrative roles shrinking; automation handles routine processing. Impact: Data entry clerks, form processors, record managers losing ground.</p>
+                        </div>
+                        
+                        <div class="skill-item decline">
+                            <strong>Call Center Operations Management</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Telemarketing agents replaced by AI-driven systems. Impact: Traditional call center supervision and outbound dialing diminished.</p>
+                        </div>
+                        
+                        <div class="skill-item decline">
+                            <strong>Basic Credit & Financial Analysis</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Credit analysts declining 3.9%; predictive models handle preliminary screening. Impact: Routine underwriting and credit score analysis automated.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-column growing">
+                        <h4>✅ Skills Growing in Demand</h4>
+                        
+                        <div class="skill-item growth">
+                            <strong>AI Tool Proficiency & Human-AI Collaboration</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Ability to work effectively with AI agents embedded in workflows. 2× faster skill change rate in AI-exposed roles. Critical differentiator for employment.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Critical Thinking & Complex Problem-Solving</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Humans move to high-judgment scenarios AI cannot handle. 2.5× more likely to be required in new tasks added to AI-exposed roles.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Empathy & Interpersonal Communication</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Customer relationships, team management, client interaction increasingly critical as routine tasks automate. 2.5× growth in demand.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Strategic Thinking & Leadership</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">AI-exposed junior roles 7× more likely to demand senior-level strategic skills. Career ladder compressing; entry-level positions require traditionally mid-career capabilities.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Creative & Adaptive Thinking</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">AI eliminates predictable patterns; human creativity becomes competitive advantage. Roles require ability to leverage AI insights creatively and adapt to evolving tools.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Technical AI Literacy (Non-Engineering)</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Across sectors; professionals must understand AI capabilities, limitations, and ethical use. Jobs requiring AI skills growing fastest with 40%+ wage premiums.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Data Interpretation & Decision-Making Under Uncertainty</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Interpreting AI outputs and making final judgments in medical diagnosis, financial recommendations, policy decisions.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Change Management & Continuous Learning</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Skills changing 2× faster in AI-exposed roles; workers must continuously upskill. 28% of entry-level workers believe half their skills will be obsolete in 3 years.</p>
+                        </div>
+                        
+                        <div class="skill-item growth">
+                            <strong>Complex Human Interaction Occupations</strong>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Healthcare (nurses +52%), personal services, counseling, education. Physical presence and sustained human interaction cannot be fully automated.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>Skill Change Rate Acceleration:</strong>
+                    <p style="margin-top: 12px;"><strong>Entry-level roles in highest AI-exposure quartile show 2× the skill change rate of non-entry-level positions.</strong> This creates a double bind: junior workers traditionally learn by doing, but AI-exposed roles compress that learning timeline and demand senior-level capabilities upfront. The education system cannot keep pace; skills requirements are evolving faster than curricula can adapt.</p>
+                    <p class="citation" style="margin-top: 12px;">Source: PwC Global AI Jobs Barometer 2026, WEF AI and Future of Entry-Level Work</p>
+                </div>
+            </section>
+            
+            <!-- Case Studies -->
+            <section>
+                <h2>📖 Case Studies: Displacement and Augmentation (2026–2031)</h2>
+                
+                <!-- Case Study 1 -->
+                <div class="case-study">
+                    <h4>Case Study 1: Customer Service Transformation (Displacement + Augmentation)</h4>
+                    <p style="margin-bottom: 15px;"><strong>Sector:</strong> Telecommunications and Financial Services | <strong>Timeline:</strong> 2024–2033 | <strong>Projected Change:</strong> −5.0%</p>
+                    
+                    <div class="case-study-item">
+                        <strong>The Mechanism:</strong>
+                        <p>AI chatbots and voicebots handle routine inquiries (billing questions, account access, basic troubleshooting). In 2026, these systems managed ~40% of first-contact interactions. By 2031, estimates suggest 50–60% automation of routine tier-1 work.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Displacement Impact:</strong>
+                        <p><em>Entry-level customer service representatives</em> and junior agents face elimination. Typical profile: 22–30 year-old college graduate hired into tier-1 support. By 2028, these positions are largely gone or require fundamentally different skills (problem-solving, empathy-based customer recovery).</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Augmentation Outcome:</strong>
+                        <p>Mid-level specialists are redeployed to complex issue resolution and customer relationship management. A representative with 5+ years experience now focuses on escalated cases (disputes, technical issues, churn retention) and mentors lower-tier agents. Their workload shifts from transaction processing to judgment-based decision-making.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Resilience Factor:</strong>
+                        <p>Client preference for human contact (62.7% of affected jobs protected by this barrier) preserves some roles despite high automation potential. However, companies reduce headcount by 30–40% and concentrate humans in higher-pay, higher-skill roles. Net result: 5% employment decline, but 20% wage increase for retained roles; 35–45% of displaced entry-level workers move to different occupations or exit the formal sector.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Skills Shift:</strong>
+                        <p><em>From:</em> Scripted response delivery, multitasking under pressure, following decision trees.<br/>
+                        <em>To:</em> Empathy, problem-solving, strategic customer relationship handling, conflict de-escalation, AI tool oversight (monitoring chatbot errors, routing escalations).</p>
+                    </div>
+                    
+                    <p class="citation" style="margin-top: 15px;">Sources: SHRM 2026 Survey, Boston Consulting Group AI Report, Telecoms Industry Data</p>
+                </div>
+                
+                <!-- Case Study 2 -->
+                <div class="case-study">
+                    <h4>Case Study 2: Healthcare Expansion (Augmentation, No Displacement)</h4>
+                    <p style="margin-bottom: 15px;"><strong>Sector:</strong> Healthcare and Medical Services | <strong>Timeline:</strong> 2024–2034 | <strong>Projected Growth:</strong> +8.4% (+2.0 million jobs) | <strong>Market Growth:</strong> $36.67B (2026) → $194.79B (2031) at 39.7% CAGR</p>
+                    
+                    <div class="case-study-item">
+                        <strong>The Mechanism:</strong>
+                        <p>AI diagnostic imaging tools, predictive analytics, and documentation automation amplify clinical capabilities rather than replace practitioners. A radiologist in 2026 uses AI-assisted detection to screen for anomalies, flagging 90%+ of lesions while the physician makes final diagnostic calls. Nursing documentation is automated; nurses spend that time on patient interaction and complex care coordination.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Employment Impact:</strong>
+                        <p><em>No net job loss.</em> Instead, healthcare employment is expected to add 2.0 million jobs (8.4% growth through 2034). Nurse practitioners grow +52%; nurses and therapists expand. Why? (1) Aging population increases care demand, (2) AI frees clinicians to handle more complex cases, (3) Administrative burden reduced, (4) New roles emerge (AI healthcare compliance officers, data privacy specialists, care coordinators).</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Augmentation Outcome:</strong>
+                        <p>Nurses gain time for patient interaction and complex care coordination. Physicians can see more patients while handling more complex cases. Diagnostic accuracy improves; physician burnout declines (fewer false alarms, less administrative work). Patient outcomes improve due to AI early-warning systems for deterioration.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Resilience Factor:</strong>
+                        <p>Sustained demand (demographic aging), nontechnical barriers (human care, legal liability, patient trust), and complementary AI-clinical workflows protect and expand healthcare employment. Additionally, regulatory requirements, medical licensure, and ethical standards slow automation of high-judgment medical decisions.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Skills Shift:</strong>
+                        <p><em>From:</em> Rote documentation, repetitive clinical assessments based on checklists, administrative data entry.<br/>
+                        <em>To:</em> Critical thinking in diagnosis (interpreting AI alerts, not blindly following), patient communication, care team leadership, ethical decision-making in edge cases, continuous learning (new AI tools, protocols).</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Wage Impact:</strong>
+                        <p>Roles command higher compensation due to expanded responsibility and critical role in AI-augmented care. A nurse practitioner salary grows from ~$110K (2024) to ~$130K+ (2031) as AI automation increases productivity and patient volumes.</p>
+                    </div>
+                    
+                    <p class="citation" style="margin-top: 15px;">Sources: BLS Employment Projections, Healthcare AI Market Reports, U.S. Bureau of Labor Statistics</p>
+                </div>
+                
+                <!-- Case Study 3 -->
+                <div class="case-study">
+                    <h4>Case Study 3: Entry-Level Career Ladder Compression (Structural Displacement)</h4>
+                    <p style="margin-bottom: 15px;"><strong>Sector:</strong> Cross-sector (Finance, Consulting, Professional Services, Technology) | <strong>Timeline:</strong> 2019–2031 | <strong>Context:</strong> "Seniorised" entry-level roles growing 35% since 2019; AI exposure 7× higher skill demand in junior roles</p>
+                    
+                    <div class="case-study-item">
+                        <strong>The Mechanism:</strong>
+                        <p>AI absorbs routine tasks historically performed by junior staff: data entry, report generation, preliminary analysis, pattern matching. A junior financial analyst's traditional role (compile data, build models, generate reports) is 80% automatable. Rather than eliminate the position, firms create "seniorised" entry-level roles demanding leadership, strategic thinking, client interaction, and decision-making that previously belonged to mid-level positions.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Displacement Impact:</strong>
+                        <p>Traditional entry-level execution roles decline; seniorised entry-level roles grow. A college graduate cannot find a "junior analyst" role performing routine analysis anymore. Instead, employers post "senior analyst" positions requiring 5+ years experience or entry-level roles that demand MBA-equivalent strategic skills. Result: ~50 million US entry-level jobs restructured upward or eliminated.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Educational Misalignment:</strong>
+                        <p>Education systems cannot keep pace. A 2026 college graduate enters the labor market with strong data/technical skills but minimal strategic thinking, leadership experience, or client management training. Employers expect these senior-level competencies from day-one entry-level hires. Gap: 40–50% of new entrants unprepared for "seniorised" junior roles.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Demographic Consequence:</strong>
+                        <p>~20% of entry-level workers (including Gen X re-entrants, career-changers, and young people) find themselves unable to enter or re-enter professional roles. They either (1) pursue vocational training in skilled trades, (2) move to less AI-exposed sectors (hospitality, healthcare aides, personal services), (3) delay career entry, or (4) exit the formal labor market. This creates a significant "lost cohort" barrier for workforce entrants unprepared for elevated demands.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Skills Shift:</strong>
+                        <p><em>From:</em> Execution (data entry, report compilation, standard analysis, following protocols).<br/>
+                        <em>To:</em> Strategy (identifying problem-solving approaches, designing solutions, client communication), Leadership (managing teams, mentoring, ownership of outcomes), Continuous learning (adapting to AI tool changes, staying ahead of automation).</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Wage & Mentorship Impact:</strong>
+                        <p>Seniorised roles command higher wages (often 20–30% premium) but require different mentorship model. Traditional junior progression (learn by doing, gradual responsibility expansion) is compressed. New entrants must demonstrate senior-level competencies upfront or be excluded from professional pathways. Entry barrier for underprivileged, first-generation, or non-networked individuals rises sharply.</p>
+                    </div>
+                    
+                    <div class="case-study-item">
+                        <strong>Resilience & Challenge:</strong>
+                        <p><em>Resilience:</em> High-skill professionals benefit; wage growth for "seniorised" roles is robust. <em>Challenge:</em> Structural inequality deepens. Only students with access to advanced mentorship, internships, and networking can meet elevated entry-level demands. Traditional pathway for social mobility via entry-level jobs is compromised.</p>
+                    </div>
+                    
+                    <p class="citation" style="margin-top: 15px;">Sources: WEF AI and Future of Entry-Level Work 2026, PwC Global AI Jobs Barometer, LinkedIn Labour Market Insights</p>
+                </div>
+            </section>
+            
+            <!-- Workforce Preparation Strategies -->
+            <section>
+                <h2>💼 Workforce Preparation Strategies for 2026–2031</h2>
+                
+                <h3>For Individuals</h3>
+                <div class="subsection">
+                    <p><strong>1. Invest in AI Literacy (Immediately)</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Learn basic AI tools, concepts, and limitations. Even non-technical roles require understanding when/how to use AI assistants.</li>
+                        <li><strong>Timeline:</strong> 40–80 hours of self-directed learning (3–6 months part-time) for foundational AI competency.</li>
+                        <li><strong>ROI:</strong> 40%+ wage premium for roles requiring AI skills by 2031.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>2. Build "Uniquely Human" Skills (Ongoing)</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Focus on critical thinking, creativity, complex communication, leadership, emotional intelligence—skills AI cannot easily replicate.</li>
+                        <li><strong>Methods:</strong> Formal training (executive education, psychology, philosophy), real-world projects requiring judgment calls, team leadership.</li>
+                        <li><strong>Occupations with resilience:</strong> Healthcare (especially patient-facing), creative industries, strategy/consulting, skilled trades.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>3. Pivot into Growing Sectors (Especially Healthcare)</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Healthcare adding 2.0 million jobs (8.4% growth through 2034); nurse practitioner roles +52%. High job security, human-centric work, strong wage growth.</li>
+                        <li><strong>Entry pathway:</strong> Nursing assistant → RN → NP or specialized nurse (oncology, critical care). 2–4 year timeline with good ROI.</li>
+                        <li>Other resilient sectors: skilled trades, personal services, professional services.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>4. Accelerate Continuous Learning Habits</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Skills in AI-exposed roles change 2× faster than traditional jobs. Workers must develop learning agility.</li>
+                        <li><strong>Strategy:</strong> Dedicate 5–10 hours/week to learning new tools, frameworks, domain knowledge. Join professional communities (online forums, local chapters, conferences).</li>
+                        <li><strong>Reality check:</strong> 28% of entry-level workers believe half their skills will be obsolete in 3 years. This is not alarmism; it is the new baseline.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>5. Network Strategically</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Career transitions are accelerating. Strong networks provide early warning of role changes, access to "seniorised" entry-level positions, and informal mentorship.</li>
+                        <li>Particularly critical for first-generation and underrepresented workers who may lack traditional pathways.</li>
+                    </ul>
+                </div>
+                
+                <h3>For Organizations</h3>
+                <div class="subsection">
+                    <p><strong>1. Invest in Workforce Reskilling Programs (Urgent)</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>~20 million US workers need retraining over the next 3 years. Companies cannot rely on external training systems alone.</li>
+                        <li><strong>Best practice:</strong> Internal upskilling pathways (junior → AI-augmented role transitions), partnerships with educational institutions, tuition reimbursement for degrees in high-demand areas.</li>
+                        <li><strong>ROI:</strong> Retaining experienced workers is cheaper than external hiring; internal mobility improves retention.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>2. Redesign Entry-Level Roles to Include Mentorship</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>"Seniorised" entry-level positions require senior-level competencies but cannot expect new graduates to possess them. Create structured mentorship, project-based learning, and apprenticeship-style pathways.</li>
+                        <li><strong>Challenge:</strong> Balancing productivity demand with teaching investment. Solution: Pair high-potential entry-level hires with seasoned mentors; rotate mentees through multiple projects to build strategic thinking.</li>
+                        <li><strong>Outcome:</strong> Better retention, more equipped junior staff, reduced hiring churn.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>3. Measure and Track Skills Drift Actively</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Create skills inventories; assess which competencies are becoming obsolete in your workforce. Use AI-driven tools to identify emerging gaps.</li>
+                        <li><strong>Benchmark:</strong> Compare internal skill profile to market demand. Where are you losing capability?</li>
+                        <li><strong>Action:</strong> Target reskilling interventions where impact is highest.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>4. Ensure Equitable Access to AI Opportunities</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Women and underrepresented groups are at disproportionate risk of displacement. Proactively recruit and support these groups in AI-adjacent roles.</li>
+                        <li><strong>Data point:</strong> 9.6% of women's jobs at highest automation risk vs. 3.2% for men (high-income nations). Women hold 20%+ of AI/STEM roles but are 50%+ of displaced entry-level workers.</li>
+                        <li><strong>Strategy:</strong> Sponsorship programs, bias-aware hiring, inclusive mentorship, transparent promotion pathways.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>5. Engage in Policy Advocacy & Industry Collaboration</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Individual company efforts alone cannot solve systemic displacement. Advocate for reskilling tax credits, apprenticeship funding, and educational curriculum modernization.</li>
+                        <li>Collaborate with competitors and educational institutions to standardize skill certifications and create industry-wide reskilling pathways.</li>
+                        <li>Support union/worker advocacy for transition assistance and wage insurance.</li>
+                    </ul>
+                </div>
+                
+                <h3>For Policy Makers & Governments</h3>
+                <div class="subsection">
+                    <p><strong>1. Fund Large-Scale Reskilling Infrastructure</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>600 million jobs must be created by 2030 for young people entering labor markets globally. AI simultaneously displaces workers from routine roles. Without massive reskilling investment, unemployment and underemployment will surge.</li>
+                        <li><strong>Approach:</strong> Public-private partnerships to design and fund short-cycle certifications (6–12 months) in high-demand areas (healthcare, skilled trades, AI literacy).</li>
+                        <li><strong>Funding:</strong> Tax AI productivity gains to fund displaced worker transition programs.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>2. Modernize Education Systems (K–12 & Higher Ed)</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Skills requirements are outpacing education curriculum. By the time students graduate college, their core competencies are partially outdated.</li>
+                        <li><strong>Reform needed:</strong> Emphasis on critical thinking, creativity, AI literacy, and continuous learning rather than static subject mastery. Stronger partnerships between education and industry to ensure relevance.</li>
+                        <li><strong>Entry-level redesign:</strong> Apprenticeship and work-integrated learning models to bridge "seniorised" skill demands.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>3. Implement Wage Insurance & Transition Support</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Displaced workers often face wage loss (20–40%) even after retraining. Wage insurance programs can smooth transition and reduce economic anxiety.</li>
+                        <li><strong>Model:</strong> Government covers 50% of wage loss for 2–3 years post-displacement if worker retrains in high-demand field.</li>
+                        <li><strong>Outcome:</strong> Greater political support for automation, faster reskilling adoption, reduced inequality.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>4. Target Support for Disproportionately Affected Groups</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Women (9.6% job risk in high-income nations):</strong> Subsidized training in tech, leadership roles, AI-adjacent fields; combat hiring bias.</li>
+                        <li><strong>Entry-level workers (~50 million at risk):</strong> Apprenticeship funding, mentorship subsidies, first-job placement support.</li>
+                        <li><strong>Low-income countries:</strong> Capacity building in AI, infrastructure to support digital transition, foreign investment in tech hubs.</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection">
+                    <p><strong>5. Monitor & Enforce Equitable AI Deployment</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Establish labor standards and transparency requirements for companies deploying AI that affects workforce. Require displacement assessments, transition planning, and equity audits.</li>
+                        <li><strong>Precedent:</strong> Environmental impact assessments; labor impact assessments could be mandatory for large-scale automation investments.</li>
+                        <li><strong>Enforcement:</strong> Tie tax incentives, government contracts to demonstrable reskilling efforts and equitable outcomes.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Key Takeaways -->
+            <section>
+                <h2>🎯 Key Takeaways for Business Decision-Makers</h2>
+                
+                <div class="highlight-box" style="background: linear-gradient(135deg, #d5f4e6 0%, #c8e6c9 100%); border-left-color: #27ae60;">
+                    <ol style="margin: 15px 0 15px 25px;">
+                        <li><strong>Transformation Will Be Rapid but Uneven:</strong> 50–55% of jobs will be reshaped within 2–3 years; entry-level roles and routine administrative work face the highest pressure. Plan for talent mobility and reskilling as operational imperatives, not nice-to-haves.</li>
+                        
+                        <li><strong>Augmentation Dominates Short Term; Substitution Accelerates Mid-Term:</strong> By 2029, most displacement is through task automation and role reshaping. By 2031, if adoption accelerates, 10–15% of jobs could be eliminated outright. Build flexibility into workforce planning.</li>
+                        
+                        <li><strong>Skill Gaps Are Immediate and Severe:</strong> Entry-level roles now demand mid-career competencies. Education systems lag by 3–5 years. Invest heavily in internal mentorship and continuous learning or face talent shortages in 2–3 years.</li>
+                        
+                        <li><strong>Healthcare Is the Bright Spot:</strong> +2.0 million jobs, +52% NP growth, $36.67B → $194.79B market expansion. Healthcare and augmentation-focused sectors offer resilience and growth; automation-heavy sectors (customer service, finance, admin) face contraction.</li>
+                        
+                        <li><strong>Demographic Inequities Will Widen Without Intervention:</strong> Women face 3× higher automation risk; entry-level workers face 20%+ career transitions. Proactive equity measures (sponsorship, bias audits, inclusive reskilling) will differentiate competitive advantage and reduce legal/reputational risk.</li>
+                        
+                        <li><strong>Reskilling ROI Is Strong, But Requires Upfront Investment:</strong> Retaining and upskilling existing workers is cheaper than external hiring and reduces institutional knowledge loss. However, commitment requires 2–3 years of focused investment before payoff materializes.</li>
+                        
+                        <li><strong>Policy Environment Will Tighten:</strong> Governments will likely implement reskilling tax credits, apprenticeship funding, and labor impact assessment requirements. Early movers in equitable workforce management will benefit from regulatory favor.</li>
+                        
+                        <li><strong>The "Two-Track Economy" Is Forming Now:</strong> High-wage AI-enhanced roles (40%+ wage premium) vs. lower-wage service work. Companies must decide whether to invest in internal talent development or outsource to lower-cost providers. Mixed strategies (core team upskilled; periphery automated) are most common.</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <!-- Sources -->
+            <section>
+                <h2>📚 Sources and Citations</h2>
+                
+                <div class="sources-list">
+                    <div class="source-item">
+                        <div class="source-item-title">1. Boston Consulting Group. (2026). "AI Will Reshape More Jobs Than It Replaces."</div>
+                        <div class="source-item-meta">Key Finding: Analysis of 1,500+ roles showing 50–55% job reshaping, 10–15% elimination in 5 years via task-level automation model.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">2. World Economic Forum. (2025). "The Future of Jobs Report 2025."</div>
+                        <div class="source-item-meta">Coverage: 1,000+ global employers representing 14 million workers; drivers include technological change, geoeconomic fragmentation, green transition.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">3. PwC. (2026). "Global AI Jobs Barometer."</div>
+                        <div class="source-item-meta">Analysis: 1 billion+ job ads from 6 continents; 40% productivity growth in high-AI companies; two-track labor market; skills changing 2× faster in AI-exposed roles; 42% wage premium for professionalised roles.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">4. SHRM (Society for Human Resource Management). (2026). "Automation, AI, and Job Displacement Risk in U.S. Employment (2026 Edition)."</div>
+                        <div class="source-item-meta">Survey: 14,245 US workers; 5.1% at high displacement risk (7.9 million jobs); 20% of employment 50%+ automated; 60.4% have nontechnical barriers protecting jobs.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">5. National University. (2026). "59 AI Job Statistics: Future of U.S. Jobs."</div>
+                        <div class="source-item-meta">Key Data: 30% of US jobs automatable by 2030; 60% will see significant task changes; 9.6% of women's jobs at highest risk vs. 3.2% for men; 50 million entry-level jobs at risk.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">6. World Economic Forum. (2026). "Artificial Intelligence and the Future of Entry-Level Work."</div>
+                        <div class="source-item-meta">Focus: Entry-level roles in highest AI-exposure quartile show 2× skill change rate; 28% of entry-level workers believe half their skills obsolete in 3 years; 600 million jobs needed by 2030 for young people.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">7. U.S. Bureau of Labor Statistics. (2024). "Employment Projections Home Page."</div>
+                        <div class="source-item-meta">Baseline: Healthcare/social assistance growing 8.4%, adding ~2.0 million jobs (2024–2034); nurse practitioners +52% growth; official government employment forecasts.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">8. Goldman Sachs Economic Research. (2023). "The Potentially Large Effects of Artificial Intelligence on Economic Growth."</div>
+                        <div class="source-item-meta">Global Impact: AI could affect 300 million jobs (9.1% of workforce); advanced economies 60%, low-income countries 26% due to employment composition differences.</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-item-title">9. Healthcare AI Market Reports. (2026). Market valuation trajectory from $36.67B (2026) to $194.79B (2031) at 39.7% CAGR.</div>
+                        <div class="source-item-meta">Contextualizes healthcare sector expansion and AI augmentation potential in fastest-growing employment sector.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h2>🔍 Methodology Note</h2>
+                <div class="highlight-box">
+                    <p><strong>Data Sources & Confidence Levels:</strong></p>
+                    <p style="margin-top: 12px;">This analysis synthesizes findings from:</p>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>High Confidence:</strong> BLS employment data, peer-reviewed forecasts (BCG, PwC, WEF), surveys of 1,000+ employers and 14,245+ workers.</li>
+                        <li><strong>Moderate Confidence:</strong> Automation probability estimates (vary by methodology and assumptions about adoption speed); sectoral projections (2026–2031 extrapolations from historical trends).</li>
+                        <li><strong>Lower Confidence:</strong> Job elimination scenarios at the 10–15% range (dependent on policy, adoption acceleration, and nontechnical barrier strength); specific occupational timelines beyond 2031.</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Key Limitations:</strong> Analysis assumes moderate AI adoption speed and continued nontechnical barriers (regulation, human preference, physical constraints). Breakthrough developments in reasoning AI or autonomous physical systems could accelerate timelines by 1–2 years and increase displacement by 30–50%.</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 AI Workforce Impact Analysis | Reference Period: July 9, 2026 – July 9, 2031</p>
+            <p style="margin-top: 15px;">For inquiries, citations, or data requests, contact the research team.</p>
+        </footer>
+    </div>
+</body>
+</html>

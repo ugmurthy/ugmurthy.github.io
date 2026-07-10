@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdaptiveAgent | Reliable AI Agents Mobile First</title>
+  <title>AdaptiveAgent | Reliable AI Agents</title>
   <meta name="description" content="AdaptiveAgent is the operating layer for reliable AI agents, built as a Bun and TypeScript runtime and CLI stack.">
   <style>
     :root {
@@ -130,30 +130,6 @@
     .brand-mark svg {
       width: 22px;
       height: 22px;
-    }
-
-    .nav-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 244, 220, 0.32);
-      border-radius: 7px;
-      color: #fffaf0;
-      background: rgba(255, 244, 220, 0.08);
-      cursor: pointer;
-    }
-
-    .nav-toggle svg {
-      width: 23px;
-      height: 23px;
-    }
-
-    .nav-toggle:hover,
-    .nav-toggle:focus {
-      background: rgba(255, 244, 220, 0.14);
-      outline: none;
     }
 
     .nav-links {
@@ -415,7 +391,6 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      min-width: 0;
       min-height: 100%;
       padding: 20px;
       border: 1px solid var(--line);
@@ -514,7 +489,6 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      min-width: 0;
     }
 
     .doc-recipe .code-block {
@@ -628,7 +602,6 @@
       grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
       gap: 22px;
       padding: 22px;
-      min-width: 0;
       border: 1px solid rgba(255, 244, 220, 0.22);
       border-radius: 8px;
       background: rgba(255, 244, 220, 0.06);
@@ -688,12 +661,10 @@
     .code-stack {
       display: grid;
       gap: 12px;
-      min-width: 0;
     }
 
     .code-block {
       overflow: hidden;
-      min-width: 0;
       border: 1px solid var(--code-line);
       border-radius: 8px;
       background: var(--code-bg);
@@ -745,7 +716,6 @@
 
     pre {
       margin: 0;
-      max-width: 100%;
       overflow-x: auto;
       padding: 16px;
       color: var(--code-text);
@@ -847,142 +817,7 @@
       font-size: 0.94rem;
     }
 
-    /* Mobile-first cascade for this standalone page. */
-    .hero {
-      min-height: 92svh;
-    }
-
-    .hero::after {
-      background: rgba(16, 20, 24, 0.54);
-      box-shadow: inset 0 -260px 190px rgba(16, 20, 24, 0.82);
-    }
-
-    .nav,
-    .hero-inner,
-    .hero-index,
-    .container,
-    .footer-inner {
-      width: min(var(--max), calc(100% - 32px));
-    }
-
-    .nav {
-      align-items: center;
-      flex-direction: row;
-      flex-wrap: wrap;
-      padding: 18px 0;
-    }
-
-    .brand {
-      min-height: 44px;
-    }
-
-    .nav-toggle {
-      display: inline-flex;
-      margin-left: auto;
-    }
-
-    .nav-links {
-      display: none;
-      width: 100%;
-      justify-content: flex-start;
-      gap: 4px;
-      padding: 10px 0 0;
-    }
-
-    .nav-links a {
-      width: 100%;
-      min-height: 40px;
-      padding: 8px 9px;
-      font-size: 0.88rem;
-    }
-
-    .nav.is-open .nav-links {
-      display: flex;
-      align-items: stretch;
-      flex-direction: column;
-    }
-
-    .hero-inner {
-      padding: 44px 0 64px;
-    }
-
-    h1 {
-      max-width: 100%;
-      font-size: clamp(2.78rem, 14vw, 3.75rem);
-    }
-
-    .lede {
-      font-size: 1.34rem;
-    }
-
-    .hero-copy,
-    .section-lede {
-      font-size: 1.02rem;
-    }
-
-    .hero-actions {
-      align-items: stretch;
-      flex-direction: column;
-    }
-
-    .button {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .hero-index,
-    .overview-grid,
-    .feature-grid,
-    .runtime-map,
-    .quickstart-grid,
-    .example-grid,
-    .docs-grid,
-    .doc-mini-grid,
-    .doc-recipe-grid,
-    .provider-list,
-    .doc-table-row,
-    .step {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-index span {
-      min-height: auto;
-    }
-
-    .section-title {
-      font-size: 2.1rem;
-    }
-
-    .workflow-header,
-    .provider-list li {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    .runtime-node {
-      min-height: 138px;
-    }
-
-    .step {
-      display: grid;
-      padding: 18px;
-    }
-
-    .step-label {
-      width: 100%;
-    }
-
-    pre {
-      font-size: 0.86rem;
-      white-space: pre;
-    }
-
-    .footer-inner {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    @media (min-width: 621px) {
+    @media (max-width: 880px) {
       h1 {
         font-size: 4.75rem;
       }
@@ -991,150 +826,87 @@
         font-size: 2.7rem;
       }
 
-      .nav {
-        align-items: center;
-        flex-direction: row;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
       .hero-index,
       .runtime-map,
       .provider-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .hero-actions {
-        align-items: center;
-        flex-direction: row;
+      .example-grid,
+      .docs-grid {
+        grid-template-columns: 1fr;
       }
 
-      .button {
-        width: auto;
-      }
-
+      .doc-mini-grid,
+      .doc-recipe-grid,
       .doc-table-row {
-        grid-template-columns: minmax(170px, 0.7fr) minmax(0, 1.3fr);
+        grid-template-columns: 1fr;
       }
 
-      .workflow-header,
-      .provider-list li,
-      .footer-inner {
-        align-items: center;
-        flex-direction: row;
-      }
-    }
-
-    @media (min-width: 881px) {
-      .nav,
-      .hero-inner,
-      .hero-index,
-      .container,
-      .footer-inner {
-        width: min(var(--max), calc(100% - 40px));
-      }
-
-      .hero {
-        min-height: 84svh;
-      }
-
-      .hero::after {
-        background: rgba(16, 20, 24, 0.42);
-        box-shadow: inset 700px 0 360px rgba(16, 20, 24, 0.56), inset 0 -260px 190px rgba(16, 20, 24, 0.78);
-      }
-
-      .hero-inner {
-        padding: clamp(50px, 9vw, 112px) 0 76px;
-      }
-
-      h1 {
-        max-width: 860px;
-        font-size: 7rem;
-      }
-
-      .lede {
-        font-size: 1.78rem;
-      }
-
-      .hero-copy {
-        font-size: 1.15rem;
-      }
-
-      .section-title {
-        font-size: 3.6rem;
-      }
-
-      .section-lede {
-        font-size: 1.18rem;
-      }
-
-      .hero-index,
-      .runtime-map {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .overview-grid {
-        grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.76fr);
+      .overview-grid,
+      .step {
+        grid-template-columns: 1fr;
       }
 
       .feature-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .example-grid,
-      .docs-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .doc-mini-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .doc-recipe-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .step {
-        grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
-        padding: 22px;
-      }
-
-      .runtime-node {
-        min-height: 170px;
-      }
-
-      .provider-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      pre {
-        font-size: 0.95rem;
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (min-width: 1025px) {
-      .nav {
-        flex-wrap: nowrap;
+    @media (max-width: 620px) {
+      h1 {
+        font-size: 3rem;
       }
 
-      .nav-toggle {
-        display: none;
+      .lede {
+        font-size: 1.36rem;
+      }
+
+      .hero-copy,
+      .section-lede {
+        font-size: 1.02rem;
+      }
+
+      .section-title {
+        font-size: 2.1rem;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .nav-links {
-        display: flex;
-        width: auto;
-        align-items: center;
-        flex-direction: row;
-        justify-content: flex-end;
-        padding: 0;
+        justify-content: flex-start;
       }
 
-      .nav-links a {
-        width: auto;
+      .hero-inner {
+        padding-top: 44px;
+      }
+
+      .hero-index,
+      .runtime-map,
+      .provider-list {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .workflow-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      pre {
+        font-size: 0.86rem;
+      }
+
+      .provider-list li {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
@@ -1156,16 +928,12 @@
         </span>
         <span>AdaptiveAgent</span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="nav-links" id="primary-nav">
+      <div class="nav-links">
         <a href="#overview">Overview</a>
         <a href="#runtime">Runtime</a>
         <a href="#quickstart">Quickstart</a>
         <a href="#examples">Examples</a>
+        <a href="showcase.html">Showcase</a>
         <a href="#docs">Docs</a>
         <a href="https://github.com/ugmurthy/adaptiveAgent" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1566,7 +1334,7 @@ adaptive-agent run \
   "invocationModes": ["run"],
   "defaultInvocationMode": "run",
   "model": {
-    "provider": "openrouter",
+    "provider": "mesh",
     "model": "qwen/qwen3.5-27b",
     "apiKeyEnv": "MESH_API_KEY"
   },
@@ -1729,45 +1497,6 @@ adaptive-agent retry --run-id &lt;runId&gt; --runtime postgres</code></pre>
           }
           throw new Error("Copy command failed");
         }
-      }
-
-      const nav = document.querySelector(".nav");
-      const navToggle = document.querySelector(".nav-toggle");
-      const navLinks = document.querySelector(".nav-links");
-      const desktopNav = window.matchMedia("(min-width: 881px)");
-
-      function setNavOpen(open) {
-        if (!nav || !navToggle) {
-          return;
-        }
-
-        nav.classList.toggle("is-open", open);
-        navToggle.setAttribute("aria-expanded", String(open));
-        navToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
-      }
-
-      if (nav && navToggle && navLinks) {
-        navToggle.addEventListener("click", () => {
-          setNavOpen(!nav.classList.contains("is-open"));
-        });
-
-        navLinks.addEventListener("click", (event) => {
-          if (event.target.closest("a")) {
-            setNavOpen(false);
-          }
-        });
-
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") {
-            setNavOpen(false);
-          }
-        });
-
-        desktopNav.addEventListener("change", (event) => {
-          if (event.matches) {
-            setNavOpen(false);
-          }
-        });
       }
 
       document.querySelectorAll(".code-block").forEach((block) => {
