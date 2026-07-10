@@ -33,86 +33,32 @@
     "open": true
   },
   {
-    "title": "Code Review Assistant",
+    "title": "Create a Plan",
     "category": "Engineering workflow",
-    "brief": "Reviews a change set, prioritizes findings, and links the review to runtime events for auditability.",
-    "description": "Describe the repository context, review prompt, tools available to the agent, and how the final findings were validated. Replace this placeholder with the actual use case narrative.",
+    "brief": "Plans an AI Agent driven website for matrimonial",
+    "description": "Adaptive-agent uses its simplest command 'run' to execute this task and writes a report in markdown",
     "image": {
       "src": "AdaptiveAgent.jpeg",
       "alt": "AdaptiveAgent logo over a high-speed abstract background"
     },
     "videos": [
       {
-        "label": "Demo video placeholder",
-        "href": "https://www.youtube.com/"
+        "label": "Run Demo",
+        "href": "https://youtu.be/FUvK3OaDcvI"
       }
     ],
     "results": [
       {
-        "label": "Review findings",
-        "href": "results/code-review.md"
+        "label": "The plan",
+        "href": "AI_Matrimony_Platform_Implementation_Plan.md"
       }
     ],
     "traceResults": [
       {
-        "label": "Open trace result",
-        "href": "trace-results/code-review-trace.html"
-      }
-    ]
-  },
-  {
-    "title": "Data Cleanup Runbook",
-    "category": "Operations workflow",
-    "brief": "Coordinates validation, cleanup steps, approvals, and retryable execution for operational data tasks.",
-    "description": "Use this placeholder for the operational task, the safety checks, the approval gates, and what happened during retries or continuation. Add enough context for someone to reproduce the demo.",
-    "image": {
-      "src": "AdaptiveAgent.jpeg",
-      "alt": "AdaptiveAgent logo over a high-speed abstract background"
-    },
-    "videos": [
-      {
-        "label": "Demo video placeholder",
-        "href": "https://www.youtube.com/"
-      }
-    ],
-    "results": [],
-    "traceResults": [
-      {
-        "label": "Open trace result",
-        "href": "trace-results/data-cleanup-trace.html"
-      }
-    ]
-  },
-  {
-    "title": "Multi-Agent Planning Demo",
-    "category": "Agent SDK workflow",
-    "brief": "Shows coordinator, worker, quality, and synthesizer runs producing an inspectable plan execution.",
-    "description": "Replace this text with the top-level objective, subObjective breakdown, delegate profiles, child runs, quality run behavior, synthesizer run summary, and any replan.required moments.",
-    "image": {
-      "src": "AdaptiveAgent.jpeg",
-      "alt": "AdaptiveAgent logo over a high-speed abstract background"
-    },
-    "videos": [
-      {
-        "label": "Demo video placeholder",
-        "href": "https://www.youtube.com/"
-      },
-      {
-        "label": "Trace walkthrough placeholder",
-        "href": "https://www.youtube.com/"
-      }
-    ],
-    "results": [
-      {
-        "label": "Plan execution result",
-        "href": "results/multi-agent-plan.html"
-      }
-    ],
-    "traceResults": [
-      {
-        "label": "Open trace result",
-        "href": "trace-results/multi-agent-planning-trace.html"
+        "label": "mat-trace.html",
+        "href": "mat-trace.html"
       }
     ]
   }
+  
 ]
