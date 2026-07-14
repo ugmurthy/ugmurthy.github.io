@@ -1,5 +1,44 @@
 [
-  {
+ {
+    "title": "Are AI Agent Loops "Old Wine in New Bottle"?",
+    "category": "Research workflow",
+    "brief": "AI Agent loops - a critical examinations",
+    "description": "Adaptive-agent uses the custom agent 'storm-researcher' to use Stanform's STORM method to critically examine AI Agent Loops.",
+    "image": {
+      "src": "AdaptiveAgent.jpeg",
+      "alt": "AdaptiveAgent logo over a high-speed abstract background"
+    },
+    "videos": [
+      {
+        "label": "Storm Researcher",
+        "href": "https://youtu.be/C7sWol9qdFg"
+      },
+      {
+        "label": "Tracing the session",
+        "href" : "https://youtu.be/znlbyQrGeoc"
+      }
+
+    ],
+    "results": [
+      {
+        "label": "AI Agents Loops research paper",
+        "href": "ai_agent_loops_research_paper.md"
+      },
+      
+      {
+        "label": "AI Agents Loops research paper",
+        "href": "ai_agent_loops_research_paper.html"
+      }
+    ],
+    "traceResults": [
+      {
+        "label": "Swarm run trace result",
+        "href": "AI_swarm_run_trace.html"
+      }
+    ],
+    "open": true
+  } ,
+{
     "title": "Impact of AI on the economy by 2030",
     "category": "Research workflow",
     "brief": "Research on AI and its impact on business, the workflows and workforce by 2030",
