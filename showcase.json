@@ -1,6 +1,6 @@
 [
  {
-    "title": "Are AI Agent Loops "Old Wine in New Bottle"?",
+    "title": "Are AI Agent Loops 'Old Wine in New Bottle'?",
     "category": "Research workflow",
     "brief": "AI Agent loops - a critical examinations",
     "description": "Adaptive-agent uses the custom agent 'storm-researcher' to use Stanform's STORM method to critically examine AI Agent Loops.",
@@ -31,10 +31,6 @@
       }
     ],
     "traceResults": [
-      {
-        "label": "Swarm run trace result",
-        "href": "AI_swarm_run_trace.html"
-      }
     ],
     "open": true
   } ,
