@@ -1,7 +1,3 @@
----
-title: AI-Driven Matrimony Platform Implementation Plan
----
-
 # AI-Driven Matrimony Platform Implementation Plan
 
 **Document Date:** July 9, 2026  
