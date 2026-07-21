@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Night Fury Stories - Adventures with Hiccup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Trebuchet MS', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-out;
+            border: 5px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            animation: shimmer 2s infinite;
+        }
+
+        .story-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .story-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .story-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .story-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd700 0%, #ffed4e 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .dragon-emoji {
+            font-size: 1.3em;
+            margin: 0 5px;
+        }
+
+        .dialogue {
+            background: #f0f4ff;
+            padding: 15px;
+            border-left: 5px solid #667eea;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .moral {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            border: 3px solid #ffc700;
+            font-size: 1.1em;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 1em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .story-card {
+                padding: 25px;
+            }
+
+            .story-title {
+                font-size: 1.5em;
+            }
+
+            .story-content {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐉 Night Fury Stories 🐉</h1>
+            <p>Tales of Learning and Friendship with Hiccup</p>
+        </div>
+
+        <!-- Story 1 -->
+        <div class="story-card">
+            <div class="story-number">1</div>
+            <h2 class="story-title"><span class="dragon-emoji">🐉</span> Toothless Learns to Land <span class="dragon-emoji">🐉</span></h2>
+            
+            <div class="story-content">
+                <p>Once upon a time, a big black dragon named Toothless was learning something brand new. His best friend Hiccup was teaching him how to land without tumbling head over tail!</p>
+
+                <p><span class="dragon-emoji">🐉</span> <strong>CRASH!</strong> <span class="dragon-emoji">🐉</span></p>
+
+                <p>Toothless landed in a heap of rocks. His wings were all tangled. His tail was twisted like a pretzel. He let out a frustrated <strong>SCREEEECH!</strong></p>
+
+                <p>"I can't do it!" Toothless grumbled, stamping his feet. "This is too hard! My wings are too big, my tail is too long, and my feet are too clumsy!"</p>
+
+                <div class="dialogue">
+                    <strong>Hiccup:</strong> "Hey buddy, listen to me. You're so close! Look, do you see how you need to tuck your left wing just a little bit earlier? Try it with me. Listen closely..."
+                </div>
+
+                <p>Toothless's big black ears perked up. He looked at Hiccup with his round green eyes and nodded. "Okay, I'm listening," he said softly.</p>
+
+                <p>"First," said Hiccup, "spread both wings wide like you're flying. Good! Now, when you come down, tuck the left wing first, then the right wing, nice and smooth. Then—and this is the important part—touch down with your back feet first, then your front feet. Can you do that?"</p>
+
+                <p>Toothless listened very carefully. He closed his eyes and repeated what Hiccup said in his mind: <em>"Left wing, right wing, back feet, front feet."</em></p>
+
+                <p>Up, up, up into the sky he flew! <span class="dragon-emoji">🐉</span></p>
+
+                <p>Now it was time. Toothless took a deep breath and came down. He tucked his left wing—just like Hiccup said! Then his right wing. His back feet touched down softly. His front feet came down smooth and gentle.</p>
+
+                <p><strong>PERFECT!</strong></p>
+
+                <p>Toothless had landed without tumbling! His tail was straight. His wings were folded just right. He looked like a real dragon champion!</p>
+
+                <p>"I DID IT!" roared Toothless with joy, jumping around in circles. "I DID IT! I listened to you, and I did it!"</p>
+
+                <p>Hiccup ran over and hugged his best friend. "You sure did, buddy! You listened, you tried, and you didn't give up. That's what makes a real dragon!"</p>
+
+                <p>Toothless purred so loud it sounded like thunder. He had learned that when things are hard and you feel frustrated, listening to your friends and trying again is the best way to succeed.</p>
+
+                <div class="moral">
+                    ✨ When you listen carefully and don't give up, you can do amazing things! ✨
+                </div>
+            </div>
+        </div>
+
+        <!-- Story 2 -->
+        <div class="story-card">
+            <div class="story-number">2</div>
+            <h2 class="story-title"><span class="dragon-emoji">🐉</span> Toothless Masters the Loop <span class="dragon-emoji">🐉</span></h2>
+            
+            <div class="story-content">
+                <p>One sunny afternoon, Hiccup had a new challenge for Toothless. "Today, buddy, we're going to try something really special. We're going to do a loop-the-loop in the sky!"</p>
+
+                <p>Toothless's eyes got big as saucers. "A loop? In the air? All the way around?"</p>
+
+                <p>"All the way around," Hiccup nodded with a smile. "It's going to be so cool!"</p>
+
+                <p>Toothless flew into the sky with lots of energy. He was so excited! But when he tried to turn upside down, his head got all dizzy.</p>
+
+                <p><strong>WHOOOOSH!</strong> He tumbled sideways instead of making a loop.</p>
+
+                <p><strong>THUMP!</strong> He bumped into a cloud.</p>
+
+                <p><span class="dragon-emoji">🐉</span> <strong>SCREEEECH!</strong> <span class="dragon-emoji">🐉</span></p>
+
+                <p>"This is IMPOSSIBLE!" Toothless flew down to Hiccup, his tail drooping sadly. "My body won't do it! I keep getting all twisted around! Maybe I'm just not good at loops. Maybe I should give up."</p>
+
+                <p>Toothless sat down and looked at his feet. He felt hot tears in his eyes. He was so frustrated!</p>
+
+                <div class="dialogue">
+                    <strong>Hiccup:</strong> "Hey, Toothless, I know it's hard. But listen to me very carefully. You're almost there. I believe in you."
+                </div>
+
+                <p>Hiccup took Toothless's big scaly face in his hands. "Okay, here's what I want you to do. Listen very, very carefully."</p>
+
+                <p>Toothless wiped away his tears and nodded. He always felt better when Hiccup helped him.</p>
+
+                <p>"Fly up high and straight," said Hiccup slowly. "Ready? Now, the secret is THIS: pull your nose up toward the sky—really high. Feel like you're flying backward for just a moment. Then keep pulling, keep turning. Let your whole body roll around like a wheel. And Toothless? Trust your wings. They know what to do."</p>
+
+                <p>Toothless closed his eyes and listened to every word. He could hear Hiccup's voice in his mind: <em>"Nose up... roll like a wheel... trust your wings."</em></p>
+
+                <p>Up, up, UP he flew! <span class="dragon-emoji">🐉</span></p>
+
+                <p>Then Toothless tilted his nose toward the sky. He pulled harder. He rolled his whole body—over, over, OVER!</p>
+
+                <p>For one magical moment, he was upside down in the clouds!</p>
+
+                <p>Over he went, and around, and—</p>
+
+                <p><strong>WHOOOOOOSH!</strong></p>
+
+                <p>Complete! He had done it! A perfect loop-the-loop!</p>
+
+                <p>Toothless whooped with joy and did another loop, and another, and another! They were so smooth and perfect!</p>
+
+                <p>He landed next to Hiccup, panting and grinning the biggest, happiest dragon grin ever.</p>
+
+                <p>"Hiccup! Hiccup! Did you see it?!" Toothless roared. "I did the loop! I was scared and frustrated, but I listened to you, and I did it!"</p>
+
+                <p>Hiccup laughed and gave Toothless a high-five (well, a high-hand to Toothless's wing!). "I told you so, buddy. You just needed to listen, believe in yourself, and keep trying."</p>
+
+                <p>Toothless purred the happiest purr in the whole wide world. He had learned something very important: when you're frustrated and things seem impossible, if you listen to someone who believes in you and keep trying, you can do anything—even magical loop-the-loops!</p>
+
+                <div class="moral">
+                    ✨ Even when things are hard and you feel frustrated, listening and trying again helps you do incredible things! Never give up! ✨
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🐉 The End 🐉 | Dedicated to all the brave learners! 🌟</p>
+        </div>
+    </div>
+</body>
+</html>
