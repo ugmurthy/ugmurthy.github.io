@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AdaptiveAgent is the operating layer for reliable AI agents: durable runs, typed tools, approvals, traces, retries, and recovery.">
+  <meta name="theme-color" content="#090b0a">
+  <title>AdaptiveAgent | The Operating Layer for Reliable AI Agents</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f3f0e8;
+      --muted: #aaa9a3;
+      --night: #090b0a;
+      --panel: #111512;
+      --panel-raised: #171c18;
+      --line: rgba(243, 240, 232, 0.14);
+      --line-strong: rgba(243, 240, 232, 0.28);
+      --acid: #c8ff3d;
+      --acid-soft: rgba(200, 255, 61, 0.13);
+      --orange: #ff7548;
+      --orange-soft: rgba(255, 117, 72, 0.13);
+      --cyan: #76e8dc;
+      --display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --body: "Avenir Next", Avenir, "Century Gothic", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--night);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      opacity: .2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+    code, pre { font-family: var(--mono); }
+    ::selection { background: var(--acid); color: var(--night); }
+
+    .skip-link {
+      position: fixed;
+      top: -80px;
+      left: 18px;
+      z-index: 100;
+      padding: 10px 14px;
+      background: var(--acid);
+      color: var(--night);
+      font: 800 .75rem/1 var(--mono);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .skip-link:focus { top: 18px; }
+
+    .shell { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--acid);
+      font: 700 .76rem/1.35 var(--mono);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 15;
+      border-bottom: 1px solid var(--line);
+      background: rgba(9, 11, 10, .84);
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(200, 255, 61, .42);
+      border-radius: 8px;
+      background: var(--acid-soft);
+    }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 5px; }
+    .nav-links a {
+      padding: 10px;
+      color: var(--muted);
+      font: 700 .68rem/1 var(--mono);
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 160ms ease, background 160ms ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--acid); background: var(--acid-soft); outline: 0; }
+    .nav-links .github { border: 1px solid var(--line-strong); color: var(--ink); }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 132px 0 74px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: radial-gradient(circle at 80% 38%, rgba(200,255,61,.12), transparent 29%), var(--night);
+    }
+    .hero::before {
+      content: "01";
+      position: absolute;
+      right: -.04em;
+      bottom: -.27em;
+      color: rgba(243, 240, 232, .025);
+      font: 34vw/1 var(--display);
+      letter-spacing: -.07em;
+    }
+    .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr); gap: 7vw; align-items: center; }
+    .hero-grid > * { min-width: 0; }
+    h1, h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-weight: 900;
+      letter-spacing: -.025em;
+      line-height: .91;
+      text-transform: uppercase;
+    }
+    h1 { max-width: 900px; font-size: clamp(4.5rem, 11vw, 10.4rem); }
+    h2 { max-width: 980px; font-size: clamp(3.2rem, 7.5vw, 7.4rem); }
+    h3 { margin: 0; line-height: 1.1; }
+    .outline { display: block; color: transparent; -webkit-text-stroke: 2px var(--ink); }
+    .accent { color: var(--acid); }
+    .accent-orange { color: var(--orange); }
+    .hero-lede { max-width: 820px; margin: 28px 0 0; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.6rem); line-height: 1.4; }
+    .hero-lede strong { color: var(--ink); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+      font: 800 .73rem/1 var(--mono);
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .button:hover, .button:focus-visible { transform: translateY(-2px); border-color: var(--acid); outline: 0; }
+    .button-primary { border-color: var(--acid); background: var(--acid); color: var(--night); }
+    .button-primary:hover, .button-primary:focus-visible { background: #d4ff66; }
+
+    .orbit {
+      position: relative;
+      width: min(40vw, 510px);
+      aspect-ratio: 1;
+      justify-self: end;
+      border: 1px solid rgba(200, 255, 61, .26);
+      border-radius: 50%;
+      animation: orbit 18s linear infinite;
+    }
+    .orbit::before, .orbit::after { content: ""; position: absolute; inset: 16%; border: 1px solid var(--line); border-radius: 50%; }
+    .orbit::after { inset: 38%; border: 0; background: var(--acid); box-shadow: 0 0 80px rgba(200, 255, 61, .35); }
+    .orbit-node { position: absolute; top: 9%; left: 29%; width: 14px; height: 14px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 20px var(--orange); }
+    .orbit-label { position: absolute; right: 4%; bottom: 17%; color: var(--cyan); font: 700 .68rem/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    @keyframes orbit { to { rotate: 360deg; } }
+
+    .ticker { overflow: hidden; border-bottom: 1px solid var(--line); background: var(--acid); color: var(--night); }
+    .ticker-track { width: max-content; display: flex; gap: 42px; padding: 12px 0; font: 900 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; animation: ticker 28s linear infinite; }
+    .ticker-track span::before { content: "●"; margin-right: 42px; }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    .section { position: relative; padding: clamp(84px, 11vw, 154px) 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+    .section-number { position: absolute; right: 2vw; top: 3vw; color: rgba(243,240,232,.045); font: 18vw/1 var(--display); }
+    .section-intro { position: relative; z-index: 2; }
+    .section-lede { max-width: 790px; margin: 24px 0 0; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.35rem); }
+
+    .problem-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: clamp(44px, 8vw, 120px); align-items: end; margin-top: 58px; }
+    .statement { margin: 0; font-size: clamp(1.55rem, 3.3vw, 3.25rem); font-weight: 700; line-height: 1.12; letter-spacing: -.04em; }
+    .status-stack { display: grid; gap: 12px; }
+    .status-card { padding: 24px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .status-card span { display: block; margin-bottom: 10px; color: var(--muted); font: 700 .66rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .status-card b { font-size: clamp(1.05rem, 2vw, 1.45rem); }
+    .status-card.good { border-color: rgba(200,255,61,.52); background: var(--acid-soft); }
+    .status-card.good b { color: var(--acid); }
+
+    .capabilities { background: var(--panel); }
+    .cap-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(50px, 9vw, 130px); align-items: start; margin-top: 72px; }
+    .cap-aside { position: sticky; top: 118px; }
+    .cap-aside p { color: var(--muted); font-size: 1.08rem; }
+    .cap-list { border-top: 1px solid var(--line); }
+    .cap-row { display: grid; grid-template-columns: 56px 1fr auto; gap: 18px; align-items: center; min-height: 102px; border-bottom: 1px solid var(--line); transition: background 180ms ease, padding 180ms ease; }
+    .cap-row:hover { padding-inline: 14px; background: var(--acid-soft); }
+    .cap-icon { color: var(--acid); font: 900 1.45rem/1 var(--mono); }
+    .cap-row h3 { font-size: clamp(1.15rem, 2vw, 1.65rem); }
+    .cap-row p { max-width: 360px; margin: 6px 0 0; color: var(--muted); }
+    .cap-tag { color: var(--cyan); font: 700 .64rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    .runtime-flow { display: grid; grid-template-columns: 1fr 58px 1.12fr 58px 1fr; align-items: stretch; margin-top: 68px; }
+    .runtime-node { min-height: 250px; display: flex; flex-direction: column; padding: 28px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)); }
+    .runtime-node.highlight { border-color: var(--acid); background: var(--acid-soft); }
+    .node-label { color: var(--acid); font: 700 .65rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .runtime-node h3 { margin-top: auto; font-size: clamp(1.45rem, 2.4vw, 2.15rem); }
+    .runtime-node p { margin: 12px 0 0; color: var(--muted); }
+    .flow-arrow { display: grid; place-items: center; color: var(--acid); font: 900 1.5rem/1 var(--mono); }
+    .architecture-note { margin-top: 22px; color: var(--muted); font: 700 .69rem/1.6 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+
+    .quickstart { background: radial-gradient(circle at 15% 75%, rgba(118,232,220,.08), transparent 25%), var(--night); }
+    .steps { display: grid; gap: 12px; margin-top: 62px; }
+    details { border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    details[open] { border-color: rgba(200,255,61,.45); background: var(--acid-soft); }
+    summary { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 18px; min-height: 94px; padding: 18px 24px; cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    .step-num { color: var(--acid); font: 900 1rem/1 var(--mono); }
+    summary h3 { font-size: clamp(1.15rem, 2vw, 1.55rem); }
+    summary::after { content: "+"; color: var(--acid); font: 400 1.8rem/1 var(--mono); }
+    details[open] summary::after { content: "−"; }
+    .step-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .72fr); gap: 28px; padding: 0 24px 24px 106px; }
+    .step-body p { margin: 0; color: var(--muted); }
+    .code-block { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(118,232,220,.28); background: #050706; }
+    .code-label { padding: 9px 14px; border-bottom: 1px solid var(--line); color: var(--cyan); font: 700 .62rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    pre { margin: 0; overflow-x: auto; padding: 18px; color: var(--ink); font-size: .86rem; line-height: 1.7; }
+    :not(pre) > code { padding: .15em .38em; background: var(--acid-soft); color: var(--acid); }
+
+    .use-cases { background: var(--panel); }
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 64px; }
+    .card { min-height: 280px; display: flex; flex-direction: column; padding: clamp(24px, 3vw, 38px); border-top: 2px solid var(--acid); background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)); transition: transform 180ms ease, background 180ms ease; }
+    .card:nth-child(2) { border-color: var(--orange); }
+    .card:nth-child(3) { border-color: var(--cyan); }
+    .card:hover { transform: translateY(-5px); background: rgba(255,255,255,.07); }
+    .card-num { color: var(--acid); font: 700 .72rem/1 var(--mono); }
+    .card:nth-child(2) .card-num { color: var(--orange); }
+    .card:nth-child(3) .card-num { color: var(--cyan); }
+    .card h3 { margin-top: auto; font-size: clamp(1.35rem, 2vw, 1.8rem); }
+    .card p { margin: 12px 0 0; color: var(--muted); }
+
+    .cta { padding: clamp(100px, 14vw, 190px) 0; text-align: center; background: radial-gradient(circle at 50% 50%, rgba(200,255,61,.11), transparent 35%); }
+    .cta h2 { max-width: 1100px; margin-inline: auto; }
+    .cta .section-lede { margin-inline: auto; }
+    .cta .actions { justify-content: center; }
+    .footer { border-top: 1px solid var(--line); }
+    .footer-inner { min-height: 92px; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: #747872; font: 700 .66rem/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease, transform 700ms cubic-bezier(.2,.8,.2,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.github) { display: none; }
+      .hero-grid, .problem-grid, .cap-grid { grid-template-columns: 1fr; }
+      .orbit { position: absolute; right: -22vw; bottom: -8vw; width: 62vw; opacity: .46; }
+      .cap-aside { position: static; }
+      .runtime-flow { grid-template-columns: 1fr; gap: 0; }
+      .flow-arrow { min-height: 54px; transform: rotate(90deg); }
+      .card-grid { grid-template-columns: 1fr; }
+      .card { min-height: 220px; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, var(--max)); }
+      .site-header .shell { width: min(100% - 20px, var(--max)); }
+      .brand { font-size: .68rem; letter-spacing: .08em; }
+      .nav { gap: 10px; }
+      .nav-links { flex: 0 0 auto; }
+      .nav-links .github { display: block !important; padding: 10px 8px; font-size: .61rem; }
+      .hero { min-height: 800px; padding-top: 110px; }
+      .hero .eyebrow { max-width: 330px; font-size: .65rem; line-height: 1.55; }
+      h1 { font-size: clamp(3.8rem, 18vw, 5.2rem); }
+      h2 { font-size: clamp(3rem, 16vw, 5rem); }
+      .outline { -webkit-text-stroke-width: 1px; }
+      .actions { align-items: stretch; flex-direction: column; }
+      .button { width: 100%; }
+      .cap-row { grid-template-columns: 40px 1fr; padding-block: 20px; }
+      .cap-tag { grid-column: 2; }
+      summary { grid-template-columns: 42px 1fr auto; padding-inline: 16px; }
+      .step-body { grid-template-columns: 1fr; padding: 0 16px 16px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; justify-content: center; padding-block: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="AdaptiveAgent home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 12c2.8-5.8 7.2-7.6 13.4-5.4" stroke="#c8ff3d" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 12c-2.8 5.8-7.2 7.6-13.4 5.4" stroke="#76e8dc" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8.5 12h7" stroke="#ff7548" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="2.25" fill="#c8ff3d"/>
+          </svg>
+        </span>
+        AdaptiveAgent
+      </a>
+      <div class="nav-links">
+        <a href="#why">Why</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#runtime">Runtime</a>
+        <a href="#quickstart">Quickstart</a>
+        <a class="github" href="https://github.com/ugmurthy/adaptiveAgent" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Durable runtime · local first · inspectable by design</p>
+          <h1><span>Adaptive</span><span class="outline">Agent</span></h1>
+          <p class="hero-lede">The operating layer for <strong>reliable AI agents.</strong> Run goals with real tools, control sensitive actions, recover from failure, and improve with evidence.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#quickstart">Start in 60 seconds →</a>
+            <a class="button" href="#why">See how it works</a>
+          </div>
+        </div>
+        <div class="orbit" aria-hidden="true">
+          <i class="orbit-node"></i>
+          <span class="orbit-label">Run · Control<br>Recover · Improve</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Durable runs</span><span>Typed tools</span><span>Human approvals</span><span>Retries + resume</span><span>Structured traces</span><span>Multi-model</span>
+        <span>Durable runs</span><span>Typed tools</span><span>Human approvals</span><span>Retries + resume</span><span>Structured traces</span><span>Multi-model</span>
+      </div>
+    </div>
+
+    <section class="section" id="why">
+      <span class="section-number" aria-hidden="true">02</span>
+      <div class="shell reveal">
+        <div class="section-intro">
+          <p class="eyebrow">What is AdaptiveAgent?</p>
+          <h2>Agents are easy to start.<br><span class="accent-orange">Hard to trust.</span></h2>
+        </div>
+        <div class="problem-grid">
+          <p class="statement">AdaptiveAgent sits between your app, AI models, and tools—so every job is <span class="accent">controlled, visible, and recoverable.</span></p>
+          <div class="status-stack">
+            <div class="status-card"><span>Without AdaptiveAgent</span><b>“What did the agent do?”</b></div>
+            <div class="status-card good"><span>With AdaptiveAgent</span><b>See it. Control it. Resume it.</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section capabilities" id="capabilities">
+      <span class="section-number" aria-hidden="true">03</span>
+      <div class="shell reveal">
+        <div class="section-intro">
+          <p class="eyebrow">A complete agent runtime</p>
+          <h2>Give agents<br><span class="accent">real capability.</span></h2>
+        </div>
+        <div class="cap-grid">
+          <aside class="cap-aside">
+            <p>Run goals that use tools, work with specialists, and keep going when things go wrong.</p>
+            <p class="eyebrow">One runtime · many workflows</p>
+          </aside>
+          <div class="cap-list">
+            <article class="cap-row"><span class="cap-icon">↗</span><div><h3>Use real tools</h3><p>Web, files, shell, APIs, and your own typed tools.</p></div><span class="cap-tag">Capability</span></article>
+            <article class="cap-row"><span class="cap-icon">⌘</span><div><h3>Delegate work</h3><p>Coordinate specialist child agents around one objective.</p></div><span class="cap-tag">Orchestration</span></article>
+            <article class="cap-row"><span class="cap-icon">Ⅱ</span><div><h3>Pause &amp; approve</h3><p>Keep humans and policy gates in control of sensitive actions.</p></div><span class="cap-tag">Control</span></article>
+            <article class="cap-row"><span class="cap-icon">↻</span><div><h3>Retry &amp; resume</h3><p>Preserve runtime state so work survives interruptions.</p></div><span class="cap-tag">Recovery</span></article>
+            <article class="cap-row"><span class="cap-icon">◎</span><div><h3>Trace &amp; evaluate</h3><p>See steps, costs, failures, and outcomes as structured evidence.</p></div><span class="cap-tag">Observability</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="runtime">
+      <span class="section-number" aria-hidden="true">04</span>
+      <div class="shell reveal">
+        <div class="section-intro">
+          <p class="eyebrow">The neutral layer in the middle</p>
+          <h2>Keep your stack.<br><span class="accent">Make it dependable.</span></h2>
+          <p class="section-lede">Core owns durable execution semantics. The Agent SDK prepares strict requests. Your models and tools remain replaceable.</p>
+        </div>
+        <div class="runtime-flow" aria-label="AdaptiveAgent architecture">
+          <article class="runtime-node"><span class="node-label">Your experience</span><h3>Apps &amp; workflows</h3><p>Research, support, coding, operations</p></article>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <article class="runtime-node highlight"><span class="node-label">The control layer</span><h3>AdaptiveAgent</h3><p>Runs · tools · approvals · memory · traces</p></article>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <article class="runtime-node"><span class="node-label">Your choice</span><h3>Models &amp; tools</h3><p>Hosted, local, or mixed</p></article>
+        </div>
+        <p class="architecture-note">Bun + TypeScript core · embedded SQLite or shared Postgres · JSON-RPC 2.0 sidecars · authenticated capability gateway</p>
+      </div>
+    </section>
+
+    <section class="section quickstart" id="quickstart">
+      <span class="section-number" aria-hidden="true">05</span>
+      <div class="shell reveal">
+        <div class="section-intro">
+          <p class="eyebrow">Getting started</p>
+          <h2>Working in<br><span class="accent">60 seconds.</span></h2>
+          <p class="section-lede">Install the CLI, add a provider key, initialize your local agent home, and run your first goal.</p>
+        </div>
+        <div class="steps">
+          <details open>
+            <summary><span class="step-num">01</span><h3>Install AdaptiveAgent</h3></summary>
+            <div class="step-body">
+              <div class="code-block"><div class="code-label">macOS / Linux</div><pre><code>curl -fsSL https://github.com/ugmurthy/adaptiveAgent/releases/latest/download/install.sh | sh</code></pre></div>
+              <p>Use the signed release installer. It places the CLI binary locally and prints any required <code>PATH</code> update.</p>
+            </div>
+          </details>
+          <details>
+            <summary><span class="step-num">02</span><h3>Add your provider key</h3></summary>
+            <div class="step-body">
+              <div class="code-block"><div class="code-label">terminal</div><pre><code>export OPENROUTER_API_KEY="&lt;your-key&gt;"</code></pre></div>
+              <p>OpenRouter is the default quickstart. Mistral, Mesh, and local Ollama providers are also supported.</p>
+            </div>
+          </details>
+          <details>
+            <summary><span class="step-num">03</span><h3>Initialize and run</h3></summary>
+            <div class="step-body">
+              <div class="code-block"><div class="code-label">terminal</div><pre><code>adaptive-agent init
+adaptive-agent doctor --provider-check
+adaptive-agent run "Hello, confirm you are working"</code></pre></div>
+              <p>Your first run is durable and inspectable—not a disposable chat response.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section use-cases" id="teams">
+      <span class="section-number" aria-hidden="true">06</span>
+      <div class="shell reveal">
+        <div class="section-intro">
+          <p class="eyebrow">Built for people shipping agents</p>
+          <h2>Beyond the<br><span class="accent-orange">prototype.</span></h2>
+        </div>
+        <div class="card-grid">
+          <article class="card"><span class="card-num">01</span><h3>AI product teams</h3><p>Ship agent features without rebuilding the reliability layer from scratch.</p></article>
+          <article class="card"><span class="card-num">02</span><h3>Platform engineers</h3><p>Give every agent shared controls, history, policies, and provider access.</p></article>
+          <article class="card"><span class="card-num">03</span><h3>Operations teams</h3><p>Automate research, support, reporting, and repeatable business workflows.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell reveal">
+        <p class="eyebrow">The takeaway</p>
+        <h2>Build once.<br><span class="accent">Run reliably.</span></h2>
+        <p class="section-lede">Choose your models. See every step. Recover from failure. Improve with evidence.</p>
+        <div class="actions">
+          <a class="button button-primary" href="#quickstart">Start building →</a>
+          <a class="button" href="https://github.com/ugmurthy/adaptiveAgent" target="_blank" rel="noopener">View on GitHub ↗</a>
+          <a class="button" href="README.md">Read the docs</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner shell">
+      <span>AdaptiveAgent · The operating layer for reliable AI agents</span>
+      <span>Run · Control · Recover · Improve</span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+    const steps = document.querySelectorAll(".steps details");
+    steps.forEach((step) => {
+      step.addEventListener("toggle", () => {
+        if (!step.open) return;
+        steps.forEach((other) => {
+          if (other !== step) other.open = false;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
